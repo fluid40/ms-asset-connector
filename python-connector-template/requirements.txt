@@ -1,0 +1,2 @@
+FastApi~=0.115.12
+pydantic~=2.11.5
