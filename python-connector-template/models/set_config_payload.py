@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class SetConfigPayload(BaseModel):
@@ -9,4 +9,4 @@ class SetConfigPayload(BaseModel):
     The JSON content is exactly the AID submodel.
     We pass it raw to that you, the developer, can choose your favorite AAS SDK to deserialize it as Submodel class.
     """
-    json_content: str
+    json_content: str = Field(..., alias="jsonContent")

@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\s8185260\\Documents\\Dev\\fluid40\\asset-connector-template\\csharp-connector-template\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5BE7F3FA-6B5E-40F7-9EC4-A3B2545264B6}|csharp-connector-template.csproj|c:\\users\\s8185260\\documents\\dev\\fluid40\\asset-connector-template\\csharp-connector-template\\controllers\\connectorapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5BE7F3FA-6B5E-40F7-9EC4-A3B2545264B6}|csharp-connector-template.csproj|solutionrelative:controllers\\connectorapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5BE7F3FA-6B5E-40F7-9EC4-A3B2545264B6}|csharp-connector-template.csproj|c:\\users\\s8185260\\documents\\dev\\fluid40\\asset-connector-template\\csharp-connector-template\\models\\setconfigpayload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5BE7F3FA-6B5E-40F7-9EC4-A3B2545264B6}|csharp-connector-template.csproj|solutionrelative:models\\setconfigpayload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5BE7F3FA-6B5E-40F7-9EC4-A3B2545264B6}|csharp-connector-template.csproj|c:\\users\\s8185260\\documents\\dev\\fluid40\\asset-connector-template\\csharp-connector-template\\models\\getvaluepayload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5BE7F3FA-6B5E-40F7-9EC4-A3B2545264B6}|csharp-connector-template.csproj|solutionrelative:models\\getvaluepayload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GetValuePayload.cs",
+              "DocumentMoniker": "C:\\Users\\s8185260\\Documents\\Dev\\fluid40\\asset-connector-template\\csharp-connector-template\\Models\\GetValuePayload.cs",
+              "RelativeDocumentMoniker": "Models\\GetValuePayload.cs",
+              "ToolTip": "C:\\Users\\s8185260\\Documents\\Dev\\fluid40\\asset-connector-template\\csharp-connector-template\\Models\\GetValuePayload.cs",
+              "RelativeToolTip": "Models\\GetValuePayload.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-30T08:30:00.351Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SetConfigPayload.cs",
+              "DocumentMoniker": "C:\\Users\\s8185260\\Documents\\Dev\\fluid40\\asset-connector-template\\csharp-connector-template\\Models\\SetConfigPayload.cs",
+              "RelativeDocumentMoniker": "Models\\SetConfigPayload.cs",
+              "ToolTip": "C:\\Users\\s8185260\\Documents\\Dev\\fluid40\\asset-connector-template\\csharp-connector-template\\Models\\SetConfigPayload.cs",
+              "RelativeToolTip": "Models\\SetConfigPayload.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-30T08:26:59.313Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ConnectorApiService.cs",
+              "DocumentMoniker": "C:\\Users\\s8185260\\Documents\\Dev\\fluid40\\asset-connector-template\\csharp-connector-template\\Controllers\\ConnectorApiService.cs",
+              "RelativeDocumentMoniker": "Controllers\\ConnectorApiService.cs",
+              "ToolTip": "C:\\Users\\s8185260\\Documents\\Dev\\fluid40\\asset-connector-template\\csharp-connector-template\\Controllers\\ConnectorApiService.cs",
+              "RelativeToolTip": "Controllers\\ConnectorApiService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAswAYAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-30T07:57:42.083Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

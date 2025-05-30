@@ -1,0 +1,34 @@
+[
+  {
+    "ContainingType": "csharp_connector_template.Controllers.ConnectorApiServiceController",
+    "Method": "GetValue",
+    "RelativePath": "get-value",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "payload",
+        "Type": "csharp_connector_template.Models.GetValuePayload",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "csharp_connector_template.Controllers.ConnectorApiServiceController",
+    "Method": "SetConfig",
+    "RelativePath": "set-config",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "payload",
+        "Type": "csharp_connector_template.Models.SetConfigPayload",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
