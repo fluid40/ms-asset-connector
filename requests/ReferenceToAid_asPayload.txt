@@ -1,0 +1,1 @@
+{\"type\":\"ModelReference\",\"keys\":[{\"type\":\"Submodel\",\"value\":\"AssetInterfacesDescription\"},{\"type\":\"SubmodelElementCollection\",\"value\":\"Interface_MQTT\"},{\"type\":\"SubmodelElementCollection\",\"value\":\"InteractionMetadata\"},{\"type\":\"SubmodelElementCollection\",\"value\":\"properties\"},{\"type\":\"SubmodelElementCollection\",\"value\":\"status\"}]}

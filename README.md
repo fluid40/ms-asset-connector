@@ -8,9 +8,9 @@ Refer to the `README.md` file in the respective subdirectory for further deploym
 
 # Overview
 
-The Connector is supposed to interact with the Runtime through the `IConnector` Interface:
+The Connector is supposed to interact with the Runtime through the `IConnector` interface:
 
-![](./docs/figures/Interfaces.png)
+![](./docs/figures/Components.png)
 
 The Connector has to implement that interface:
 
