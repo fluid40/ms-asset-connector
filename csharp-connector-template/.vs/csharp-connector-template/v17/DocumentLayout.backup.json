@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\s8185260\\Documents\\Dev\\fluid40\\asset-connector-template\\csharp-connector-template\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5BE7F3FA-6B5E-40F7-9EC4-A3B2545264B6}|csharp-connector-template.csproj|c:\\users\\s8185260\\documents\\dev\\fluid40\\asset-connector-template\\csharp-connector-template\\controllers\\connectorapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5BE7F3FA-6B5E-40F7-9EC4-A3B2545264B6}|csharp-connector-template.csproj|solutionrelative:controllers\\connectorapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5BE7F3FA-6B5E-40F7-9EC4-A3B2545264B6}|csharp-connector-template.csproj|c:\\users\\s8185260\\documents\\dev\\fluid40\\asset-connector-template\\csharp-connector-template\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5BE7F3FA-6B5E-40F7-9EC4-A3B2545264B6}|csharp-connector-template.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5BE7F3FA-6B5E-40F7-9EC4-A3B2545264B6}|csharp-connector-template.csproj|c:\\users\\s8185260\\documents\\dev\\fluid40\\asset-connector-template\\csharp-connector-template\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5BE7F3FA-6B5E-40F7-9EC4-A3B2545264B6}|csharp-connector-template.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5BE7F3FA-6B5E-40F7-9EC4-A3B2545264B6}|csharp-connector-template.csproj|c:\\users\\s8185260\\documents\\dev\\fluid40\\asset-connector-template\\csharp-connector-template\\models\\getvaluepayload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5BE7F3FA-6B5E-40F7-9EC4-A3B2545264B6}|csharp-connector-template.csproj|solutionrelative:models\\getvaluepayload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5BE7F3FA-6B5E-40F7-9EC4-A3B2545264B6}|csharp-connector-template.csproj|c:\\users\\s8185260\\documents\\dev\\fluid40\\asset-connector-template\\csharp-connector-template\\models\\setconfigpayload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5BE7F3FA-6B5E-40F7-9EC4-A3B2545264B6}|csharp-connector-template.csproj|solutionrelative:models\\setconfigpayload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5BE7F3FA-6B5E-40F7-9EC4-A3B2545264B6}|csharp-connector-template.csproj|c:\\users\\s8185260\\documents\\dev\\fluid40\\asset-connector-template\\csharp-connector-template\\models\\getvaluepayload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5BE7F3FA-6B5E-40F7-9EC4-A3B2545264B6}|csharp-connector-template.csproj|solutionrelative:models\\getvaluepayload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5BE7F3FA-6B5E-40F7-9EC4-A3B2545264B6}|csharp-connector-template.csproj|c:\\users\\s8185260\\documents\\dev\\fluid40\\asset-connector-template\\csharp-connector-template\\controllers\\connectorapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5BE7F3FA-6B5E-40F7-9EC4-A3B2545264B6}|csharp-connector-template.csproj|solutionrelative:controllers\\connectorapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,8 +30,33 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\s8185260\\Documents\\Dev\\fluid40\\asset-connector-template\\csharp-connector-template\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\s8185260\\Documents\\Dev\\fluid40\\asset-connector-template\\csharp-connector-template\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-30T09:00:25.968Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\s8185260\\Documents\\Dev\\fluid40\\asset-connector-template\\csharp-connector-template\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\s8185260\\Documents\\Dev\\fluid40\\asset-connector-template\\csharp-connector-template\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-30T09:00:06.456Z"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 2,
@@ -34,12 +67,11 @@
               "RelativeToolTip": "Models\\GetValuePayload.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-30T08:30:00.351Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-30T08:30:00.351Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "SetConfigPayload.cs",
               "DocumentMoniker": "C:\\Users\\s8185260\\Documents\\Dev\\fluid40\\asset-connector-template\\csharp-connector-template\\Models\\SetConfigPayload.cs",
               "RelativeDocumentMoniker": "Models\\SetConfigPayload.cs",
@@ -47,21 +79,19 @@
               "RelativeToolTip": "Models\\SetConfigPayload.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-30T08:26:59.313Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-30T08:26:59.313Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "ConnectorApiService.cs",
               "DocumentMoniker": "C:\\Users\\s8185260\\Documents\\Dev\\fluid40\\asset-connector-template\\csharp-connector-template\\Controllers\\ConnectorApiService.cs",
               "RelativeDocumentMoniker": "Controllers\\ConnectorApiService.cs",
               "ToolTip": "C:\\Users\\s8185260\\Documents\\Dev\\fluid40\\asset-connector-template\\csharp-connector-template\\Controllers\\ConnectorApiService.cs",
               "RelativeToolTip": "Controllers\\ConnectorApiService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAswAYAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAwwAgAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-30T07:57:42.083Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-30T07:57:42.083Z"
             }
           ]
         }
