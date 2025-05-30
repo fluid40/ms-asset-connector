@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 
-class ConfigPayload(BaseModel):
+class SetConfigPayload(BaseModel):
     """
     We introduce this class to wrap the configuration that is passed via the `set_config` POST method.
     For now, it only includes raw JSON content.

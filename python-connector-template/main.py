@@ -14,22 +14,34 @@ async def root():
 @app.post("/set-config")
 async def set_config(payload: SetConfigPayload):
     # get the raw JSON from the payload
-    json_content = payload.json_content
+    # the raw JSON string in the payload must escape the " character, revert this by replacing \" with "
+    json_content = payload.json_content.replace("\\\"", "\"")
 
     # TODO: use an AAS SDK to deserialize the content as Submodel
 
     # TODO: store the deserialized AID Submodel class, e.g., as global variable
 
-    return {"message": f"Successfully set config"}
+    return {"message": f"Successfully invoked `/set-config` with raw JSON in payload:"
+                       f""
+                       f"{json_content}"}
 
 
-@app.get("/get-value")
+@app.post("/get-value")
 async def get_value(payload: GetValuePayload):
     # get the raw JSON from the payload
-    json_content = payload.json_content
+    # the raw JSON string in the payload must escape the " character, revert this by replacing \" with "
+    json_content = payload.json_content.replace("\\\"", "\"")
 
     # TODO: use an AAS SDK to deserialize the content as Reference
 
     # TODO: find the SMC in the cached AID Submodel to which the reference points
 
     # TODO: read the details in the SMC and use it to establish a connection to the asset
+
+    # TODO: return the value
+    result = "myResult"
+
+    return {"message": f"Successfully invoked `/get-value` with raw JSON in payload:"
+                       f""
+                       f"{json_content}",
+            "value": result}
