@@ -23,7 +23,7 @@ The `IConnector` interface is currently implemented through a HTTP API.
 
 ## Request Structure
 
-The implementations support to requests
+The implementations support two requests
 * POST `/set-config`
 * POST `/get-value`
 
@@ -38,13 +38,14 @@ In the `jsonContent` field, the `...` have to be replaced with the actual conten
 This content is either
 * A complete JSON-serialized AID submodel (for the `/set-config` endpoint)
 * A JSON-serialized AAS Reference to a property in the AID (for the `/get-value` endpoint)
-That means, a JSON-serialized object is wrapped as string inside a JSON payload.
-This ensures that the application can freely choose a way to deserialize the actual content.
 
-Therefore, the JSON-serialized AID / Reference _cannot_ be put in there as plain text: The `"` symbol must be escaped as `\"` and all line breaks need to be removed.
-It becomes a compact single-line JSON string with proper escaping.
+That means, a JSON-serialized object (AID or Reference) is wrapped as string inside a JSON payload.
+This ensures that the application can freely choose a way to deserialize the `jsonContent`.
 
-Examples for both (AID and Reference) encoded as JSON string with escaping can be found in
+Therefore, the JSON-serialized AID / Reference _cannot_ be put in there as JSON text: The `"` symbol must be escaped as `\"` and all line breaks need to be removed.
+Ultimately, it becomes a compact single-line JSON string with proper escaping which can be treated as any other string.
+
+Examples for both (AID and Reference) encoded as JSON string with proper escaping can be found in
 * `requests/BallPenMachine_AID_asPayload.txt`
 * `requests/ReferenceToAid_asPayload.txt`
 
