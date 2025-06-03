@@ -15,3 +15,40 @@ The Connector is supposed to interact with the Runtime through the `IConnector` 
 The Connector has to implement that interface:
 
 ![](./docs/figures/Classes.png)
+
+
+# Testing
+
+The `IConnector` interface is currently implemented through a HTTP API.
+
+## Request Structure
+
+The implementations support to requests
+* POST `/set-config`
+* POST `/get-value`
+
+In both cases, a JSON payload has to be passed
+```json
+{
+    "jsonContent": "..."
+}
+```
+
+In the `jsonContent` field, the `...` have to be replaced with the actual content.
+This content is either
+* A complete JSON-serialized AID submodel (for the `/set-config` endpoint)
+* A JSON-serialized AAS Reference to a property in the AID (for the `/get-value` endpoint)
+That means, a JSON-serialized object is wrapped as string inside a JSON payload.
+This ensures that the application can freely choose a way to deserialize the actual content.
+
+Therefore, the JSON-serialized AID / Reference _cannot_ be put in there as plain text: The `"` symbol must be escaped as `\"` and all line breaks need to be removed.
+It becomes a compact single-line JSON string with proper escaping.
+
+Examples for both (AID and Reference) encoded as JSON string with escaping can be found in
+* `requests/BallPenMachine_AID_asPayload.txt`
+* `requests/ReferenceToAid_asPayload.txt`
+
+
+## Postman
+
+You can import the Postman collection `requests/PostmanCollection.json` which already contains two request examples according to the specification explained above.
