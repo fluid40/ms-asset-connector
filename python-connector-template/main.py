@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 from models.set_config_payload import SetConfigPayload
 from models.get_value_payload import GetValuePayload
-
+from models.response_body import ResponseBody
 app = FastAPI()
 
 
@@ -12,7 +12,7 @@ async def root():
 
 
 @app.post("/set-config")
-async def set_config(payload: SetConfigPayload):
+async def set_config(payload: SetConfigPayload) -> ResponseBody:
     # get the raw JSON from the payload
     # the raw JSON string in the payload must escape the " character, revert this by replacing \" with "
     json_content = payload.json_content.replace("\\\"", "\"")
@@ -27,7 +27,7 @@ async def set_config(payload: SetConfigPayload):
 
 
 @app.post("/get-value")
-async def get_value(payload: GetValuePayload):
+async def get_value(payload: GetValuePayload) -> ResponseBody   :
     # get the raw JSON from the payload
     # the raw JSON string in the payload must escape the " character, revert this by replacing \" with "
     json_content = payload.json_content.replace("\\\"", "\"")
