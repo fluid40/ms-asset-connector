@@ -21,10 +21,10 @@ async def set_config(payload: SetConfigPayload) -> ResponseBody:
 
     # TODO: store the deserialized AID Submodel class, e.g., as global variable
 
-    return create_response(
+    return ResponseBody(
         status_code=200,
         message="Successfully invoked `/set-config` with raw JSON in payload",
-        content=json_content
+        payload=json_content
     )
 
 
@@ -43,9 +43,9 @@ async def get_value(payload: GetValuePayload) -> ResponseBody   :
     # TODO: return the value
     result = "myResult"
 
-    return create_response(
+    return ResponseBody(
         status_code=200,
         message="Successfully invoked `/get-value` with raw JSON in payload",
-        content=json_content,
+        payload=json_content,
         value=result
     )
