@@ -15,12 +15,19 @@ class ResponseBody(BaseModel):
         example="Successfully invoked `/set-config` with raw JSON in payload",
     )
     
-    content: str = Field(
+    payload: str = Field(
         default="{}",
         description="Json content of the response.",
-        alias="Content",
+        alias="Payload",
         example="",
     )
+    
+    value: str = Field(
+        default="",
+        description="The value returned by the operation, if applicable.",
+        alias="Value",
+        example="myResult",
+    )    
     
 def create_response(status_code: int = 200, message: str = "Successfully", content: str = "{}") -> ResponseBody:
     """
@@ -31,4 +38,4 @@ def create_response(status_code: int = 200, message: str = "Successfully", conte
     :param content: Json content of the response.
     :return: An instance of ResponseBody.
     """
-    return ResponseBody(status_code=status_code, message=message, content=content)
+    return ResponseBody(status_code=status_code, message=message, payload=content)
