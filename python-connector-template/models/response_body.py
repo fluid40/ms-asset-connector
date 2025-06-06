@@ -29,3 +29,20 @@ class ResponseBody(BaseModel):
         example="myResult",
     )    
     
+def create_response(status_code: int, message: str, payload: str = "{}", value: str = "") -> ResponseBody:
+    """
+    Create a ResponseBody instance with the given parameters.
+    
+    :param status_code: The HTTP status code of the response.
+    :param message: A message providing additional information about the response.
+    :param payload: Json content of the response.
+    :param value: The value returned by the operation, if applicable.
+    :return: An instance of ResponseBody.
+    """
+    body = ResponseBody()
+    body.status_code = status_code
+    body.message = message
+    body.payload = payload
+    body.value = value
+    
+    return body

@@ -3,6 +3,8 @@ from fastapi import FastAPI
 from models.set_config_payload import SetConfigPayload
 from models.get_value_payload import GetValuePayload
 from models.response_body import ResponseBody, create_response
+
+
 app = FastAPI()
 
 
@@ -21,7 +23,7 @@ async def set_config(payload: SetConfigPayload) -> ResponseBody:
 
     # TODO: store the deserialized AID Submodel class, e.g., as global variable
 
-    return ResponseBody(
+    return create_response(
         status_code=200,
         message="Successfully invoked `/set-config` with raw JSON in payload",
         payload=json_content
@@ -43,7 +45,8 @@ async def get_value(payload: GetValuePayload) -> ResponseBody   :
     # TODO: return the value
     result = "myResult"
 
-    return ResponseBody(
+
+    return create_response(
         status_code=200,
         message="Successfully invoked `/get-value` with raw JSON in payload",
         payload=json_content,
