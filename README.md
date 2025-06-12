@@ -1,23 +1,24 @@
 # Asset Connector Template
 
-
 In here you can find a template for implementing the asset connector.
-The example is given in two programming languages: Python and C#.
+The example is given in two programming languages:
+
+- [Python](python-connector-template/README.md)
+- [C#](csharp-connector-template/README.md)
+
 Refer to the `README.md` file in the respective subdirectory for further deployment instructions.
 
-
-# Overview
+## Overview
 
 The Connector is supposed to interact with the Runtime through the `IConnector` interface:
 
-![](./docs/figures/Components.png)
+![components](./docs/figures/Components.png)
 
 The Connector has to implement that interface:
 
-![](./docs/figures/Classes.png)
+![classes](./docs/figures/Classes.png)
 
-
-# Testing
+## Testing
 
 The `IConnector` interface is currently implemented through a HTTP API.
 
