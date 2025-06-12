@@ -10,6 +10,20 @@
 
 `pip install -r requirements.txt`
 
+## Dev Container
+
+In general, you should have [VS Code](https://https://code.visualstudio.com/) installed (which is fully
+supported by us). Alternatively you could also use any other python IDE (e.g. PyCharm), however then you're on
+your own considering setup.
+
+We provide a [dev container](https://code.visualstudio.com/docs/remote/containers) which is more frictionless
+(because all dependencies are installed automatically in an isolated environment) than standard
+__non container development__.
+
+### VS Code
+
+1. Install `DevContainer` extension
+
 # Usage
 
 ## Paycharm
