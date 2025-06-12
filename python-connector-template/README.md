@@ -12,7 +12,7 @@
 
 ## Dev Container
 
-In general, you should have [VS Code](https://https://code.visualstudio.com/) installed (which is fully
+In general, you should have [VS Code](https://code.visualstudio.com/) installed (which is fully
 supported by us). Alternatively you could also use any other python IDE (e.g. PyCharm), however then you're on
 your own considering setup.
 
@@ -22,7 +22,7 @@ __non container development__.
 
 ### VS Code
 
-1. Install `DevContainer` extension
+1. Install [`Dev Containers`](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension
 
 # Usage
 
