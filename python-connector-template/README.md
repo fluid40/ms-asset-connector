@@ -20,9 +20,16 @@ We provide a [dev container](https://code.visualstudio.com/docs/remote/container
 (because all dependencies are installed automatically in an isolated environment) than standard
 __non container development__.
 
+If you already have VS Code and Docker installed, you can
+__[🚀 click this link to open the devcontainer right away](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://gitlab.alm.em.ag/abb/lca_report_automation/aspect_services)__
+to get started. Clicking that link will cause VS Code to automatically install the Dev Containers
+extension if needed, clone the source code into a container volume, and spin up a dev container for use.
+
 ### VS Code
 
 1. Install [`Dev Containers`](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension
+
+2.
 
 # Usage
 
