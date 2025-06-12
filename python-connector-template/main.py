@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+import uvicorn
 
 from models.set_config_payload import SetConfigPayload
 from models.get_value_payload import GetValuePayload
@@ -52,3 +53,7 @@ async def get_value(payload: GetValuePayload) -> ResponseBody   :
         payload=json_content,
         value=result
     )
+
+if __name__ == "__main__":
+    """Run the FastAPI application."""
+    uvicorn.run(app, host="127.0.0.1", port=8080)
