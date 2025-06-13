@@ -20,14 +20,15 @@ All requirements are already installed, plus some extensions to improve developm
 
 ### VS Code
 
-1. Install [`Dev Containers`](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension
+1. Install [`Dev Containers extension`](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
 2. Install Docker like [Docker Hub Desktop](https://hub.docker.com/welcome)
 
-3. in VS Code open container
+3. in VS Code open container by
 
-- by clicking button 'Reopen in Container' in the lower right corner ![button](./docs/vscode_container.png)
-- or press 'F1' and user command 'Dev Containers: Rebuild and Reopen in Container'
+- clicking button `Reopen in Container` in the lower right corner
+![button](./docs/vscode_container.png)
+- or press 'F1' and user command `Dev Containers: Rebuild and Reopen in Container`
 
 # Usage
 
