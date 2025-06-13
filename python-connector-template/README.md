@@ -20,7 +20,7 @@ All requirements are already installed, plus some extensions to improve developm
 
 ### VS Code
 
-1. Install Docker like [Docker Hub Desktop](https://hub.docker.com/welcome)
+1. Install Docker (like [Docker Hub Desktop](https://hub.docker.com/welcome))
 
 2. Install [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) in VS Code
 
