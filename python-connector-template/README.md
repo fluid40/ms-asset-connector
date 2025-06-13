@@ -12,24 +12,22 @@
 
 ## Dev Container
 
-In general, you should have [VS Code](https://code.visualstudio.com/) installed (which is fully
-supported by us). Alternatively you could also use any other python IDE (e.g. PyCharm), however then you're on
-your own considering setup.
-
 We provide a [dev container](https://code.visualstudio.com/docs/remote/containers) which is more frictionless
 (because all dependencies are installed automatically in an isolated environment) than standard
 __non container development__.
 
-If you already have VS Code and Docker installed, you can
-__[🚀 click this link to open the devcontainer right away](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://gitlab.alm.em.ag/abb/lca_report_automation/aspect_services)__
-to get started. Clicking that link will cause VS Code to automatically install the Dev Containers
-extension if needed, clone the source code into a container volume, and spin up a dev container for use.
+All requirements are already installed, plus some extensions to improve development quality
 
 ### VS Code
 
 1. Install [`Dev Containers`](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension
 
-2.
+2. Install Docker like [Docker Hub Desktop](https://hub.docker.com/welcome)
+
+3. in VS Code open container
+
+- by clicking button 'Reopen in Container' in the lower right corner ![button](./docs/vscode_container.png)
+- or press 'F1' and user command 'Dev Containers: Rebuild and Reopen in Container'
 
 # Usage
 
@@ -41,6 +39,6 @@ extension if needed, clone the source code into a container volume, and spin up 
 
 1. Start server by pressing 'F5' or use the play button
 
-2. Server is running on 'http://127.0.0.1:8080/'
+2. Server is running on '<http://127.0.0.1:8080/>'
 
-3. For testing use PostMan or Swagger UI on 'http://127.0.0.1:8080/docs'
+3. For testing use PostMan or Swagger UI on '<http://127.0.0.1:8080/docs>'
