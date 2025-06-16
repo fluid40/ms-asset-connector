@@ -6,9 +6,8 @@ services:
     volumes:
       - ../..:/workspaces:cached
     command: sleep infinity
-    networks:
-      - shared-net
 
 networks:
-  shared-net:
-    external: true
+  bridge:
+
+
