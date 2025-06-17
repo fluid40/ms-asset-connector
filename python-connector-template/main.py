@@ -22,7 +22,11 @@ async def set_config(payload: SetConfigPayload) -> ResponseBody:
 
     # TODO: store the deserialized AID Submodel class, e.g., as global variable
 
-    return create_response(status_code=200, message="Successfully invoked `/set-config` with raw JSON in payload", payload=json_content)
+    return create_response(
+        status_code=200,
+        message="Successfully invoked `/set-config` with raw JSON in payload",
+        payload=json_content,
+    )
 
 
 @app.post("/get-value")
@@ -40,9 +44,14 @@ async def get_value(payload: GetValuePayload) -> ResponseBody:
     # TODO: return the value
     result = "myResult"
 
-    return create_response(status_code=200, message="Successfully invoked `/get-value` with raw JSON in payload", payload=json_content, value=result)
+    return create_response(
+        status_code=200,
+        message="Successfully invoked `/get-value` with raw JSON in payload",
+        payload=json_content,
+        value=result,
+    )
 
 
 if __name__ == "__main__":
     """Run the FastAPI application."""
-    uvicorn.run(app, host="127.0.0.1", port=8080)
+    uvicorn.run(app, host="127.0.0.1", port=8090)

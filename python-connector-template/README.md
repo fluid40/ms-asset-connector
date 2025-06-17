@@ -41,6 +41,6 @@ All requirements are already installed, plus some extensions to improve developm
 
 1. Start server by pressing 'F5' or use the play button
 
-2. Server is running on '<http://127.0.0.1:8080/>'
+2. Server is running on '<http://127.0.0.1:8090/>'
 
-3. For testing use PostMan or Swagger UI on '<http://127.0.0.1:8080/docs>'
+3. For testing use PostMan or Swagger UI on '<http://127.0.0.1:8090/docs>'
