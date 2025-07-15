@@ -1,5 +1,11 @@
+"""FastAPI connector for handling `/set-config` and `/get-value` endpoints.
+
+This module provides endpoints to set configuration and retrieve values using JSON payloads.
+"""
+
 import uvicorn
 from fastapi import FastAPI
+
 from models.get_value_payload import GetValuePayload
 from models.response_body import ResponseBody, create_response
 from models.set_config_payload import SetConfigPayload
@@ -9,11 +15,20 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
+    """Root endpoint that returns available endpoints.
+
+    :return: A dictionary with a message listing available endpoints.
+    """
     return {"message": "Available endpoints are `/set-config` and `/get-value`"}
 
 
 @app.post("/set-config")
 async def set_config(payload: SetConfigPayload) -> ResponseBody:
+    """Set configuration endpoint.
+
+    :param payload: The configuration payload to set.
+    :return: A response indicating the result of the operation.
+    """
     # get the raw JSON from the payload
     # the raw JSON string in the payload must escape the " character, revert this by replacing \" with "
     json_content = payload.json_content.replace('\\"', '"')
@@ -31,6 +46,11 @@ async def set_config(payload: SetConfigPayload) -> ResponseBody:
 
 @app.post("/get-value")
 async def get_value(payload: GetValuePayload) -> ResponseBody:
+    """Get value endpoint.
+
+    :param payload: The payload containing the reference to the value to retrieve.
+    :return: A response containing the retrieved value.
+    """
     # get the raw JSON from the payload
     # the raw JSON string in the payload must escape the " character, revert this by replacing \" with "
     json_content = payload.json_content.replace('\\"', '"')
