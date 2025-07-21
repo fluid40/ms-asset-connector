@@ -19,7 +19,7 @@ mqttc: Client
 
 base_url: str = ""
 
-# contains the AID Submodel that is provided by set_config()
+# contains the AID Submodel provided by set_config()
 aid_sm: Submodel = None
 
 # maps the idShort of every property in the AID SMC "properties" to
@@ -64,7 +64,7 @@ def parse_aid_topics_and_subscribe():
                                     # you can check the idShort of aid_property_smc and you will see that this loop iterates
                                     # over all of them (axes_position, valves, status, energy)
                                     aid_property_idshort = aid_toplevel_proerty_smc.id_short
-                                    print(f"Checking AID-Property: {aid_property_idshort}")
+                                    #print(f"Checking AID-Property: {aid_property_idshort}")
 
                                     # find the "forms" SMC
                                     for info_in_property_smc in aid_toplevel_proerty_smc.over_value_or_empty():
@@ -90,7 +90,7 @@ def on_message(client, userdata, msg):
     topic = msg.topic
     payload = str(msg.payload)
 
-    print(f"Received new msg on topic {topic}")
+    #print(f"Received new msg on topic {topic}")
     # cache the payload (probably JSON) for that topic
     values[topic] = payload
 
