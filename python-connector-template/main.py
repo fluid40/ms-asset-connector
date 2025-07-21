@@ -33,48 +33,48 @@ values: Dict[str, str] = {}
 def parse_aid_topics_and_subscribe():
     global base_url
 
-    for interface_smc in aid_sm.descend_once():
+    for interface_smc_in_aid in aid_sm.over_submodel_elements_or_empty():
         # find the SMC that describes the interface e.g. "Interface_MQTT"
-        if (isinstance(interface_smc, SubmodelElementCollection) and
-                interface_smc.semantic_id.keys[0].value == "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/Interface" and
-                "mqtt" in interface_smc.id_short.lower()):
-            # find the "EndpointMetadata" SMC
-            for metadata_smc in interface_smc.descend_once():
-                if (isinstance(metadata_smc, SubmodelElementCollection) and
-                        metadata_smc.semantic_id.keys[0].value == "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/EndpointMetadata"):
+        if (isinstance(interface_smc_in_aid, SubmodelElementCollection) and
+                interface_smc_in_aid.semantic_id.keys[0].value == "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/Interface" and
+                "mqtt" in interface_smc_in_aid.id_short.lower()):
+
+            for metadata_in_interface_smc in interface_smc_in_aid.over_value_or_empty():
+                # find the "EndpointMetadata" SMC
+                if (isinstance(metadata_in_interface_smc, SubmodelElementCollection) and
+                        metadata_in_interface_smc.semantic_id.keys[0].value == "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/EndpointMetadata"):
                     # find the "base" Property
-                    for info_in_endpointmetadata in metadata_smc.descend_once():
+                    for info_in_endpointmetadata in metadata_in_interface_smc.over_value_or_empty():
                         if (isinstance(info_in_endpointmetadata, Property) and
                                 info_in_endpointmetadata.semantic_id.keys[0].value == "https://www.w3.org/2019/wot/td#base"):
                             base_url = info_in_endpointmetadata.value
 
-        # find the InteractionMetadata
-        for metadata_smc in interface_smc.descend_once():
-            if (isinstance(metadata_smc, SubmodelElementCollection) and
-                    metadata_smc.semantic_id.keys[0].value == "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/InteractionMetadata"):
-                # find the "properties" SMC
-                for info_in_interactionmetadata in metadata_smc.descend_once():
-                    if (isinstance(info_in_interactionmetadata, SubmodelElementCollection) and
-                            info_in_interactionmetadata.semantic_id.keys[0].value == "https://www.w3.org/2019/wot/td#PropertyAffordance"):
-                        # find any of the sub-SMCs (one for each property)
-                        # this semanticID probably matches any SMC in here, just to be sure
-                        for aid_proerty_smc in info_in_interactionmetadata.descend_once():
-                            if (isinstance(aid_proerty_smc, SubmodelElementCollection) and
-                                    aid_proerty_smc.semantic_id.keys[0].value == "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"):
-                                # you can check the idShort of aid_property_smc and you will see that this loop iterates
-                                # over all of them (axes_position, valves, status, energy)
-                                aid_property_idshort = aid_proerty_smc.id_short
-                                print(f"Checking AID-Property: {aid_property_idshort}")
+                # find the InteractionMetadata
+                if (isinstance(metadata_in_interface_smc, SubmodelElementCollection) and
+                        metadata_in_interface_smc.semantic_id.keys[0].value == "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/InteractionMetadata"):
+                    # find the "properties" SMC
+                    for info_in_interactionmetadata in metadata_in_interface_smc.over_value_or_empty():
+                        if (isinstance(info_in_interactionmetadata, SubmodelElementCollection) and
+                                info_in_interactionmetadata.semantic_id.keys[0].value == "https://www.w3.org/2019/wot/td#PropertyAffordance"):
+                            # find any of the sub-SMCs (one for each property)
+                            # this semanticID probably matches any SMC in here, just to be sure
+                            for aid_toplevel_proerty_smc in info_in_interactionmetadata.over_value_or_empty():
+                                if (isinstance(aid_toplevel_proerty_smc, SubmodelElementCollection) and
+                                        aid_toplevel_proerty_smc.semantic_id.keys[0].value == "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"):
+                                    # you can check the idShort of aid_property_smc and you will see that this loop iterates
+                                    # over all of them (axes_position, valves, status, energy)
+                                    aid_property_idshort = aid_toplevel_proerty_smc.id_short
+                                    print(f"Checking AID-Property: {aid_property_idshort}")
 
-                                # find the "forms" SMC
-                                for info_in_property_smc in aid_proerty_smc.descend_once():
-                                    if (isinstance(info_in_property_smc, SubmodelElementCollection) and
-                                            info_in_property_smc.semantic_id.keys[0].value == "https://www.w3.org/2019/wot/td#hasForm"):
-                                        # find the "href" Property
-                                        for info_in_forms in info_in_property_smc.descend_once():
-                                            if (isinstance(info_in_forms, Property) and
-                                                    info_in_forms.semantic_id.keys[0].value == "https://www.w3.org/2019/wot/hypermedia#hasTarget"):
-                                                topics[aid_property_idshort] = info_in_forms.value
+                                    # find the "forms" SMC
+                                    for info_in_property_smc in aid_toplevel_proerty_smc.over_value_or_empty():
+                                        if (isinstance(info_in_property_smc, SubmodelElementCollection) and
+                                                info_in_property_smc.semantic_id.keys[0].value == "https://www.w3.org/2019/wot/td#hasForm"):
+                                            # find the "href" Property
+                                            for info_in_forms in info_in_property_smc.over_value_or_empty():
+                                                if (isinstance(info_in_forms, Property) and
+                                                        info_in_forms.semantic_id.keys[0].value == "https://www.w3.org/2019/wot/hypermedia#hasTarget"):
+                                                    topics[aid_property_idshort] = info_in_forms.value
 
     mqtt_connect()
 
@@ -157,7 +157,7 @@ async def get_value(payload: GetValuePayload) -> ResponseBody:
     # TODO: handle references to sub-properties
     # for now: this assumes that the provided Reference points to the top-level property
     # in the "InteractionMetadata.properties" SMC
-    prop_name = prop_ref.keys[-1].value
+    prop_name = prop_ref.keys[4].value
 
     # get the value from the cache
     topic_name = ""
