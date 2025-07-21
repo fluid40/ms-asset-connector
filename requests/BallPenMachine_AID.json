@@ -2272,7 +2272,7 @@
 														}
 													],
 													"valueType": "xs:string",
-													"value": "fluid40/BallPenMachine/Pneumatics/Valves",
+													"value": "tom-ag2/BallPenMachine/Pneumatics/Valves",
 													"modelType": "Property"
 												},
 												{
@@ -3253,7 +3253,7 @@
 														}
 													],
 													"valueType": "xs:string",
-													"value": "fluid40/BallPenMachine/Status",
+													"value": "tom-ag2/BallPenMachine/Status",
 													"modelType": "Property"
 												},
 												{
@@ -3721,7 +3721,7 @@
 														}
 													],
 													"valueType": "xs:string",
-													"value": "fluid40/BallPenMachine/Energy",
+													"value": "tom-ag2/BallPenMachine/Energy",
 													"modelType": "Property"
 												},
 												{

@@ -118,16 +118,7 @@ async def root():
 @app.post("/set-config")
 async def set_config(payload: SetConfigPayload) -> ResponseBody:
     global aid_sm
-    # get the raw JSON from the payload
-    # the raw JSON string in the payload must escape the " character, revert this by replacing \" with "
-    json_content = payload.json_content.replace('\\"', '"')
-
-    # use an AAS SDK to deserialize the content as Submodel
-    # TODO: error handling - what if there is no SM
-    jsonable = json.loads(json_content)
-    aid_sm = aas_jsonization.submodel_from_jsonable(
-        jsonable
-    )
+    aid_sm = payload.aid_sm
 
     # parse the AID and extract all topics
     # create an MQTT client and subscribe to all topics
@@ -137,19 +128,13 @@ async def set_config(payload: SetConfigPayload) -> ResponseBody:
     return create_response(
         status_code=200,
         message="Successfully invoked `/set-config` with raw JSON in payload",
-        payload=json_content,
+        payload=aid_sm,
     )
 
 
 @app.post("/get-value")
 async def get_value(payload: GetValuePayload) -> ResponseBody:
-    # get the raw JSON from the payload
-    # the raw JSON string in the payload must escape the " character, revert this by replacing \" with "
-    json_content = payload.json_content.replace('\\"', '"')
-
-    # use an AAS SDK to deserialize the content as Reference
-    jsonable = json.loads(json_content)
-    prop_ref: Reference = aas_jsonization.reference_from_jsonable(jsonable)
+    prop_ref: Reference = payload.aid_ref
 
     if prop_ref.keys[0].value != aid_sm.id:
         return create_response(status_code=404, message="Invalid AID SM-ID")
@@ -175,7 +160,7 @@ async def get_value(payload: GetValuePayload) -> ResponseBody:
     return create_response(
         status_code=200,
         message="Successfully invoked `/get-value` with raw JSON in payload",
-        payload=json_content,
+        payload=prop_ref,
         value=result,
     )
 
