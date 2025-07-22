@@ -3,7 +3,7 @@
   "keys": [
     {
       "type": "Submodel",
-      "value": "AssetInterfacesDescription"
+      "value": "https://fluid40.de/ids/sm/4757_4856_8464_1441"
     },
     {
       "type": "SubmodelElementCollection",
@@ -19,7 +19,7 @@
     },
     {
       "type": "SubmodelElementCollection",
-      "value": "status"
+      "value": "axes_position"
     }
   ]
 }
