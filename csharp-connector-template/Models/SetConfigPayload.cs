@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using AasCore.Aas3_0;
 
 namespace csharp_connector_template.Models
 {
@@ -11,7 +12,7 @@ namespace csharp_connector_template.Models
         /// The JSON content is exactly the AID submodel.
         /// We pass it raw so you can use your favorite AAS SDK to deserialize it as a Submodel class.
         /// </summary>
-        [JsonPropertyName("jsonContent")]
-        public string jsonContent { get; set; }
+        [JsonPropertyName("Aid")]
+        public Submodel aidSm { get; set; }
     }
 }

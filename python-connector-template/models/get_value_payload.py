@@ -15,7 +15,7 @@ class GetValuePayload(BaseModel):
     The JSON content is a Reference (AAS type) to a property in the AID submodel.
     We pass it raw to that you, the developer, can choose your favorite AAS SDK to deserialize it as Reference class.
     """
-    aid_ref: Reference = Field(..., alias="reference")
+    aid_ref: Reference = Field(..., alias="Reference")
 
     @validator("aid_ref", pre=True)
     def parse_aid_ref(cls, v: Any) -> Reference:

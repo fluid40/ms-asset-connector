@@ -18,7 +18,7 @@ class SetConfigPayload(BaseModel):
     The JSON content is exactly the AID submodel.
     We pass it raw to that you, the developer, can choose your favorite AAS SDK to deserialize it as Submodel class.
     """
-    aid_sm: Submodel = Field(..., alias="aid", exclude=True)
+    aid_sm: Submodel = Field(..., alias="Aid", exclude=True)
 
     @validator("aid_sm", pre=True)
     def parse_aid_sm(cls, v: Any) -> Submodel:
