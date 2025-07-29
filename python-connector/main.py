@@ -3,12 +3,18 @@
 This module provides endpoints to set configuration and retrieve values using JSON payloads.
 """
 
+import json
+from typing import TYPE_CHECKING
+
 import uvicorn
 from fastapi import FastAPI
 
+from core import AIDParser
 from models.get_value_payload import GetValuePayload
 from models.response_body import ResponseBody, create_response
 from models.set_config_payload import SetConfigPayload
+from basyx.aas.adapter.json import AASFromJsonDecoder
+from basyx.aas.model import ReferenceElement, Submodel
 
 app = FastAPI()
 
@@ -31,17 +37,30 @@ async def set_config(payload: SetConfigPayload) -> ResponseBody:
     """
     # get the raw JSON from the payload
     # the raw JSON string in the payload must escape the " character, revert this by replacing \" with "
-    json_content = payload.json_content.replace('\\"', '"')
+    try:
+        sm_json_str = json.dumps(payload.aid_sm)
+        sm = json.loads(sm_json_str, cls=AASFromJsonDecoder)
 
-    # TODO: use an AAS SDK to deserialize the content as Submodel
 
-    # TODO: store the deserialized AID Submodel class, e.g., as global variable
+        aid_submodel: Submodel = payload.aid_sm
 
-    return create_response(
-        status_code=200,
-        message="Successfully invoked `/set-config` with raw JSON in payload",
-        payload=json_content,
-    )
+        # TODO: use AIDParser to process the AID Submodel
+        aid_parser = AIDParser(aid_submodel)
+        #aid_parser.parse_aid_and_connect()
+
+        # TODO: store the deserialized AID Submodel class, e.g., as global variable
+
+        return create_response(
+            status_code=200,
+            message="Successfully invoked `/set-config` with raw JSON in payload",
+            payload=aid_submodel,
+        )
+    except Exception as e:
+        return create_response(
+            status_code=500,
+            message=f"Error processing `/set-config`: {e!s}",
+            payload=None,
+        )
 
 
 @app.post("/get-value")
@@ -53,7 +72,8 @@ async def get_value(payload: GetValuePayload) -> ResponseBody:
     """
     # get the raw JSON from the payload
     # the raw JSON string in the payload must escape the " character, revert this by replacing \" with "
-    json_content = payload.json_content.replace('\\"', '"')
+    prop_ref: ReferenceElement = payload.aid_ref
+
 
     # TODO: use an AAS SDK to deserialize the content as Reference
 
@@ -67,7 +87,7 @@ async def get_value(payload: GetValuePayload) -> ResponseBody:
     return create_response(
         status_code=200,
         message="Successfully invoked `/get-value` with raw JSON in payload",
-        payload=json_content,
+        payload=prop_ref,
         value=result,
     )
 
