@@ -38,14 +38,9 @@ async def set_config(payload: SetConfigPayload) -> ResponseBody:
     # get the raw JSON from the payload
     # the raw JSON string in the payload must escape the " character, revert this by replacing \" with "
     try:
-        sm_json_str = json.dumps(payload.aid_sm)
-        sm = json.loads(sm_json_str, cls=AASFromJsonDecoder)
-
-
-        aid_submodel: Submodel = payload.aid_sm
-
         # TODO: use AIDParser to process the AID Submodel
-        aid_parser = AIDParser(aid_submodel)
+        aid_sm = payload._aid_sm
+        aid_parser = AIDParser(aid_sm)
         #aid_parser.parse_aid_and_connect()
 
         # TODO: store the deserialized AID Submodel class, e.g., as global variable
@@ -53,7 +48,7 @@ async def set_config(payload: SetConfigPayload) -> ResponseBody:
         return create_response(
             status_code=200,
             message="Successfully invoked `/set-config` with raw JSON in payload",
-            payload=aid_submodel,
+            payload=aid_sm,
         )
     except Exception as e:
         return create_response(

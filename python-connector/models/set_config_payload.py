@@ -8,10 +8,11 @@ from pydantic import BaseModel, Field, PrivateAttr, field_validator
 
 
 class SetConfigPayload(BaseModel):  # noqa: D101
-    aid_dict: dict = Field(..., alias="Aid")
+    aid_dict: dict = Field(..., alias="Aid", exclude=True)
     _aid_sm: Submodel = PrivateAttr(default=None)
 
-    def __init__(self) -> None:
-        #super().__init__()
-        aid = self.aid_dict.get("Aid1", {})
-        self._aid_sm = AASFromJsonDecoder.object_hook(aid)
+    def __init__(self, **data: Any):  # noqa: D107
+        super().__init__(**data)
+
+        self._aid_sm = AASFromJsonDecoder.object_hook(self.aid_dict)
+
