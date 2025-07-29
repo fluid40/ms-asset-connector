@@ -1,6 +1,6 @@
 basyx_python_sdk==1.2.1
-fastapi<0.111
+fastapi
 paho-mqtt==2.1.0
-pydantic<2.0.0
+pydantic
 uvicorn==0.35.0
     
