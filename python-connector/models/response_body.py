@@ -1,7 +1,20 @@
+"""Defines the ResponseBody model and related utilities for HTTP response handling.
+
+This module provides:
+- ResponseBody: a Pydantic model for HTTP responses;
+- create_response: a helper function to create ResponseBody instances.
+"""
+
+import json
+from typing import Any, ClassVar
+
+from basyx.aas.adapter.json import AASToJsonEncoder
+from basyx.aas.model import ModelReference as Reference
+from basyx.aas.model import Submodel
 from pydantic import BaseModel, Field
 
 
-class ResponseBody(BaseModel):
+class ResponseBody(BaseModel):  # noqa: D101
     status_code: int = Field(
         default=200,
         description="The HTTP status code of the response.",
@@ -16,8 +29,8 @@ class ResponseBody(BaseModel):
         example="Successfully invoked `/set-config` with raw JSON in payload",
     )
 
-    payload: str = Field(
-        default="{}",
+    payload: Any = Field(
+        default={},
         description="Json content of the response.",
         alias="Payload",
         example="",
@@ -29,6 +42,13 @@ class ResponseBody(BaseModel):
         alias="Value",
         example="myResult",
     )
+
+    class Config:  # noqa: D106
+        arbitrary_types_allowed = True
+        json_encoders: ClassVar = {
+            Reference: lambda v: json.dumps(v, cls=AASToJsonEncoder),
+            Submodel: lambda v: json.dumps(v, cls=AASToJsonEncoder)
+        }
 
 
 def create_response(status_code: int, message: str, payload: str = "{}", value: str = "") -> ResponseBody:

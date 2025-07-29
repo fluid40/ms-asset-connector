@@ -1,12 +1,21 @@
-from pydantic import BaseModel, Field
+"""Defines the SetConfigPayload model for configuration payloads using Basyx and Pydantic."""
 
+from typing import Any
 
-class SetConfigPayload(BaseModel):
-    """
-    We introduce this class to wrap the configuration that is passed via the `set_config` POST method.
-    For now, it only includes raw JSON content.
+from basyx.aas.adapter.json import AASFromJsonDecoder
+from basyx.aas.model import Submodel
+from pydantic import BaseModel, Field, validator
 
-    The JSON content is exactly the AID submodel.
-    We pass it raw to that you, the developer, can choose your favorite AAS SDK to deserialize it as Submodel class.
-    """
-    json_content: str = Field(..., alias="jsonContent")
+BaseModel.arbitrary_types_allowed = True
+
+class SetConfigPayload(BaseModel):  # noqa: D101
+    aid_sm: Submodel = Field(..., alias="Aid", exclude=True)
+
+    @validator("aid_sm", pre=True)
+    def parse_aid_sm(cls, v: Any) -> Submodel:  # noqa: D102
+        if isinstance(v, Submodel):
+            return v
+        return AASFromJsonDecoder.object_hook(v)
+
+    class Config:  # noqa: D106
+        arbitrary_types_allowed = True
