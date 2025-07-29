@@ -4,18 +4,14 @@ from typing import Any
 
 from basyx.aas.adapter.json import AASFromJsonDecoder
 from basyx.aas.model import Submodel
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, PrivateAttr, field_validator
 
-BaseModel.arbitrary_types_allowed = True
 
 class SetConfigPayload(BaseModel):  # noqa: D101
-    aid_sm: Submodel = Field(..., alias="Aid", exclude=True)
+    aid_dict: dict = Field(..., alias="Aid")
+    _aid_sm: Submodel = PrivateAttr(default=None)
 
-    @validator("aid_sm", pre=True)
-    def parse_aid_sm(cls, v: Any) -> Submodel:  # noqa: D102
-        if isinstance(v, Submodel):
-            return v
-        return AASFromJsonDecoder.object_hook(v)
-
-    class Config:  # noqa: D106
-        arbitrary_types_allowed = True
+    def __init__(self) -> None:
+        #super().__init__()
+        aid = self.aid_dict.get("Aid1", {})
+        self._aid_sm = AASFromJsonDecoder.object_hook(aid)
