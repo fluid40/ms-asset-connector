@@ -1,10 +1,11 @@
 """Defines the GetValuePayload model for handling AAS Reference deserialization."""
 
+import json
 from typing import Any
+
 from basyx.aas.adapter.json import AASFromJsonDecoder
 from basyx.aas.model import ModelReference as Reference
 from pydantic import BaseModel, Field, PrivateAttr
-
 
 
 class GetValuePayload(BaseModel):  # noqa: D101
@@ -13,4 +14,5 @@ class GetValuePayload(BaseModel):  # noqa: D101
 
     def __init__(self, **data: Any):  # noqa: D107
         super().__init__(**data)
-        self._aid_ref = AASFromJsonDecoder.object_hook(self.aid_ref_dict)
+        aid_string = json.dumps(self.aid_ref_dict)
+        self._aid_ref = json.loads(aid_string, cls=AASFromJsonDecoder)
