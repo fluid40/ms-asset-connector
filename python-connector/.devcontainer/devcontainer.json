@@ -17,7 +17,8 @@
                 "bierner.github-markdown-preview",
                 "ms-azuretools.vscode-docker",
                 "ms-python.isort",
-                "charliermarsh.ruff"
+                "charliermarsh.ruff",
+                "rapidapi.vscode-rapidapi-client"
             ]
         }
     },
