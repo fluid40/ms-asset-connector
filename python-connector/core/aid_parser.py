@@ -1,9 +1,8 @@
 """This module provides functions to parse AID Submodels and extract MQTT interface descriptions."""
 
-from collections.abc import Iterator
-from basyx.aas.model import Submodel, NamespaceSet, SubmodelElement, Reference
+from basyx.aas import model
+from basyx.aas.model import NamespaceSet, Reference, Submodel, SubmodelElement, SubmodelElementCollection
 from basyx.aas.util import traversal
-
 
 SEMANTIC_ID_INTERFACE: str = "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/Interface"
 SEMANTIC_ID_MQTT: str = "http://www.w3.org/2011/mqtt"
@@ -11,7 +10,7 @@ class AIDParser:
     """A class to handle parsing of AID Submodels and connecting to MQTT topics."""
 
     _aid_sm: Submodel
-    _mqtt_interface: object = None
+    _mqtt_interface: SubmodelElementCollection = None
     _interaction_properties: list = None
 
 
@@ -22,59 +21,68 @@ class AIDParser:
         """
         self._aid_sm = aid_sm
 
-        interface_smes = [sme for sme in aid_sm.submodel_element
-                          if sme.semantic_id and sme.semantic_id.keys[0].value == SEMANTIC_ID_INTERFACE]
-        self._mqtt_interface = self._find_mqtt_interface_description(aid_sm.submodel_element)
-        self._interaction_properties = self._loop_property_definitions(self._mqtt_interface)
-
-
-    def _find_mqtt_interface_description(self, submodel_elements: NamespaceSet[SubmodelElement]) -> SubmodelElement:
-        """
-        Find the MQTT interface collection in the AID Submodel.
-
-        :param aid_sm: The AID Submodel to search.
-        :return: The MQTT interface collection object, or None if not found.
-        """
-        # TODO find MQTT interface in submodel
-        # TODO loop interaction metadata and map idShort/ key to topic links
-        # # Assuming the MQTT interface is a SubmodelElementCollection with idShort 'MQTT'
-        smes: Iterator[SubmodelElement] = traversal.walk_semantic_ids_recursive(self._aid_sm)
-        mqtt_interface = next(
-            (sme for sme in smes
-             if sme.semantic_id and sme.semantic_id.keys[0].value == SEMANTIC_ID_INTERFACE),
-            None
+        mqtt_interface: SubmodelElementCollection = find_by_semantic_id(aid_sm.submodel_element, SEMANTIC_ID_INTERFACE)
+        if mqtt_interface is None:
+            raise ValueError("MQTT interface description not found in AID Submodel.")
+        self._mqtt_interface = mqtt_interface
+ 
+        interaction_metadata: SubmodelElementCollection = find_by_supplemental_semantic_id(
+            self._mqtt_interface.value, SEMANTIC_ID_MQTT
         )
-        # mqtt_interface = next(
-        #     (
-        #         sme for sme in submodel_elements
-        #         if sme.semantic_id
-        #         and sme.semantic_id.keys[0].value == semantic_id_val_interface
-        #         # and any(
-        #         #     sup_key.value == semantic_id_val_mqtt
-        #         #     for ref in getattr(sme, "supplemental_semantic_ids", [])
-        #         #     for sup_key in ref.keys
-        #         # )
-        #     ),
-        #     None
-        # )
-        return None #mqtt_interface
+        if interaction_metadata is None:
+            raise ValueError("InteractionMetadata SMC not found in MQTT interface description.")
 
-    def _loop_property_definitions(self, mqtt_interface):
+        self._interaction_properties = self._loop_property_definitions(interaction_metadata)
+
+    def _loop_property_definitions(self, interaction_metadata: SubmodelElementCollection):
         """
         Loop through the MQTT interface collection and find all Interactionmetadata.property elements.
 
-        :param mqtt_interface: The MQTT interface collection object.
+        :param interaction_metadata: The Interactionmetadata collection object.
         :return: List of property elements found under Interactionmetadata.
         """
-        properties = []
-        if mqtt_interface is None:
-            return properties
-        for elem in getattr(mqtt_interface, 'value', []):
-            if getattr(elem, 'id_short', '').lower() == 'interactionmetadata' and elem.model_type == 'SubmodelElementCollection':
-                for subelem in getattr(elem, 'value', []):
-                    if subelem.model_type == 'Property':
-                        properties.append(subelem)
-        return properties
+        mqtt_property_collection: SubmodelElementCollection = find_by_semantic_id(
+            interaction_metadata.value, "https://www.w3.org/2019/wot/td#PropertyAffordance"
+        )
+        # TODO
+
 
     def _find_topics(self):
         pass
+
+def find_by_semantic_id(parent: NamespaceSet[SubmodelElement], semantic_id_value: str) -> SubmodelElement:
+    """Find a SubmodelElement by its semantic ID.
+
+    :param parent: The NamespaceSet to search within.
+    :param semantic_id_value: The semantic ID value to search for.
+    :return: The found SubmodelElement, or None if not found.
+    """
+    reference: Reference = model.ExternalReference(
+        [model.Key(
+            type_= model.KeyTypes.GLOBAL_REFERENCE,
+            value=semantic_id_value
+        )]
+    )
+    for element in parent:
+        if element.semantic_id.__eq__(reference):
+            return element
+    return None
+
+def find_by_supplemental_semantic_id(parent: NamespaceSet[SubmodelElement], semantic_id_value: str) -> SubmodelElement:
+    """Find a SubmodelElement by its supplemental semantic ID.
+
+    :param parent: The NamespaceSet to search within.
+    :param semantic_id_value: The supplemental semantic ID value to search for.
+    :return: The found SubmodelElement, or None if not found.
+    """
+    reference: Reference = model.ExternalReference(
+        [model.Key(
+            type_= model.KeyTypes.GLOBAL_REFERENCE,
+            value=semantic_id_value
+        )]
+    )
+
+    for element in parent:
+        if element.supplemental_semantic_id.__eq__(reference):
+            return element
+    return None
