@@ -9,7 +9,7 @@ from typing import TYPE_CHECKING
 import uvicorn
 from fastapi import FastAPI
 
-from core import AIDParser
+from core import AIDParser, MQTTConnector
 from models.get_value_payload import GetValuePayload
 from models.response_body import ResponseBody, create_response
 from models.set_config_payload import SetConfigPayload
@@ -41,7 +41,9 @@ async def set_config(payload: SetConfigPayload) -> ResponseBody:
         # TODO: use AIDParser to process the AID Submodel
         aid_sm = payload._aid_sm
         aid_parser = AIDParser(aid_sm)
-        #aid_parser.parse_aid_and_connect()
+        topics_to_subscribe = aid_parser.get_mqtt_topics()
+        mqtt_connector = MQTTConnector(aid_parser.base_url, topics_to_subscribe)
+        mqtt_connector.start_async()
 
         # TODO: store the deserialized AID Submodel class, e.g., as global variable
 

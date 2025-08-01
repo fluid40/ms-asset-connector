@@ -10,7 +10,7 @@ from paho.mqtt.client import Client
 class MQTTConnector:
     """Connector for managing connections to MQTT topics."""
 
-    def __init__(self, broker_host, broker_port):
+    def __init__(self, base_url: str, topics: dict[str, str]):
         """Initialize the MQTTConnector with broker host and port.
 
         :param broker_host: The hostname or IP address of the MQTT broker.
@@ -19,9 +19,11 @@ class MQTTConnector:
         self.client = Client()
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
-        self.topics = {}
+        self.topics: dict[str, str] = topics
         self.cache = {}
 
+        broker_host: str = base_url.split(":")[0]
+        broker_port: int = int(base_url.split(":")[1]) if ":" in base_url else 1883
         self.client.connect(broker_host, broker_port, 60)
         # Note: start() method should be called manually after initialization
         # to avoid blocking in __init__
@@ -37,7 +39,7 @@ class MQTTConnector:
         print(f"Connected with result code {rc}")
 
         # Subscribe to all topics in self.topics
-        for topic in self.topics:
+        for topic in self.topics.values():
             self.client.subscribe(topic)
 
     def on_message(self, client, userdata, message):  # noqa: ARG002

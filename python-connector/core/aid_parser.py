@@ -19,18 +19,16 @@ from basyx.aas.util import traversal
 class AIDParser:
     """A class to handle parsing of AID Submodels and connecting to MQTT topics."""
 
-    topics: dict[str, str]
+    _topics: dict[str, str]
+    base_url: str = ""
 
     _aid_sm: Submodel
     _mqtt_interface: SubmodelElementCollection = None
-    _interaction_properties: list = None
-    _base_url: str = ""
-
 
     def __init__(self, aid_sm: Submodel):
         """Initialize the AIDParser with a JSON representation of an AID Submodel.
 
-        Extracts the MQTT interface collection and all Interactionmetadata.property elements.
+        Extracts the MQTT interface collection and all InteractionMetadata.property elements.
         """
         self._aid_sm = aid_sm
 
@@ -41,13 +39,6 @@ class AIDParser:
 
         self._get_base_url()
 
-        interaction_metadata: SubmodelElementCollection = find_by_semantic_id(
-            self._mqtt_interface.value, "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/InteractionMetadata"
-        )
-        if interaction_metadata is None:
-            raise ValueError("InteractionMetadata SMC not found in MQTT interface description.")
-
-        self._interaction_properties = self._extract_topics(interaction_metadata)
 
     def _find_mqtt_interface(self) -> SubmodelElementCollection:
         """Find the MQTT interface collection in the AID Submodel by semantic_id and supplemental_semantic_id.
@@ -82,23 +73,16 @@ class AIDParser:
             raise ValueError("BaseUrl Property not found in EndpointMetadata SMC.")
         if not isinstance(base, Property):
             raise TypeError("BaseUrl is not a Property type.")
-        self._base_url = base.value
+        self.base_url = base.value
 
 
-    def _extract_topics(self, interaction_metadata: SubmodelElementCollection):
+    def get_mqtt_topics(self) -> dict[str, str]:
         """
-        Loop through the MQTT interface collection and find all Interactionmetadata.property elements.
+        Loop through the MQTT interface collection and find all InteractionMetadata.property elements.
 
-        :param interaction_metadata: The Interactionmetadata collection object.
-        :return: List of property elements found under Interactionmetadata.
+        :return: List of property elements found under InteractionMetadata.
         """
-        mqtt_property_collection: SubmodelElementCollection = find_by_semantic_id(
-            interaction_metadata.value, "https://www.w3.org/2019/wot/td#PropertyAffordance"
-        )
-        if mqtt_property_collection is None:
-            raise ValueError("PropertyAffordance SMC not found in InteractionMetadata SMC.")
-        if not isinstance(mqtt_property_collection, SubmodelElementCollection):
-            raise TypeError("PropertyAffordance is not a SubmodelElementCollection type.")
+        mqtt_property_collection: SubmodelElementCollection = self._get_mqtt_properties()
 
         property_definitions: list[SubmodelElementCollection] = [
             prop_def for prop_def in find_all_by_semantic_id(
@@ -110,6 +94,28 @@ class AIDParser:
         ]
 
         self._find_topics(property_definitions)
+        return self._topics
+
+    def _get_mqtt_properties(self) -> SubmodelElementCollection:
+        """Get the MQTT properties from the InteractionMetadata SMC.
+
+        :return: The SubmodelElementCollection containing MQTT properties.
+        """
+        interaction_metadata: SubmodelElementCollection = find_by_semantic_id(
+            self._mqtt_interface.value, "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/InteractionMetadata"
+        )
+        if interaction_metadata is None:
+            raise ValueError("InteractionMetadata SMC not found in MQTT interface description.")
+
+        mqtt_property_collection: SubmodelElementCollection = find_by_semantic_id(
+            interaction_metadata.value, "https://www.w3.org/2019/wot/td#PropertyAffordance"
+        )
+        if mqtt_property_collection is None:
+            raise ValueError("PropertyAffordance SMC not found in InteractionMetadata SMC.")
+        if not isinstance(mqtt_property_collection, SubmodelElementCollection):
+            raise TypeError("PropertyAffordance is not a SubmodelElementCollection type.")
+
+        return mqtt_property_collection
 
     def _find_topics(self, property_definitions: list[SubmodelElementCollection]):
         for prop_def in property_definitions:
@@ -128,7 +134,6 @@ class AIDParser:
 
             self._topics[prop_def.id_short] = target_href.value
 
-        
 
 def find_all_by_semantic_id(parent: Iterator[SubmodelElement], semantic_id_value: str) -> list[SubmodelElement]:
     """Find all SubmodelElements having a specific Semantic ID.
