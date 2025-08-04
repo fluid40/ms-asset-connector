@@ -4,6 +4,8 @@ Provides the MQTTConnector class for subscribing to topics, receiving messages,
 and storing the latest payload for each topic.
 """
 
+from urllib.parse import ParseResult, urlparse
+
 from paho.mqtt.client import Client
 
 
@@ -22,8 +24,9 @@ class MQTTConnector:
         self.topics: dict[str, str] = topics
         self.cache = {}
 
-        broker_host: str = base_url.split(":")[0]
-        broker_port: int = int(base_url.split(":")[1]) if ":" in base_url else 1883
+        parsed_mqtt_url: ParseResult = urlparse(base_url)
+        broker_host = parsed_mqtt_url.hostname
+        broker_port = parsed_mqtt_url.port if parsed_mqtt_url.port else 1883
         self.client.connect(broker_host, broker_port, 60)
         # Note: start() method should be called manually after initialization
         # to avoid blocking in __init__
