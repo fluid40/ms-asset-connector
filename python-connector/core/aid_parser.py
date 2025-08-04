@@ -19,7 +19,7 @@ from basyx.aas.util import traversal
 class AIDParser:
     """A class to handle parsing of AID Submodels and connecting to MQTT topics."""
 
-    _topics: dict[str, str]
+    _topics: dict[str, str] = {}
     base_url: str = ""
 
     _aid_sm: Submodel
