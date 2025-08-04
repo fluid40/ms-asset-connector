@@ -4,8 +4,10 @@ Provides the MQTTConnector class for subscribing to topics, receiving messages,
 and storing the latest payload for each topic.
 """
 
+import os
 from urllib.parse import ParseResult, urlparse
 
+from dotenv import load_dotenv
 from paho.mqtt.client import Client
 
 
@@ -18,11 +20,18 @@ class MQTTConnector:
         :param broker_host: The hostname or IP address of the MQTT broker.
         :param broker_port: The port number of the MQTT broker.
         """
+        load_dotenv()
         self.client = Client()
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
         self.topics: dict[str, str] = topics
         self.cache = {}
+
+        # Load credentials from environment variables
+        mqtt_username = os.getenv("MQTT_USERNAME")
+        mqtt_password = os.getenv("MQTT_PASSWORD")
+        if mqtt_username and mqtt_password:
+            self.client.username_pw_set(mqtt_username, mqtt_password)
 
         parsed_mqtt_url: ParseResult = urlparse(base_url)
         broker_host = parsed_mqtt_url.hostname
@@ -115,8 +124,8 @@ class MQTTConnector:
 
     def add_topics(self, topics_dict):
         """Add topics to the MQTTConnector."""
-        # TODO: Implement topic addition logic
-        pass
+        self.topics.update(topics_dict)
+
 
 
     def get_cached_value(self, topic):
@@ -125,5 +134,4 @@ class MQTTConnector:
         :param topic: The topic to retrieve the cached value for.
         :return: The cached value if it exists, otherwise None.
         """
-        # TODO: Implement logic to retrieve cached value
-        pass
+        return self.cache.get(topic, None)
