@@ -5,6 +5,7 @@ This module provides endpoints to set configuration and retrieve values using JS
 
 import base64
 import json
+import threading
 
 import uvicorn
 from basyx.aas.adapter.json import AASToJsonEncoder
@@ -18,8 +19,10 @@ from models.set_config_payload import SetConfigPayload
 
 app = FastAPI()
 
-# Store AssetConnector instances by submodel id
+
+# Store AssetConnector instances by submodel id (thread-safe)
 connector_store: dict[str, AssetConnector] = {}
+connector_store_lock = threading.Lock()
 
 
 @app.get("/")
@@ -30,7 +33,7 @@ async def root():
 
 # Set config for a specific AID submodel id
 @app.post("/set-config")
-async def set_config(payload: SetConfigPayload) -> ResponseBody:
+async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
     """Set configuration for a specific AID submodel id."""
     aid_sm: Submodel = payload._aid_sm  # noqa: SLF001
     try:
@@ -38,7 +41,8 @@ async def set_config(payload: SetConfigPayload) -> ResponseBody:
 
         asset_connector = AssetConnector(connector_id)
         asset_connector.set_config(aid_sm)
-        connector_store[connector_id] = asset_connector
+        with connector_store_lock:
+            connector_store[connector_id] = asset_connector
         return create_response(
             status_code=200,
             message="Successfully invoked `/set-config` with raw JSON in payload",
@@ -57,7 +61,8 @@ async def set_config(payload: SetConfigPayload) -> ResponseBody:
 @app.post("/{id}/get-value")
 async def get_value(id: str, payload: GetValuePayload) -> ResponseBody:
     """Get value for a specific AID submodel id."""
-    asset_connector = connector_store.get(id)
+    with connector_store_lock:
+        asset_connector = connector_store.get(id)
     decoded_id: str = base64.urlsafe_b64decode(id.encode()).decode()
     if asset_connector is None:
         return create_response(
@@ -66,7 +71,7 @@ async def get_value(id: str, payload: GetValuePayload) -> ResponseBody:
             payload=None,
         )
     try:
-        result = asset_connector.get_value(payload._aid_ref)
+        result = asset_connector.get_value(payload._aid_ref)  # noqa: SLF001
         return create_response(
             status_code=200,
             message=f"Successfully invoked `/get-value/{id}` with raw JSON in payload",
