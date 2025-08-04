@@ -3,93 +3,82 @@
 This module provides endpoints to set configuration and retrieve values using JSON payloads.
 """
 
+import base64
 import json
 
 import uvicorn
-from basyx.aas.adapter.json import AASFromJsonDecoder, AASToJsonEncoder
-from basyx.aas.model import ModelReference, Submodel
+from basyx.aas.adapter.json import AASToJsonEncoder
+from basyx.aas.model import Submodel
 from fastapi import FastAPI
 
-from core import AIDParser, MQTTConnector, ReferenceResolver
+from core.asset_connector import AssetConnector
 from models.get_value_payload import GetValuePayload
 from models.response_body import ResponseBody, create_response
 from models.set_config_payload import SetConfigPayload
 
 app = FastAPI()
 
+# Store AssetConnector instances by submodel id
+connector_store: dict[str, AssetConnector] = {}
 
-topic_map: dict[str, str] = {}
-mqtt_connector: MQTTConnector | None = None
 
 @app.get("/")
 async def root():
-    """Root endpoint that returns available endpoints.
-
-    :return: A dictionary with a message listing available endpoints.
-    """
-    return {"message": "Available endpoints are `/set-config` and `/get-value`"}
+    """Root endpoint that returns available endpoints."""
+    return {"message": "Available endpoints are `/set-config/{{id}}` and `/get-value/{{id}}`"}
 
 
+# Set config for a specific AID submodel id
 @app.post("/set-config")
 async def set_config(payload: SetConfigPayload) -> ResponseBody:
-    """Set configuration endpoint.
-
-    :param payload: The configuration payload to set.
-    :return: A response indicating the result of the operation.
-    """
-    # get the raw JSON from the payload
-    # the raw JSON string in the payload must escape the " character, revert this by replacing \" with "
+    """Set configuration for a specific AID submodel id."""
+    aid_sm: Submodel = payload._aid_sm  # noqa: SLF001
     try:
-        aid_sm: Submodel = payload._aid_sm  # noqa: SLF001
-        aid_parser = AIDParser(aid_sm)
-        mqtt_topics = aid_parser.get_mqtt_topics()
-        connector = MQTTConnector(aid_parser.base_url, mqtt_topics)
-        connector.start_async()
+        connector_id: str = base64.urlsafe_b64encode(str(aid_sm.id).encode()).decode()
 
-        global mqtt_connector
-        mqtt_connector = connector
-
-        # Assign the connector to the global variable
-        # (do this outside the function, e.g., in a wrapper or after calling the endpoint)
-        global topic_map
-        topic_map = mqtt_topics
-
+        asset_connector = AssetConnector(connector_id)
+        asset_connector.set_config(aid_sm)
+        connector_store[connector_id] = asset_connector
         return create_response(
             status_code=200,
             message="Successfully invoked `/set-config` with raw JSON in payload",
-            payload=json.dumps(aid_sm, cls=AASToJsonEncoder),
+            payload=None,
+            value=connector_id
         )
-    except Exception as e:
+    except (ValueError, RuntimeError) as e:
         return create_response(
             status_code=500,
-            message=f"Error processing `/set-config`: {e!s}",
+            message=f"Error processing `/set-config/{id}`: {e!s}",
             payload=None,
         )
 
 
-@app.post("/get-value")
-async def get_value(payload: GetValuePayload) -> ResponseBody:
-    """Get value endpoint.
-
-    :param payload: The payload containing the reference to the value to retrieve.
-    :return: A response containing the retrieved value.
-    """
-    # get the raw JSON from the payload
-    # the raw JSON string in the payload must escape the " character, revert this by replacing \" with "
-    reference: ModelReference = payload.aid_ref_dict  # noqa: SLF001
-
-    topic_name = ReferenceResolver.get_topic_by_reference(reference, topic_map)
-
-    result = None
-    if mqtt_connector is not None:
-        result = json.loads(mqtt_connector.get_cached_value(topic_name))
-
-    return create_response(
-        status_code=200,
-        message="Successfully invoked `/get-value` with raw JSON in payload",
-        payload=payload,
-        value=result,
-    )
+# Get value for a specific AID submodel id
+@app.post("/{id}/get-value")
+async def get_value(id: str, payload: GetValuePayload) -> ResponseBody:
+    """Get value for a specific AID submodel id."""
+    asset_connector = connector_store.get(id)
+    decoded_id: str = base64.urlsafe_b64decode(id.encode()).decode()
+    if asset_connector is None:
+        return create_response(
+            status_code=404,
+            message=f"No AssetConnector found for id {decoded_id}",
+            payload=None,
+        )
+    try:
+        result = asset_connector.get_value(payload._aid_ref)
+        return create_response(
+            status_code=200,
+            message=f"Successfully invoked `/get-value/{id}` with raw JSON in payload",
+            payload=payload,
+            value=json.loads(result, cls=AASToJsonEncoder) if result else None,
+        )
+    except (ValueError, RuntimeError) as e:
+        return create_response(
+            status_code=500,
+            message=f"Error processing `/get-value/{id}`: {e!s}",
+            payload=None,
+        )
 
 
 if __name__ == "__main__":
