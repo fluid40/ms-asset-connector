@@ -1518,7 +1518,7 @@
 														}
 													],
 													"valueType": "xs:string",
-													"value": "tom-ag2/BallPenMachine/Axes/Position",
+													"value": "cad/BallPenMachine/Axes/Position",
 													"modelType": "Property"
 												},
 												{
@@ -2272,7 +2272,7 @@
 														}
 													],
 													"valueType": "xs:string",
-													"value": "tom-ag2/BallPenMachine/Pneumatics/Valves",
+													"value": "cad/BallPenMachine/Pneumatics/Valves",
 													"modelType": "Property"
 												},
 												{
@@ -3253,7 +3253,7 @@
 														}
 													],
 													"valueType": "xs:string",
-													"value": "tom-ag2/BallPenMachine/Status",
+													"value": "cad/BallPenMachine/Status",
 													"modelType": "Property"
 												},
 												{
@@ -3721,7 +3721,7 @@
 														}
 													],
 													"valueType": "xs:string",
-													"value": "tom-ag2/BallPenMachine/Energy",
+													"value": "cad/BallPenMachine/Energy",
 													"modelType": "Property"
 												},
 												{
