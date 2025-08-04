@@ -4,20 +4,22 @@ This module provides endpoints to set configuration and retrieve values using JS
 """
 
 import json
-from typing import TYPE_CHECKING
 
 import uvicorn
+from basyx.aas.adapter.json import AASFromJsonDecoder, AASToJsonEncoder
+from basyx.aas.model import ModelReference, Submodel
 from fastapi import FastAPI
 
-from core import AIDParser, MQTTConnector
+from core import AIDParser, MQTTConnector, ReferenceResolver
 from models.get_value_payload import GetValuePayload
 from models.response_body import ResponseBody, create_response
 from models.set_config_payload import SetConfigPayload
-from basyx.aas.adapter.json import AASFromJsonDecoder
-from basyx.aas.model import ReferenceElement, Submodel
 
 app = FastAPI()
 
+
+topic_map: dict[str, str] = {}
+mqtt_connector: MQTTConnector | None = None
 
 @app.get("/")
 async def root():
@@ -38,19 +40,24 @@ async def set_config(payload: SetConfigPayload) -> ResponseBody:
     # get the raw JSON from the payload
     # the raw JSON string in the payload must escape the " character, revert this by replacing \" with "
     try:
-        # TODO: use AIDParser to process the AID Submodel
-        aid_sm = payload._aid_sm
+        aid_sm: Submodel = payload._aid_sm  # noqa: SLF001
         aid_parser = AIDParser(aid_sm)
-        topics_to_subscribe = aid_parser.get_mqtt_topics()
-        mqtt_connector = MQTTConnector(aid_parser.base_url, topics_to_subscribe)
-        mqtt_connector.start_async()
+        mqtt_topics = aid_parser.get_mqtt_topics()
+        connector = MQTTConnector(aid_parser.base_url, mqtt_topics)
+        connector.start_async()
 
-        # TODO: store the deserialized AID Submodel class, e.g., as global variable
+        global mqtt_connector
+        mqtt_connector = connector
+
+        # Assign the connector to the global variable
+        # (do this outside the function, e.g., in a wrapper or after calling the endpoint)
+        global topic_map
+        topic_map = mqtt_topics
 
         return create_response(
             status_code=200,
             message="Successfully invoked `/set-config` with raw JSON in payload",
-            payload=aid_sm,
+            payload=json.dumps(aid_sm, cls=AASToJsonEncoder),
         )
     except Exception as e:
         return create_response(
@@ -69,22 +76,18 @@ async def get_value(payload: GetValuePayload) -> ResponseBody:
     """
     # get the raw JSON from the payload
     # the raw JSON string in the payload must escape the " character, revert this by replacing \" with "
-    prop_ref: ReferenceElement = payload.aid_ref
+    reference: ModelReference = payload.aid_ref_dict  # noqa: SLF001
 
+    topic_name = ReferenceResolver.get_topic_by_reference(reference, topic_map)
 
-    # TODO: use an AAS SDK to deserialize the content as Reference
-
-    # TODO: find the SMC in the cached AID Submodel to which the reference points
-
-    # TODO: read the details in the SMC and use it to establish a connection to the asset
-
-    # TODO: return the value
-    result = "myResult"
+    result = None
+    if mqtt_connector is not None:
+        result = json.loads(mqtt_connector.get_cached_value(topic_name))
 
     return create_response(
         status_code=200,
         message="Successfully invoked `/get-value` with raw JSON in payload",
-        payload=prop_ref,
+        payload=payload,
         value=result,
     )
 
