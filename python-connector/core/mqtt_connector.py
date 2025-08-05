@@ -34,11 +34,21 @@ class MQTTConnector:
             self.client.username_pw_set(mqtt_username, mqtt_password)
 
         parsed_mqtt_url: ParseResult = urlparse(base_url)
-        broker_host = parsed_mqtt_url.hostname
-        broker_port = parsed_mqtt_url.port if parsed_mqtt_url.port else 1883
-        self.client.connect(broker_host, broker_port, 60)
+        self.broker_host = parsed_mqtt_url.hostname
+        self.broker_port = parsed_mqtt_url.port if parsed_mqtt_url.port else 1883
+
         # Note: start() method should be called manually after initialization
         # to avoid blocking in __init__
+
+    def connect(self):
+        """Connect to the MQTT broker and subscribe to all topics.
+
+        This method should be called after initializing the MQTTConnector.
+        """
+        try:
+            self.client.connect(self.broker_host, self.broker_port, 60)
+        except Exception as e:
+            raise ConnectionError(f"Error connecting to MQTT broker at {self.broker_host}:{self.broker_port}: {e}")
 
     def on_connect(self, client, userdata, flags, rc):  # noqa: ARG002
         """Handle response from the server.

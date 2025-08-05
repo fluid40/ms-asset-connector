@@ -49,7 +49,7 @@ async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
             payload=None,
             value=connector_id
         )
-    except (ValueError, RuntimeError) as e:
+    except (ValueError, RuntimeError, ConnectionError) as e:
         return create_response(
             status_code=500,
             message=f"Error processing `/set-config/{id}`: {e!s}",
@@ -78,7 +78,7 @@ async def get_value(id: str, payload: GetValuePayload) -> ResponseBody:
             payload=payload,
             value=json.loads(result, cls=AASToJsonEncoder) if result else None,
         )
-    except (ValueError, RuntimeError) as e:
+    except (ValueError, RuntimeError, ConnectionError) as e:
         return create_response(
             status_code=500,
             message=f"Error processing `/get-value/{id}`: {e!s}",
