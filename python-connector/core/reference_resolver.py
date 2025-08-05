@@ -1,5 +1,5 @@
 """Module for resolving ReferenceElement objects to their mapped MQTT topics."""
-from basyx.aas.model import ModelReference
+from basyx.aas.model import ModelReference, Key
 
 
 class ReferenceResolver:
@@ -17,8 +17,9 @@ class ReferenceResolver:
         :return: The topic name if found, else None.
         """
         # Get the last element of reference.keys if available
-        last_key = reference.get("keys", [])[-1] if reference.get("keys") else None
-        property_name: str = last_key["value"] if last_key else None
+        # last_key = reference.get("keys", [])[-1] if reference.get("keys") else None
+        last_key: Key = reference.key[-1] if reference.key else None
+        property_name: str = last_key.value if last_key else None
 
         if property_name and property_name in topic_map:
             return topic_map[property_name]

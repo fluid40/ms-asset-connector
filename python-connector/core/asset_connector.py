@@ -1,5 +1,5 @@
 """Asset connector module for interfacing with assets via AID and MQTT."""
-from basyx.aas.model import Submodel
+from basyx.aas.model import Submodel, ModelReference
 
 from core.aid_parser import AIDParser
 from core.mqtt_connector import MQTTConnector
@@ -30,7 +30,7 @@ class AssetConnector:
             print(f"Failed to connect MQTTConnector: {e}")
             self.connected = False
 
-    def get_value(self, model_reference: dict) -> str:
+    def get_value(self, model_reference: ModelReference) -> str:
         """Get the value for a specific model reference."""
         topic_name = ReferenceResolver.get_topic_by_reference(model_reference, self._mqtt_connector.topics)
 
