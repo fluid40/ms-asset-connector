@@ -145,3 +145,10 @@ class MQTTConnector:
         :return: The cached value if it exists, otherwise None.
         """
         return self.cache.get(topic, None)
+
+class WebSocketMQTTConnector(MQTTConnector):
+    """MQTTConnector subclass using WebSocket transport."""
+
+    def __init__(self, base_url: str, topics: dict[str, str]):  # noqa: D107
+        super().__init__(base_url, topics)
+        self.client = Client(transport="websockets")
