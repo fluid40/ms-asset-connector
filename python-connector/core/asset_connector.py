@@ -26,6 +26,9 @@ class AssetConnector:
             self._mqtt_connector.connect()
             self._mqtt_connector.start_async()
             self.connected = True
+        except ConnectionError:
+            print("MQTT protocol connection failed. Try to use websocket.")
+            # TODO
         except Exception as e:
             print(f"Failed to connect MQTTConnector: {e}")
             self.connected = False
