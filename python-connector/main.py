@@ -52,7 +52,7 @@ async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
     except (ValueError, RuntimeError, ConnectionError) as e:
         return create_response(
             status_code=500,
-            message=f"Error processing `/set-config/{id}`: {e!s}",
+            message=f"Error processing `/set-config`: {e!s}",
             payload=None,
         )
 
