@@ -28,7 +28,7 @@ connector_store_lock = threading.Lock()
 @app.get("/")
 async def root():
     """Root endpoint that returns available endpoints."""
-    return {"message": "Available endpoints are `/set-config/{{id}}` and `/get-value/{{id}}`"}
+    return {"message": "Available endpoints are `/set-config` and `{{id}}/get-value`"}
 
 
 # Set config for a specific AID submodel id
