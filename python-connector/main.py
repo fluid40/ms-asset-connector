@@ -75,8 +75,7 @@ async def get_value(id: str, payload: GetValuePayload) -> ResponseBody:
         return create_response(
             status_code=200,
             message=f"Successfully invoked `/get-value/{id}` with raw JSON in payload",
-            payload=payload,
-            value=json.loads(result, cls=AASToJsonEncoder) if result else None,
+            payload=json.loads(result) if result else None
         )
     except (ValueError, RuntimeError, ConnectionError) as e:
         return create_response(
