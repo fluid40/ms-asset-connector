@@ -14,14 +14,19 @@ from paho.mqtt.client import Client
 class MQTTConnector:
     """Connector for managing connections to MQTT topics."""
 
-    def __init__(self, base_url: str, topics: dict[str, str]):
+    def __init__(self, base_url: str, topics: dict[str, str], use_websocket: bool = False):
         """Initialize the MQTTConnector with broker host and port.
 
         :param broker_host: The hostname or IP address of the MQTT broker.
         :param broker_port: The port number of the MQTT broker.
         """
         load_dotenv()
-        self.client = Client()
+        if use_websocket:
+            self.client = Client(transport="websockets")
+            self.client.ws_set_options(path="/ws")
+            self.client.tls_set()
+        else:
+            self.client = Client()
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
         self.topics: dict[str, str] = topics
@@ -145,10 +150,3 @@ class MQTTConnector:
         :return: The cached value if it exists, otherwise None.
         """
         return self.cache.get(topic, None)
-
-class WebSocketMQTTConnector(MQTTConnector):
-    """MQTTConnector subclass using WebSocket transport."""
-
-    def __init__(self, base_url: str, topics: dict[str, str]):  # noqa: D107
-        super().__init__(base_url, topics)
-        self.client = Client(transport="websockets")
