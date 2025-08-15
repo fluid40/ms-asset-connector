@@ -1,5 +1,5 @@
 """Asset connector module for interfacing with assets via AID and MQTT."""
-from basyx.aas.model import Submodel, ModelReference
+from basyx.aas.model import ModelReference, Submodel
 
 from core.aid_parser import AIDParser
 from core.mqtt_connector import MQTTConnector
@@ -20,14 +20,15 @@ class AssetConnector:
         """Set the configuration for the asset connector."""
         self.aid = new_config
         aid_parser = AIDParser(new_config)
-        mqtt_topics = aid_parser.get_mqtt_topics()
+        mqtt_topics: dict[str, str] = aid_parser.get_mqtt_topics()
+        base_url: str = aid_parser.get_base_url()
         try:
-            self._mqtt_connector = MQTTConnector(aid_parser.base_url, mqtt_topics)
+            self._mqtt_connector = MQTTConnector(base_url, mqtt_topics, aid_parser.has_websocket_interface())
             self._mqtt_connector.connect()
             self._mqtt_connector.start_async()
             self.connected = True
-        except ConnectionError:
-            print("MQTT protocol connection failed. Try to use websocket.")
+        except ConnectionError as ce:
+            print(f"MQTT protocol connection failed: {ce}.")
             # TODO
         except Exception as e:
             print(f"Failed to connect MQTTConnector: {e}")
