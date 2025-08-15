@@ -33,7 +33,6 @@ class AIDParser:
     """A class to handle parsing of AID Submodels and connecting to MQTT topics."""
 
     _topics: dict[str, str] = {}
-    base_url: str = ""
 
     _aid_sm: Submodel
     _mqtt_interfaces: list[MQTTInterfaceDescription]
@@ -57,7 +56,7 @@ class AIDParser:
             )
             for smc in mqtt_interfaces
         ]
-        print("found MQTT interfaces:", self._mqtt_interfaces)
+        print(f"Found {len(self._mqtt_interfaces)} MQTT interfaces in AID Submodel.")
 
     def _find_mqtt_interfaces(self) -> list[SubmodelElementCollection]:
         """Find all MQTT interface collections in the AID Submodel by semantic_id and supplemental_semantic_id.
@@ -97,8 +96,8 @@ class AIDParser:
 
         :return: List of property elements found under InteractionMetadata.
         """
-        default_mqtt_interface: SubmodelElementCollection = self._get_default_mqtt_interface()
-        mqtt_property_collection: SubmodelElementCollection = self._get_mqtt_properties(default_mqtt_interface)
+        default_mqtt_interface: MQTTInterfaceDescription = self._get_default_mqtt_interface_description()
+        mqtt_property_collection: SubmodelElementCollection = self._get_mqtt_properties(default_mqtt_interface.interface_smc)
 
         property_definitions: list[SubmodelElementCollection] = [
             prop_def for prop_def in find_all_by_semantic_id(
@@ -112,8 +111,24 @@ class AIDParser:
         self._find_topics(property_definitions)
         return self._topics
 
-    def _get_default_mqtt_interface(self) -> SubmodelElementCollection:
-        """Get the default MQTT interface from the list of MQTT interfaces.
+    def get_base_url(self) -> str:
+        """Return the base url used for the MQTT connection.
+
+        :return: The base URL of the default MQTT interface.
+        """
+        default_mqtt_interface = self._get_default_mqtt_interface_description()
+
+        return self._get_base_url(default_mqtt_interface.interface_smc)
+
+    def has_websocket_interface(self) -> bool:
+        """Check if the MQTT connection will be initialized using Websocket.
+
+        :return: True if the default MQTT interface uses WebSocket, False otherwise.
+        """
+        return self._get_default_mqtt_interface_description().websocket_connection
+
+    def _get_default_mqtt_interface_description(self) -> MQTTInterfaceDescription:
+        """Get the default MQTT interface description from the list of MQTT interfaces.
 
         Default MQTT interface does not use Websocket. If no such interface is found, simply return the first one.
 
