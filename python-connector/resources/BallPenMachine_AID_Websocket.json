@@ -199,7 +199,7 @@
 								}
 							],
 							"valueType": "xs:anyURI",
-							"value": "ws://mqtt.fluidon.com:443/",
+							"value": "wss://mqtt.fluidon.com:443/ws",
 							"modelType": "Property"
 						},
 						{
