@@ -14,6 +14,10 @@ from paho.mqtt.client import Client
 class MQTTConnector:
     """Connector for managing connections to MQTT topics."""
 
+    base_url: str
+    broker_host: str
+    broker_port: int
+
     def __init__(self, base_url: str, topics: dict[str, str], use_websocket: bool = False):
         """Initialize the MQTTConnector with broker host and port.
 
@@ -21,10 +25,17 @@ class MQTTConnector:
         :param broker_port: The port number of the MQTT broker.
         """
         load_dotenv()
+
+        self.base_url = base_url
+        parsed_mqtt_url: ParseResult = urlparse(base_url)
+        self.broker_host = parsed_mqtt_url.hostname
+        self.broker_port = parsed_mqtt_url.port if parsed_mqtt_url.port else 1883
+
         if use_websocket:
             self.client = Client(transport="websockets")
-            self.client.ws_set_options(path="/ws")
-            self.client.tls_set()
+            self.client.ws_set_options(path=parsed_mqtt_url.path)
+            if parsed_mqtt_url.scheme == "wss":
+                self.client.tls_set()
         else:
             self.client = Client()
         self.client.on_connect = self.on_connect
@@ -38,10 +49,6 @@ class MQTTConnector:
         if mqtt_username and mqtt_password:
             self.client.username_pw_set(mqtt_username, mqtt_password)
 
-        parsed_mqtt_url: ParseResult = urlparse(base_url)
-        self.broker_host = parsed_mqtt_url.hostname
-        self.broker_port = parsed_mqtt_url.port if parsed_mqtt_url.port else 1883
-
         # Note: start() method should be called manually after initialization
         # to avoid blocking in __init__
 
@@ -53,7 +60,7 @@ class MQTTConnector:
         try:
             self.client.connect(self.broker_host, self.broker_port, 60)
         except Exception as e:
-            raise ConnectionError(f"Error connecting to MQTT broker at {self.broker_host}:{self.broker_port}: {e}")
+            raise ConnectionError(f"Error connecting to MQTT broker at {self.base_url}: {e}")
 
     def on_connect(self, client, userdata, flags, rc):  # noqa: ARG002
         """Handle response from the server.
@@ -68,6 +75,7 @@ class MQTTConnector:
         # Subscribe to all topics in self.topics
         for topic in self.topics.values():
             self.client.subscribe(topic)
+            print(f"Subscribed to topic: {topic}")
 
     def on_message(self, client, userdata, message):  # noqa: ARG002
         """Handle incoming messages from subscribed topics.
