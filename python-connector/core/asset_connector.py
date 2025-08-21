@@ -16,20 +16,28 @@ class AssetConnector:
         self.id = id
         self.connected = False
 
-    def set_config(self, new_config: Submodel):
-        """Set the configuration for the asset connector."""
-        self.aid = new_config
-        aid_parser = AIDParser(new_config)
-        mqtt_topics: dict[str, str] = aid_parser.get_mqtt_topics()
-        base_url: str = aid_parser.get_base_url()
+    def set_config(self, new_aid: Submodel):
+        """Set (or overwrite) the configuration for the asset connector.
+
+        :param new_aid: The new AID to use for the connection.
+        """
+        self.aid = new_aid
+
         try:
-            self._mqtt_connector = MQTTConnector(base_url, mqtt_topics, aid_parser.has_websocket_interface())
-            self._mqtt_connector.connect()
-            self._mqtt_connector.start_async()
-            self.connected = True
-        except ConnectionError as ce:
-            print(f"MQTT protocol connection failed: {ce}.")
-            # TODO
+            aid_parser = AIDParser(new_aid)
+            mqtt_topics: dict[str, str] = aid_parser.get_mqtt_topic_map()
+            base_url: str = aid_parser.get_mqtt_base_url()
+            use_websocket_connection: bool = aid_parser.uses_websocket_interface()
+            connection_success: bool = self._connect_to_mqtt_topics(base_url, mqtt_topics, use_websocket_connection)
+
+            if not connection_success and not use_websocket_connection:
+                print("Check for MQTT interface using Websocket as fallback.")
+                mqtt_topics = aid_parser.get_mqtt_topic_map(fallback=True)
+                base_url = aid_parser.get_mqtt_base_url(fallback=True)
+                use_websocket_connection = aid_parser.uses_websocket_interface(fallback=True)
+                connection_success = self._connect_to_mqtt_topics(base_url, mqtt_topics, use_websocket_connection)
+
+            self.connected = connection_success
         except Exception as e:
             print(f"Failed to connect MQTTConnector: {e}")
             self.connected = False
@@ -45,3 +53,19 @@ class AssetConnector:
             result = self._mqtt_connector.get_cached_value(topic_name)
 
         return result
+
+    def _connect_to_mqtt_topics(self, base_url: str, mqtt_topics: dict[str, str], use_websocket: bool) -> bool:
+        """Connect to the MQTT topics using a MQTT connector.
+
+        :param base_url: The base URL for the MQTT broker.
+        :param mqtt_topics: A dictionary of MQTT topics to subscribe to.
+        :param use_websocket: Whether to use WebSocket for the connection.
+        """
+        try:
+            self._mqtt_connector = MQTTConnector(base_url, mqtt_topics, use_websocket)
+            self._mqtt_connector.connect()
+            self._mqtt_connector.start_async()
+            return True
+        except ConnectionError as ce:
+            print(f"MQTT protocol connection failed: {ce}.")
+            return False
