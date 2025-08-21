@@ -8,7 +8,6 @@ import json
 import threading
 
 import uvicorn
-from basyx.aas.adapter.json import AASToJsonEncoder
 from basyx.aas.model import Submodel
 from fastapi import FastAPI
 
@@ -31,7 +30,6 @@ async def root():
     return {"message": "Available endpoints are `/set-config` and `{{id}}/get-value`"}
 
 
-# Set config for a specific AID submodel id
 @app.post("/set-config")
 async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
     """Set configuration for a specific AID submodel id."""
@@ -43,6 +41,7 @@ async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
         asset_connector.set_config(aid_sm)
         with connector_store_lock:
             connector_store[connector_id] = asset_connector
+
         return create_response(
             status_code=200,
             message="Successfully invoked `/set-config` with raw JSON in payload",
@@ -67,7 +66,7 @@ async def get_value(id: str, payload: GetValuePayload) -> ResponseBody:
     if asset_connector is None:
         return create_response(
             status_code=404,
-            message=f"No AssetConnector found for id {decoded_id}",
+            message=f"No AssetConnector found for id {id} (decoded: {decoded_id})",
             payload=None,
         )
     try:
