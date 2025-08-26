@@ -1,0 +1,26 @@
+{
+    "name": "Asset Connector Python DevContainer",
+    "dockerComposeFile": "./docker-compose.yaml",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+    "service": "devcontainer_asset_connector",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "streetsidesoftware.code-spell-checker",
+                "mhutchie.git-graph",
+                "medo64.render-crlf",
+                "eamodio.gitlens",
+                "njpwerner.autodocstring",
+                "aaron-bond.better-comments",
+                "vivaxy.vscode-conventional-commits",
+                "bierner.github-markdown-preview",
+                "ms-azuretools.vscode-docker",
+                "ms-python.isort",
+                "charliermarsh.ruff",
+                "rapidapi.vscode-rapidapi-client"
+            ]
+        }
+    },
+    "postCreateCommand": "pip install --no-cache-dir -r requirements.txt"
+}
