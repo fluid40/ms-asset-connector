@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 from paho.mqtt.client import Client
 
 
-class MQTTConnector:
+class MqttClient:
     """Connector for managing connections to MQTT topics."""
 
     base_url: str

@@ -29,7 +29,7 @@ class MQTTInterfaceDescription(NamedTuple):
     base_url: str
     websocket_connection: bool = False
 
-class AIDParser:
+class AidInterfaceParser:
     """A class to handle parsing of AID Submodels and connecting to MQTT topics.
 
     It extracts the MQTT topic information from the AID Submodel as well as the base url of the MQTT broker.
@@ -41,7 +41,7 @@ class AIDParser:
     _fallback_mqtt_interface: MQTTInterfaceDescription = None
     _topic_map: dict[str, str] = {}
 
-    def __init__(self, aid_sm: Submodel):
+    def __init__(self, interface_smc: SubmodelElementCollection):
         """Initialize the AIDParser with a JSON representation of an AID Submodel.
 
         Extract all MQTT interface collections and find the contained MQTT topics using the default interface.

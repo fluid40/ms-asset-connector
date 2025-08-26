@@ -6,12 +6,13 @@ This module provides endpoints to set configuration and retrieve values using JS
 import base64
 import json
 import threading
+from typing import Dict
 
 import uvicorn
 from basyx.aas.model import Submodel
 from fastapi import FastAPI
 
-from core.asset_connector import AssetConnector
+from core.asset_connector import IAssetConnector
 from models.get_value_payload import GetValuePayload
 from models.response_body import ResponseBody, create_response
 from models.set_config_payload import SetConfigPayload
@@ -19,28 +20,31 @@ from models.set_config_payload import SetConfigPayload
 app = FastAPI()
 
 
-# Store AssetConnector instances by submodel id (thread-safe)
-connector_store: dict[str, AssetConnector] = {}
+# Store AssetConnector instances mapped by (submodel id + interface idshort) in thread-safe way
+connector_store: Dict[str, IAssetConnector] = {}
 connector_store_lock = threading.Lock()
 
 
 @app.get("/")
 async def root():
     """Root endpoint that returns available endpoints."""
-    return {"message": "Available endpoints are `/set-config` and `{{id}}/get-value`"}
+    return {"message": "Available endpoints are `/add-config` and `/get-value`"}
 
 
-@app.post("/set-config")
+@app.post("/add-config")
 async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
-    """Set configuration for a specific AID submodel id."""
+    """Set configuration using a specific AID submodel."""
     aid_sm: Submodel = payload._aid_sm  # noqa: SLF001
     try:
         connector_id: str = base64.urlsafe_b64encode(str(aid_sm.id).encode()).decode()
 
-        asset_connector = AssetConnector(connector_id)
-        asset_connector.set_config(aid_sm)
-        with connector_store_lock:
-            connector_store[connector_id] = asset_connector
+        # iterate over all interface SMCs and create IAssetConnector for each of them
+        for iface_smc in aid_sm.submodel_element:
+
+            asset_connector = IAssetConnector(connector_id, iface_smc)
+            connector_id = f"{connector_id}-{iface_smc.id_short}"
+            with connector_store_lock:
+                connector_store[connector_id] = asset_connector
 
         return create_response(
             status_code=200,
@@ -57,31 +61,35 @@ async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
 
 
 # Get value for a specific AID submodel id
-@app.post("/{id}/get-value")
-async def get_value(id: str, payload: GetValuePayload) -> ResponseBody:
-    """Get value for a specific AID submodel id."""
+@app.post("/get-value")
+async def get_value(payload: GetValuePayload) -> ResponseBody:
+    """Get value from a specified protocol-specific endpoint in an AID submodel."""
+
+    reference = payload._aid_ref
+    aid_id = reference.key[0].value
+    iface_smc = reference.key[1].value
+    connector_id = f"{aid_id}-{iface_smc}"
     with connector_store_lock:
-        asset_connector = connector_store.get(id)
-    decoded_id: str = base64.urlsafe_b64decode(id.encode()).decode()
-    if asset_connector is None:
-        return create_response(
-            status_code=404,
-            message=f"No AssetConnector found for id {id} (decoded: {decoded_id})",
-            payload=None,
-        )
-    try:
-        result = asset_connector.get_value(payload._aid_ref)  # noqa: SLF001
-        return create_response(
-            status_code=200,
-            message=f"Successfully invoked `/get-value/{id}` with raw JSON in payload",
-            payload=json.loads(result) if result else None
-        )
-    except (ValueError, RuntimeError, ConnectionError) as e:
-        return create_response(
-            status_code=500,
-            message=f"Error processing `/get-value/{id}`: {e!s}",
-            payload=None,
-        )
+        asset_connector = connector_store.get(connector_id)
+        if asset_connector is None:
+            return create_response(
+                status_code=404,
+                message=f"No AssetConnector found for id {id} (decoded: {decoded_id})",
+                payload=None,
+            )
+        try:
+            result = asset_connector.get_value(payload._aid_ref)  # noqa: SLF001
+            return create_response(
+                status_code=200,
+                message=f"Successfully invoked `/get-value/{id}` with raw JSON in payload",
+                payload=json.loads(result) if result else None
+            )
+        except (ValueError, RuntimeError, ConnectionError) as e:
+            return create_response(
+                status_code=500,
+                message=f"Error processing `/get-value/{id}`: {e!s}",
+                payload=None,
+            )
 
 
 if __name__ == "__main__":

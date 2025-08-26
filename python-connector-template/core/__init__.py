@@ -5,11 +5,11 @@ and connect to MQTT topics.
 """
 
 __all__ = [
-    "AIDParser",
+    "AidInterfaceParser",
     "MQTTConnector",
     "ReferenceResolver"
 ]
 
-from .aid_parser import AIDParser
+from .aid_parser import AidInterfaceParser
 from .mqtt_connector import MQTTConnector
 from .reference_resolver import ReferenceResolver
