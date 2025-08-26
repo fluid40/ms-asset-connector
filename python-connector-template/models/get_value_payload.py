@@ -1,28 +1,35 @@
+"""Defines the GetValuePayload model for handling AAS Reference deserialization."""
+
 from typing import Any
 
-# TODO: change these two imports if you're using Basyx
-from aas_core3.types import Reference
-import aas_core3.jsonization as aas_jsonization
+from basyx.aas.model import Key, KeyTypes, ModelReference
+from pydantic import BaseModel, Field, PrivateAttr
 
-from pydantic import BaseModel, Field, validator
+KEY_TYPE_MAPPING: dict[str, str] = {
+    "Submodel": "SUBMODEL",
+    "SubmodelElementCollection": "SUBMODEL_ELEMENT_COLLECTION",
+    "Property": "PROPERTY",
+}
 
+class GetValuePayload(BaseModel):  # noqa: D101
+    aid_ref_dict: dict = Field(..., alias="Reference")
+    _aid_ref: ModelReference = PrivateAttr(default=None)
 
-class GetValuePayload(BaseModel):
-    """
-    We introduce this class to wrap the parameters that are passed via the `get_value` GET method.
-    For now, it only includes raw JSON content.
+    def __init__(self, **data: Any):  # noqa: D107
+        super().__init__(**data)
+        # aid_string = json.dumps(self.aid_ref_dict)
+        # self._aid_ref = json.loads(aid_string, cls=AASFromJsonDecoder)
+        self._build_model_reference()
 
-    The JSON content is a Reference (AAS type) to a property in the AID submodel.
-    We pass it raw to that you, the developer, can choose your favorite AAS SDK to deserialize it as Reference class.
-    """
-    aid_ref: Reference = Field(..., alias="Reference")
+    def _build_model_reference(self) -> ModelReference:
+        if self.aid_ref_dict is None:
+            raise ValueError("AID Reference has not been initialized.")
+        key_list = [Key(type_=self._get_key_type(key["type"]), value=key["value"]) for key in self.aid_ref_dict["keys"]]
+        ref: ModelReference = ModelReference(key=tuple(key_list), type_=ModelReference)
+        self._aid_ref = ref
 
-    @validator("aid_ref", pre=True)
-    def parse_aid_ref(cls, v: Any) -> Reference:
-        if isinstance(v, Reference):
-            return v
-        # TODO: replace with Basyx deserialization logic if you wish
-        return aas_jsonization.reference_from_jsonable(v)
-
-    class Config:
-        arbitrary_types_allowed = True
+    def _get_key_type(self, key_str: str) -> KeyTypes:
+        key_type = KEY_TYPE_MAPPING.get(key_str)
+        if key_type is None:
+            raise ValueError(f"Unknown key type: {key_str}")
+        return KeyTypes[key_type]
