@@ -1,0 +1,12 @@
+services:
+  devcontainer_asset_connector:
+    build: .
+    container_name: python_container_asset_connector
+    volumes:
+      - ../..:/workspaces:cached
+    command: sleep infinity
+
+networks:
+  bridge:
+
+

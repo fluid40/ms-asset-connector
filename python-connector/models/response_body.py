@@ -1,15 +1,20 @@
-from typing import Any
+"""Defines the ResponseBody model and related utilities for HTTP response handling.
 
-# TODO: change these two imports if you're using Basyx
-from aas_core3.types import Submodel
-from aas_core3.types import Reference
-import aas_core3.jsonization as aas_jsonization
+This module provides:
+- ResponseBody: a Pydantic model for HTTP responses;
+- create_response: a helper function to create ResponseBody instances.
+"""
 
-from pydantic import BaseModel, Field, ConfigDict
+import json
+from typing import Any, ClassVar
+
+from basyx.aas.adapter.json import AASToJsonEncoder
+from basyx.aas.model import ModelReference as Reference
+from basyx.aas.model import Submodel
+from pydantic import BaseModel, Field
 
 
-class ResponseBody(BaseModel):
-
+class ResponseBody(BaseModel):  # noqa: D101
     status_code: int = Field(
         default=200,
         description="The HTTP status code of the response.",
@@ -38,16 +43,15 @@ class ResponseBody(BaseModel):
         example="myResult",
     )
 
-    class Config:
+    class Config:  # noqa: D106
         arbitrary_types_allowed = True
-        json_encoders = {
-            # TODO: replace with Basyx serialization logic if you wish
-            Reference: lambda v: aas_jsonization.to_jsonable(v),
-            Submodel: lambda v: aas_jsonization.to_jsonable(v)
+        json_encoders: ClassVar = {
+            Reference: lambda v: json.dumps(v, cls=AASToJsonEncoder),
+            Submodel: lambda v: json.dumps(v, cls=AASToJsonEncoder)
         }
 
 
-def create_response(status_code: int, message: str, payload=None, value: str = "") -> ResponseBody:
+def create_response(status_code: int, message: str, payload: str = "{}", value: str = "") -> ResponseBody:
     """
     Create a ResponseBody instance with the given parameters.
 
@@ -57,8 +61,6 @@ def create_response(status_code: int, message: str, payload=None, value: str = "
     :param value: The value returned by the operation, if applicable.
     :return: An instance of ResponseBody.
     """
-    if payload is None:
-        payload = {}
     body = ResponseBody()
     body.status_code = status_code
     body.message = message

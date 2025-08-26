@@ -10,26 +10,19 @@ namespace csharp_connector_template.Controllers
         [HttpPost("set-config")]
         public IActionResult SetConfig([FromBody] SetConfigPayload payload)
         {
-            // Revert escaped quotes (replace \" with ") if necessary
-            string rawJson = payload.jsonContent.Replace("\\\"", "\"");
+            // TODO: store the AID Submodel object, e.g., as global variable
 
-            // TODO: use an AAS SDK to deserialize the content as Submodel
-
-            // TODO: store the deserialized AID Submodel class, e.g., as global variable
-
-            return Ok(new
+            return Ok(new ResponseBody()
             {
-                message = $"Successfully invoked `/set-config` with raw JSON in payload:\n\n{rawJson}"
+                Payload = payload.aidSm,
+                Message = "Successfully received AID config",
+                StatusCode = 200
             });
         }
 
         [HttpPost("get-value")]
         public IActionResult GetValue([FromBody] GetValuePayload payload)
         {
-            // Revert escaped quotes (replace \" with ") if necessary
-            string rawJson = payload.jsonContent.Replace("\\\"", "\"");
-
-            // TODO: use an AAS SDK to deserialize the content as Reference
 
             // TODO: find the SMC in the cached AID Submodel to which the reference points
 
@@ -38,10 +31,12 @@ namespace csharp_connector_template.Controllers
             // TODO: return the value
             var result = "myResult";
 
-            return Ok(new
+            return Ok(new ResponseBody()
             {
-                message = $"Successfully invoked `/get-value` with raw JSON in payload:\n\n{rawJson}",
-                value = result
+                Payload = payload.reference,
+                Message = "Successfully received Reference to AID",
+                StatusCode = 200,
+                Value = result
             });
         }
     }

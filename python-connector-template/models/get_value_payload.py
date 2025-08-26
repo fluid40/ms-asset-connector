@@ -1,4 +1,10 @@
-from pydantic import BaseModel, Field
+from typing import Any
+
+# TODO: change these two imports if you're using Basyx
+from aas_core3.types import Reference
+import aas_core3.jsonization as aas_jsonization
+
+from pydantic import BaseModel, Field, validator
 
 
 class GetValuePayload(BaseModel):
@@ -9,4 +15,14 @@ class GetValuePayload(BaseModel):
     The JSON content is a Reference (AAS type) to a property in the AID submodel.
     We pass it raw to that you, the developer, can choose your favorite AAS SDK to deserialize it as Reference class.
     """
-    json_content: str = Field(..., alias="jsonContent")
+    aid_ref: Reference = Field(..., alias="Reference")
+
+    @validator("aid_ref", pre=True)
+    def parse_aid_ref(cls, v: Any) -> Reference:
+        if isinstance(v, Reference):
+            return v
+        # TODO: replace with Basyx deserialization logic if you wish
+        return aas_jsonization.reference_from_jsonable(v)
+
+    class Config:
+        arbitrary_types_allowed = True

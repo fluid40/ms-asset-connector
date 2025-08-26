@@ -19,7 +19,7 @@
 	},
 	"submodelElements": [
 		{
-			"idShort": "Interface_MQTT",
+			"idShort": "Interface_MQTT_Websocket",
 			"semanticId": {
 				"type": "ExternalReference",
 				"keys": [
@@ -45,6 +45,15 @@
 						{
 							"type": "GlobalReference",
 							"value": "https://www.w3.org/2019/wot/td"
+						}
+					]
+				},
+				{
+					"type": "ExternalReference",
+					"keys": [
+						{
+							"type": "GlobalReference",
+							"value": "https://www.rfc-editor.org/rfc/rfc6455"
 						}
 					]
 				}
@@ -190,7 +199,7 @@
 								}
 							],
 							"valueType": "xs:anyURI",
-							"value": "mqtt://mqtt.fluidon.com:1883/",
+							"value": "wss://mqtt.fluidon.com:443/ws",
 							"modelType": "Property"
 						},
 						{

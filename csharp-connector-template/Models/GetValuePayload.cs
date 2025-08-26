@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using AasCore.Aas3_0;
 
 namespace csharp_connector_template.Models
 {
@@ -11,7 +12,7 @@ namespace csharp_connector_template.Models
         /// The JSON content is a Reference (AAS type) to a property in the AID submodel.
         /// We pass it raw to that you, the developer, can choose your favorite AAS SDK to deserialize it as Reference class.
         /// </summary>
-        [JsonPropertyName("jsonContent")]
-        public string jsonContent { get; set; }
+        [JsonPropertyName("Reference")]
+        public Reference reference { get; set; }
     }
 }
