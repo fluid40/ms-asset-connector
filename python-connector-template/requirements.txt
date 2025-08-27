@@ -3,4 +3,3 @@ fastapi
 paho-mqtt==2.1.0
 pydantic
 uvicorn==0.35.0
-python-dotenv
