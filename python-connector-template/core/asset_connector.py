@@ -1,6 +1,3 @@
-# TODO: change to AasCore if required
-from typing import Dict
-
 from basyx.aas.model import SubmodelElementCollection, ModelReference
 
 from core.aid_interface_parser import get_base_url_from_interface, create_property_to_href_map

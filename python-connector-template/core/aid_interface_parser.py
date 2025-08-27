@@ -1,7 +1,6 @@
 """This module provides functions to parse AID Submodels and extract MQTT interface descriptions."""
 
-from collections.abc import Iterator
-from typing import NamedTuple, Dict, List
+from typing import Dict, List
 
 from basyx.aas.model import (
     ExternalReference,
@@ -10,7 +9,6 @@ from basyx.aas.model import (
     NamespaceSet,
     Property,
     Reference,
-    Submodel,
     SubmodelElement,
     SubmodelElementCollection, ModelReference,
 )

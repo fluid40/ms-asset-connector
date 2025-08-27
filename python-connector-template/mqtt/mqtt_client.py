@@ -4,12 +4,10 @@ Provides the MQTTConnector class for subscribing to topics, receiving messages,
 and storing the latest payload for each topic.
 """
 
-import os
 import ssl
 from typing import List, Tuple
-from urllib.parse import ParseResult, urlparse
+from urllib.parse import urlparse
 
-from dotenv import load_dotenv
 from paho.mqtt.client import Client
 
 

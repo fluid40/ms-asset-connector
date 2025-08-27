@@ -2,12 +2,11 @@
 import json
 from typing import List
 
-from basyx.aas.model import ModelReference, Submodel, SubmodelElementCollection
+from basyx.aas.model import ModelReference, SubmodelElementCollection
 
-from core.aid_interface_parser import AidInterfaceParser, construct_idshort_path_from_reference
+from core.aid_interface_parser import construct_idshort_path_from_reference
 from core.asset_connector import IAssetConnector
 from mqtt.mqtt_client import MqttClient
-from core.reference_resolver import ReferenceResolver
 
 
 class MqttAssetConnector(IAssetConnector):
