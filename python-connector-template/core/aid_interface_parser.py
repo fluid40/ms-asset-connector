@@ -10,7 +10,7 @@ from basyx.aas.model import (
     Property,
     Reference,
     SubmodelElement,
-    SubmodelElementCollection, ModelReference, ReferenceElement,
+    SubmodelElementCollection, ModelReference, ReferenceElement, SubmodelElementList,
 )
 from basyx.aas.util import traversal
 
@@ -57,6 +57,15 @@ def find_by_semantic_id(parent: NamespaceSet[SubmodelElement], semantic_id_value
         if element.semantic_id.__eq__(reference):
             return element
     return None
+
+
+def find_by_id_short(parent: NamespaceSet[SubmodelElement], id_short_value: str) -> SubmodelElement | None:
+    for element in parent:
+        if element.id_short == id_short_value:
+            return element
+
+    return None
+
 
 
 def find_by_supplemental_semantic_id(parent: NamespaceSet[SubmodelElement], semantic_id_value: str) -> SubmodelElement:
@@ -216,17 +225,18 @@ def parse_auth(aid_interface: SubmodelElementCollection) -> IAuthenticationDetai
     if endpoint_metadata is None:
         raise ValueError("EndpointMetadata SMC not found in AID Submodel.")
 
-    security: ReferenceElement | None = find_by_semantic_id(
+    security: SubmodelElementList | None = find_by_semantic_id(
         endpoint_metadata.value, "https://www.w3.org/2019/wot/td#hasSecurityConfiguration"
     )
     if security is None:
-        raise ValueError("security Property not found in EndpointMetadata SMC.")
+        raise ValueError("security SML not found in EndpointMetadata SMC.")
 
-    # TODO: resolve the full reference
-    # this assumes it points to a security scheme in this very AID SM
+    # TODO: resolve the full reference(s)
+    # for now, assume there is only one reference to the security in use
+    # -> access SML[0]
+    # assume that this ReferenceElement points to a security scheme in this very AID SM
     # -> can just use the last key to determine the type of security
-
-    sc = security.value.key[-1].value
+    sc = security.value[0].value.key[-1].value
 
     security_definitions: SubmodelElementCollection | None = find_by_semantic_id(
         endpoint_metadata.value, "https://www.w3.org/2019/wot/td#definesSecurityScheme"
@@ -243,13 +253,13 @@ def parse_auth(aid_interface: SubmodelElementCollection) -> IAuthenticationDetai
     # TODO: check if "scheme" property (sem-id: https://www.w3.org/2019/wot/security#SecurityScheme) has value "basic"
 
     basic_sc_name: Property | None = find_by_semantic_id(
-        security_definitions.value, "https://www.w3.org/2019/wot/security#name"
+        security_details.value, "https://www.w3.org/2019/wot/security#name"
     )
     if basic_sc_name is None:
         raise ValueError("name Property not found in referenced security scheme SMC")
 
     auth_base64 = basic_sc_name.value
-    auth_plain = base64.decodestring(auth_base64).decode("utf-8")
+    auth_plain = base64.b64decode(auth_base64).decode("utf-8")
 
     # TODO: case distinction depending on security scheme (determined by semantic id)
     # for now, assume it is basic security
