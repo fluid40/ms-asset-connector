@@ -6,10 +6,10 @@ and connect to MQTT topics.
 
 __all__ = [
     "AidInterfaceParser",
-    "MQTTConnector",
+    "MqttAssetConnector",
     "ReferenceResolver"
 ]
 
-from .aid_parser import AidInterfaceParser
-from .mqtt_connector import MQTTConnector
+from mqtt.mqtt_asset_connector import MqttAssetConnector
+from .aid_interface_parser import AidInterfaceParser
 from .reference_resolver import ReferenceResolver

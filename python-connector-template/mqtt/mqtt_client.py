@@ -5,6 +5,7 @@ and storing the latest payload for each topic.
 """
 
 import os
+from typing import List
 from urllib.parse import ParseResult, urlparse
 
 from dotenv import load_dotenv
@@ -18,7 +19,7 @@ class MqttClient:
     broker_host: str
     broker_port: int
 
-    def __init__(self, base_url: str, topics: dict[str, str], use_websocket: bool = False):
+    def __init__(self, base_url: str, topics: List[str], use_websocket: bool = False):
         """Initialize the MQTTConnector with broker host and port.
 
         :param broker_host: The hostname or IP address of the MQTT broker.
@@ -40,7 +41,7 @@ class MqttClient:
             self.client = Client()
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
-        self.topics: dict[str, str] = topics
+        self.topics: List[str] = topics
         self.cache = {}
 
         # Load credentials from environment variables
@@ -73,9 +74,10 @@ class MqttClient:
         print(f"Connected with result code {rc}")
 
         # Subscribe to all topics in self.topics
-        for topic in self.topics.values():
-            self.client.subscribe(topic)
-            print(f"Subscribed to topic: {topic}")
+        if rc == 0:
+            for topic in self.topics:
+                self.client.subscribe(topic)
+                print(f"Subscribed to topic: {topic}")
 
     def on_message(self, client, userdata, message):  # noqa: ARG002
         """Handle incoming messages from subscribed topics.
@@ -145,9 +147,9 @@ class MqttClient:
         """
         self.dispose()
 
-    def add_topics(self, topics_dict):
+    def add_topics(self, topics):
         """Add topics to the MQTTConnector."""
-        self.topics.update(topics_dict)
+        self.topics = topics
 
 
 

@@ -16,6 +16,7 @@ from core.asset_connector import IAssetConnector
 from models.get_value_payload import GetValuePayload
 from models.response_body import ResponseBody, create_response
 from models.set_config_payload import SetConfigPayload
+from mqtt.mqtt_asset_connector import MqttAssetConnector
 
 app = FastAPI()
 
@@ -35,16 +36,22 @@ async def root():
 async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
     """Set configuration using a specific AID submodel."""
     aid_sm: Submodel = payload._aid_sm  # noqa: SLF001
-    try:
-        connector_id: str = base64.urlsafe_b64encode(str(aid_sm.id).encode()).decode()
 
+    try:
         # iterate over all interface SMCs and create IAssetConnector for each of them
         for iface_smc in aid_sm.submodel_element:
+            asset_connector: IAssetConnector = None
+            if iface_smc.supplemental_semantic_id[0].key[0].value == "http://www.w3.org/2011/mqtt":
+                asset_connector = MqttAssetConnector(aid_sm.id, iface_smc)
+            else:
+                # TODO: check for other protocols
+                pass
 
-            asset_connector = IAssetConnector(connector_id, iface_smc)
-            connector_id = f"{connector_id}-{iface_smc.id_short}"
+            connector_id = f"{aid_sm.id}-{iface_smc.id_short}"
             with connector_store_lock:
                 connector_store[connector_id] = asset_connector
+
+            asset_connector.connect()
 
         return create_response(
             status_code=200,
@@ -74,7 +81,7 @@ async def get_value(payload: GetValuePayload) -> ResponseBody:
         if asset_connector is None:
             return create_response(
                 status_code=404,
-                message=f"No AssetConnector found for id {id} (decoded: {decoded_id})",
+                message=f"No AssetConnector found for id {id} (decoded: {connector_id})",
                 payload=None,
             )
         try:

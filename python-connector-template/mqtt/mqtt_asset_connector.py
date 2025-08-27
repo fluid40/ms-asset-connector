@@ -1,7 +1,10 @@
 """Asset connector module for interfacing with assets via AID and MQTT."""
+import json
+from typing import List
+
 from basyx.aas.model import ModelReference, Submodel, SubmodelElementCollection
 
-from core.aid_interface_parser import AidInterfaceParser
+from core.aid_interface_parser import AidInterfaceParser, construct_idshort_path_from_reference
 from core.asset_connector import IAssetConnector
 from mqtt.mqtt_client import MqttClient
 from core.reference_resolver import ReferenceResolver
@@ -10,35 +13,25 @@ from core.reference_resolver import ReferenceResolver
 class MqttAssetConnector(IAssetConnector):
     """Class to connect to an asset using its AID."""
 
-    _mqtt_connector: MqttClient = None
+    _mqtt_client: MqttClient = None
     connected: bool = False
 
     def __init__(self, aid_id: str, interface_smc: SubmodelElementCollection):  # noqa: D107
-        self.aid_id = aid_id
-        self.interface_smc = interface_smc
+        self._aid_id = aid_id
+        self._interface = interface_smc
         super().__init__(aid_id, interface_smc)
 
     def connect(self):
         try:
-            aid_parser = AidInterfaceParser(self.interface_smc)
-            mqtt_topics: dict[str, str] = aid_parser.get_mqtt_topic_map()
-            base_url: str = aid_parser.get_mqtt_base_url()
-            use_websocket_connection: bool = aid_parser.uses_websocket_interface()
-            connection_success: bool = self._connect_to_mqtt_topics(base_url, mqtt_topics, use_websocket_connection)
+            topics = set([v["href"] for v in self._property_to_href_map.values()])
 
-            if not connection_success and not use_websocket_connection:
-                print("Check for MQTT interface using Websocket as fallback.")
-                mqtt_topics = aid_parser.get_mqtt_topic_map(fallback=True)
-                base_url = aid_parser.get_mqtt_base_url(fallback=True)
-                use_websocket_connection = aid_parser.uses_websocket_interface(fallback=True)
-                connection_success = self._connect_to_mqtt_topics(base_url, mqtt_topics, use_websocket_connection)
-
-            self.connected = connection_success
+            # TODO: dynamically decide for/against WS
+            self.connected = self._connect_to_mqtt_topics(topics, use_websocket=True)
         except Exception as e:
             print(f"Failed to connect MQTTConnector: {e}")
             self.connected = False
 
-    def _connect_to_mqtt_topics(self, base_url: str, mqtt_topics: dict[str, str], use_websocket: bool) -> bool:
+    def _connect_to_mqtt_topics(self, mqtt_topics: List[str], use_websocket: bool) -> bool:
         """Connect to the MQTT topics using a MQTT connector.
 
         :param base_url: The base URL for the MQTT broker.
@@ -46,9 +39,9 @@ class MqttAssetConnector(IAssetConnector):
         :param use_websocket: Whether to use WebSocket for the connection.
         """
         try:
-            self._mqtt_connector = MqttClient(base_url, mqtt_topics, use_websocket)
-            self._mqtt_connector.connect()
-            self._mqtt_connector.start_async()
+            self._mqtt_client = MqttClient(self._base, mqtt_topics, use_websocket)
+            self._mqtt_client.connect()
+            self._mqtt_client.start_async()
             return True
         except ConnectionError as ce:
             print(f"MQTT protocol connection failed: {ce}.")
@@ -56,12 +49,18 @@ class MqttAssetConnector(IAssetConnector):
 
     def get_value(self, model_reference: ModelReference) -> str:
         """Get the value for a specific model reference."""
-        topic_name = ReferenceResolver.get_topic_by_reference(model_reference, self._mqtt_connector.topics)
-
         result: str = None
         if not self.connected:
             raise ConnectionError("AssetConnector is not connected.")
-        if self._mqtt_connector is not None:
-            result = self._mqtt_connector.get_cached_value(topic_name)
+        if self._mqtt_client is not None:
+            property_idshort_path = construct_idshort_path_from_reference(model_reference)
+            topic_name = self._property_to_href_map[property_idshort_path]["href"]
+
+            keys = self._property_to_href_map[property_idshort_path]["keys"]
+            value_in_payload = self._mqtt_client.get_cached_value(topic_name)
+            for k in keys:
+                value_in_payload = json.dumps(json.loads(value_in_payload)[k])
+
+            result = value_in_payload
 
         return result
