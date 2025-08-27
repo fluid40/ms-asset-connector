@@ -5,7 +5,8 @@ and storing the latest payload for each topic.
 """
 
 import os
-from typing import List
+import ssl
+from typing import List, Tuple
 from urllib.parse import ParseResult, urlparse
 
 from dotenv import load_dotenv
@@ -16,42 +17,65 @@ class MqttClient:
     """Connector for managing connections to MQTT topics."""
 
     base_url: str
-    broker_host: str
-    broker_port: int
+    auth: Tuple[str, str]
+    host: str
+    port: int
+    path: str
 
-    def __init__(self, base_url: str, topics: List[str], use_websocket: bool = False):
+    def __init__(self, base_url: str, topics: List[str], auth=None):
         """Initialize the MQTTConnector with broker host and port.
 
         :param broker_host: The hostname or IP address of the MQTT broker.
         :param broker_port: The port number of the MQTT broker.
         """
-        load_dotenv()
+        self.topics = topics
 
         self.base_url = base_url
-        parsed_mqtt_url: ParseResult = urlparse(base_url)
-        self.broker_host = parsed_mqtt_url.hostname
-        self.broker_port = parsed_mqtt_url.port if parsed_mqtt_url.port else 1883
+        self.auth = auth
+        self.host, self.port, self.path, use_tls = self._parse_url()
 
-        if use_websocket:
-            self.client = Client(transport="websockets")
-            self.client.ws_set_options(path=parsed_mqtt_url.path)
-            if parsed_mqtt_url.scheme == "wss":
-                self.client.tls_set()
-        else:
-            self.client = Client()
-        self.client.on_connect = self.on_connect
-        self.client.on_message = self.on_message
-        self.topics: List[str] = topics
-        self.cache = {}
+        self.client = Client(transport=self._detect_transport())
 
-        # Load credentials from environment variables
-        mqtt_username = os.getenv("MQTT_USERNAME")
-        mqtt_password = os.getenv("MQTT_PASSWORD")
-        if mqtt_username and mqtt_password:
-            self.client.username_pw_set(mqtt_username, mqtt_password)
+        if auth:
+            self.client.username_pw_set(auth[0], auth[1])
 
-        # Note: start() method should be called manually after initialization
-        # to avoid blocking in __init__
+        if use_tls:
+            self.client.tls_set(cert_reqs=ssl.CERT_REQUIRED, ca_certs=None)
+            self.client.tls_insecure_set(True)
+
+        if self._detect_transport() == "websockets" and self.path != "/":
+            self.client.ws_set_options(path=self.path)
+
+        self.client.on_connect = self._on_connect
+        self.client.on_message = self._on_message
+
+    def _parse_url(self):
+        """Extract host, port, and path from broker_url."""
+        parsed = urlparse(self.base_url)
+
+        # scheme like mqtt, mqtts, ws, wss
+        scheme = parsed.scheme or "mqtt"
+
+        # host
+        host = parsed.hostname
+
+        # port (fall back to defaults if missing)
+        defaults = {"mqtt": 1883, "mqtts": 8883, "ws": 80, "wss": 443}
+        port = parsed.port or defaults.get(scheme, 1883)
+
+        # path (default to "/" if not given)
+        path = parsed.path or "/" if "ws" in parsed.scheme else None
+
+        # TLS required?
+        use_tls = scheme in ("mqtts", "wss")
+
+        return host, port, path, use_tls
+
+    def _detect_transport(self):
+        """Determine if plain MQTT or MQTT over WebSocket is needed."""
+        if self.base_url.startswith("ws://") or self.base_url.startswith("wss://"):
+            return "websockets"
+        return "tcp"
 
     def connect(self):
         """Connect to the MQTT broker and subscribe to all topics.
@@ -59,11 +83,11 @@ class MqttClient:
         This method should be called after initializing the MQTTConnector.
         """
         try:
-            self.client.connect(self.broker_host, self.broker_port, 60)
+            self.client.connect(self.host, self.port, 60)
         except Exception as e:
             raise ConnectionError(f"Error connecting to MQTT broker at {self.base_url}: {e}")
 
-    def on_connect(self, client, userdata, flags, rc):  # noqa: ARG002
+    def _on_connect(self, client, userdata, flags, rc):  # noqa: ARG002
         """Handle response from the server.
 
         :param client: The client instance for this callback.
@@ -79,7 +103,7 @@ class MqttClient:
                 self.client.subscribe(topic)
                 print(f"Subscribed to topic: {topic}")
 
-    def on_message(self, client, userdata, message):  # noqa: ARG002
+    def _on_message(self, client, userdata, message):  # noqa: ARG002
         """Handle incoming messages from subscribed topics.
 
         :param client: The client instance for this callback.

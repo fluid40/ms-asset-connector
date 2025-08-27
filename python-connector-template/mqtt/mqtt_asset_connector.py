@@ -23,15 +23,14 @@ class MqttAssetConnector(IAssetConnector):
 
     def connect(self):
         try:
-            topics = set([v["href"] for v in self._property_to_href_map.values()])
+            topics = list(set([v["href"] for v in self._property_to_href_map.values()]))
 
-            # TODO: dynamically decide for/against WS
-            self.connected = self._connect_to_mqtt_topics(topics, use_websocket=True)
+            self.connected = self._connect_to_mqtt_topics(topics)
         except Exception as e:
             print(f"Failed to connect MQTTConnector: {e}")
             self.connected = False
 
-    def _connect_to_mqtt_topics(self, mqtt_topics: List[str], use_websocket: bool) -> bool:
+    def _connect_to_mqtt_topics(self, mqtt_topics: List[str]) -> bool:
         """Connect to the MQTT topics using a MQTT connector.
 
         :param base_url: The base URL for the MQTT broker.
@@ -39,7 +38,7 @@ class MqttAssetConnector(IAssetConnector):
         :param use_websocket: Whether to use WebSocket for the connection.
         """
         try:
-            self._mqtt_client = MqttClient(self._base, mqtt_topics, use_websocket)
+            self._mqtt_client = MqttClient(self._base, mqtt_topics)
             self._mqtt_client.connect()
             self._mqtt_client.start_async()
             return True
