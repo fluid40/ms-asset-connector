@@ -1,6 +1,7 @@
 from basyx.aas.model import SubmodelElementCollection, ModelReference
 
-from core.aid_interface_parser import get_base_url_from_interface, create_property_to_href_map
+from core.aid_interface_parser import get_base_url_from_interface, create_property_to_href_map, parse_auth
+from core.authentication_details import IAuthenticationDetails
 
 
 class IAssetConnector:
@@ -15,6 +16,7 @@ class IAssetConnector:
         # extract the base url
         self._base = get_base_url_from_interface(self._interface)
         self._property_to_href_map = create_property_to_href_map(self._interface)
+        self._auth: IAuthenticationDetails = parse_auth(self._interface)
 
     def connect(self):
         pass

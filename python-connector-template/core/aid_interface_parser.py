@@ -1,5 +1,5 @@
 """This module provides functions to parse AID Submodels and extract MQTT interface descriptions."""
-
+import base64
 from typing import Dict, List
 
 from basyx.aas.model import (
@@ -10,9 +10,12 @@ from basyx.aas.model import (
     Property,
     Reference,
     SubmodelElement,
-    SubmodelElementCollection, ModelReference,
+    SubmodelElementCollection, ModelReference, ReferenceElement,
 )
 from basyx.aas.util import traversal
+
+from core.authentication_details import IAuthenticationDetails, BasicAuthenticationDetails
+
 
 def find_all_by_semantic_id(parent: NamespaceSet[SubmodelElement], semantic_id_value: str) -> List[SubmodelElement]:
     """Find all SubmodelElements having a specific Semantic ID.
@@ -96,7 +99,7 @@ def get_base_url_from_interface(aid_interface: SubmodelElementCollection) -> str
         endpoint_metadata.value, "https://www.w3.org/2019/wot/td#base"
     )
     if base is None:
-        raise ValueError("BaseUrl Property not found in EndpointMetadata SMC.")
+        raise ValueError("base Property not found in EndpointMetadata SMC.")
 
     return base.value
 
@@ -195,7 +198,6 @@ def create_property_to_href_map(aid_interface: SubmodelElementCollection) -> Dic
     return mapping
 
 
-
 def construct_idshort_path_from_reference(reference: ModelReference) -> str:
     idshort_path: str = ""
 
@@ -205,3 +207,51 @@ def construct_idshort_path_from_reference(reference: ModelReference) -> str:
 
     # get rid of the trailing dot
     return idshort_path[:-1]
+
+
+def parse_auth(aid_interface: SubmodelElementCollection) -> IAuthenticationDetails:
+    endpoint_metadata: SubmodelElementCollection | None = find_by_semantic_id(
+        aid_interface.value, "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/EndpointMetadata"
+    )
+    if endpoint_metadata is None:
+        raise ValueError("EndpointMetadata SMC not found in AID Submodel.")
+
+    security: ReferenceElement | None = find_by_semantic_id(
+        endpoint_metadata.value, "https://www.w3.org/2019/wot/td#hasSecurityConfiguration"
+    )
+    if security is None:
+        raise ValueError("security Property not found in EndpointMetadata SMC.")
+
+    # TODO: resolve the full reference
+    # this assumes it points to a security scheme in this very AID SM
+    # -> can just use the last key to determine the type of security
+
+    sc = security.value.key[-1].value
+
+    security_definitions: SubmodelElementCollection | None = find_by_semantic_id(
+        endpoint_metadata.value, "https://www.w3.org/2019/wot/td#definesSecurityScheme"
+    )
+    if security_definitions is None:
+        raise ValueError("securitySchemes Property not found in EndpointMetadata SMC.")
+
+    security_details: SubmodelElementCollection | None = find_by_id_short(
+        security_definitions.value, sc
+    )
+    if security_details is None:
+        raise ValueError("Referenced security scheme SMC not found in securityDefinitions SMC")
+
+    # TODO: check if "scheme" property (sem-id: https://www.w3.org/2019/wot/security#SecurityScheme) has value "basic"
+
+    basic_sc_name: Property | None = find_by_semantic_id(
+        security_definitions.value, "https://www.w3.org/2019/wot/security#name"
+    )
+    if basic_sc_name is None:
+        raise ValueError("name Property not found in referenced security scheme SMC")
+
+    auth_base64 = basic_sc_name.value
+    auth_plain = base64.decodestring(auth_base64).decode("utf-8")
+
+    # TODO: case distinction depending on security scheme (determined by semantic id)
+    # for now, assume it is basic security
+    auth_details: IAuthenticationDetails = BasicAuthenticationDetails(auth_plain.split(":")[0], auth_plain.split(":")[1])
+    return auth_details

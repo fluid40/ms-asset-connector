@@ -37,7 +37,7 @@ class MqttAssetConnector(IAssetConnector):
         :param use_websocket: Whether to use WebSocket for the connection.
         """
         try:
-            self._mqtt_client = MqttClient(self._base, mqtt_topics)
+            self._mqtt_client = MqttClient(self._base, mqtt_topics, self._auth)
             self._mqtt_client.connect()
             self._mqtt_client.start_async()
             return True
