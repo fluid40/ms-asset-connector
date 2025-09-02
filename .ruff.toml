@@ -1,5 +1,5 @@
 # source dirs
-src = ["abb_sql_export"]
+src = ["python-connector"]
 
 # set cache dir to our project's cache dir
 cache-dir = "~/.cache/ruff"
@@ -18,8 +18,6 @@ extend-exclude = [
 ]
 
 line-length = 150
-
-target-version = "py312"
 
 [lint]
 # Note on these rules:
@@ -103,6 +101,11 @@ ignore = [
     "G004",    # Logging statement uses f-string
     "PLC1901", # {existing} can be simplified to {replacement} as an empty string is falsey
     "PLR2004", # Checks for the use of unnamed numerical constants ("magic") values in comparisons
+    "BLE001",  # Check for generic exceptions
+    "D401",    # Imperative docstring
+    "TC001",   # Type check
+    "TC002",   # Type check
+    "D100",    # Missing docstring in public module
 ]
 
 # allow autofix for all enabled rules (when `--fix`) is provided.
@@ -125,4 +128,4 @@ convention = "pep257"
 max-args = 9
 
 [lint.isort]
-known-first-party = ["abb_sql_export"]
+known-first-party = ["python-connector"]
