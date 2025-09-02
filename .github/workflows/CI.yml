@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - dk-dev-for-runtime-tests
+      - main
 
 jobs:
   build-image:
