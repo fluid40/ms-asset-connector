@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - main
+      - dk/dockerization-pipeline
 
 jobs:
   build-image:
@@ -23,9 +23,9 @@ jobs:
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build and push fluid-asset-connector-mqtt-python image
+      - name: Build and push fluid-asset-connector-python image
         uses: docker/build-push-action@v5
         with:
           file: Dockerfile
           push: true
-          tags: engineeringmethodsag/fluid-asset-connector-mqtt-python:latest
+          tags: engineeringmethodsag/fluid-asset-connector-python:latest
