@@ -1,7 +1,7 @@
 services:
-  devcontainer_asset_connector_template:
+  devcontainer_asset_connector:
     build: .
-    container_name: python_container_asset_connector_template
+    container_name: python_container_ac
     volumes:
       - ../..:/workspaces:cached
     command: sleep infinity
