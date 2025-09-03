@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - dk/dockerization-pipeline
+      - main
 
 permissions:
   contents: write
