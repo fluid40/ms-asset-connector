@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - main
+      - dk/dockerization-pipeline
 
 jobs:
   build-image:
@@ -23,9 +23,31 @@ jobs:
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Get next version from pyproject.toml
+        id: semver
+        run: |
+          # get version from pyproject.toml
+          BASE_VERSION=$(grep '^version' pyproject.toml | head -1 | cut -d'"' -f2)
+          echo "Base Version: $BASE_VERSION"
+
+          MAJOR=$(echo $BASE_VERSION | cut -d. -f1)
+          MINOR=$(echo $BASE_VERSION | cut -d. -f2)
+          PATCH=$(echo $BASE_VERSION | cut -d. -f3)
+
+          # Minor hochzählen
+          NEW_PATCH=$((PATCH+1))
+          NEW_TAG="v$MAJOR.$MINOR.$NEW_PATCH"
+
       - name: Build and push fluid-asset-connector-python image
         uses: docker/build-push-action@v5
         with:
           file: Dockerfile
           push: true
           tags: engineeringmethodsag/fluid-asset-connector-python:latest
+
+      - name: Create Git Tag
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git tag ${{ steps.semver.outputs.tag }}
+          git push origin ${{ steps.semver.outputs.tag }}
