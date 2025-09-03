@@ -25,7 +25,6 @@ jobs:
       - name: Compute version
         id: version
         run: |
-          # Major/Minor sauber extrahieren
           MAJOR_MINOR=${VERSION_MAJOR_MINOR}
           PATCH=${VERSION_PATCH}
           echo "Current version $MAJOR_MINOR.$PATCH"
