@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  build-image:
+  docker-build-and-release:
     runs-on: ubuntu-latest
     env:
       VERSION_MAJOR_MINOR: ${{ vars.VERSION_MAJOR_MINOR }}
