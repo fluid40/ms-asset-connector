@@ -69,6 +69,8 @@ jobs:
           git push origin v${{ steps.version.outputs.version }}
 
       - name: Update VERSION_PATCH repository variable
+        env:
+          PAT_GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
         run: |
           echo "Updating VERSION_PATCH to ${{ steps.version.outputs.patch }}"
           curl -X PATCH \
