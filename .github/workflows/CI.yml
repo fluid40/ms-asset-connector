@@ -3,15 +3,18 @@ name: CI
 on:
   push:
     branches:
-      - main
+      - dk/dockerization-pipeline
 
 permissions:
-  contents: write   # to push tag and new version
+  contents: write
 
 jobs:
   build-image:
     runs-on: ubuntu-latest
-    name: Build docker image
+    env:
+      VERSION_MAJOR_MINOR: ${{ vars.VERSION_MAJOR_MINOR }}
+      VERSION_PATCH: ${{ vars.VERSION_PATCH }}
+      PAT_GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
     steps:
       - name: Checkout code
@@ -19,64 +22,43 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Login Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Get next version from pyproject.toml
-        id: semver
+      - name: Compute version
+        id: version
         run: |
-          # Get version from pyproject.toml
-          BASE_VERSION=$(grep '^version' pyproject.toml | head -1 | cut -d'"' -f2)
-          echo "Base Version: $BASE_VERSION"
-
-          MAJOR=$(echo $BASE_VERSION | cut -d. -f1)
-          MINOR=$(echo $BASE_VERSION | cut -d. -f2)
-          PATCH=$(echo $BASE_VERSION | cut -d. -f3)
-
-          NEW_PATCH=$((PATCH+1))
-          NEW_VERSION="$MAJOR.$MINOR.$NEW_PATCH"
-          NEW_TAG="v$NEW_VERSION"
-
+          PATCH=$((VERSION_PATCH + 1))
+          VERSION="${VERSION_MAJOR_MINOR}.${PATCH}"
           GIT_HASH=$(git rev-parse --short HEAD)
+          echo "Version=$VERSION"
+          echo "Patch=$PATCH"
+          echo "Git Hash=$GIT_HASH"
 
-          echo "New Version: $NEW_VERSION"
-          echo "New Tag: $NEW_TAG"
-          echo "Git Hash: $GIT_HASH"
-
-          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
-          echo "tag=$NEW_TAG" >> $GITHUB_OUTPUT
+          # Outputs setzen
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "patch=$PATCH" >> $GITHUB_OUTPUT
           echo "hash=$GIT_HASH" >> $GITHUB_OUTPUT
 
-      - name: Build and push fluid-asset-connector-python image
+      - name: Build and push Docker images
         uses: docker/build-push-action@v5
         with:
           file: Dockerfile
           push: true
           tags: |
             engineeringmethodsag/fluid-asset-connector-python:latest
-            engineeringmethodsag/fluid-asset-connector-python:${{ steps.semver.outputs.version }}-${{ steps.semver.outputs.hash }}
+            engineeringmethodsag/fluid-asset-connector-python:${{ steps.version.outputs.version }}-${{ steps.version.outputs.hash }}
 
       - name: Create Git Tag
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-          git tag ${{ steps.semver.outputs.tag }}
-          git push origin ${{ steps.semver.outputs.tag }}
+          git remote set-url origin https://x-access-token:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/${{ github.repository }}
+          git tag v${{ steps.version.outputs.version }}
+          git push origin v${{ steps.version.outputs.version }}
 
-      - name: Update pyproject.toml with new version
+      - name: Update VERSION_PATCH repository variable
         run: |
-          sed -i "s/^version = \".*\"/version = \"${{ steps.semver.outputs.version }}\"/" pyproject.toml
-
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-          git add pyproject.toml
-          git commit -m "chore: bump version to ${{ steps.semver.outputs.version }}"
-          git push origin HEAD:dk/dockerization-pipeline
+          echo "Updating VERSION_PATCH to ${{ steps.version.outputs.patch }}"
+          curl -X PATCH \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: token $PAT_GITHUB_TOKEN" \
+            https://api.github.com/repos/${{ github.repository }}/actions/variables/VERSION_PATCH \
+            -d "{\"value\":\"${{ steps.version.outputs.patch }}\"}"
