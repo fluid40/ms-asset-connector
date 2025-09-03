@@ -42,6 +42,7 @@ jobs:
 
           # Outputs setzen
           echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "patch=$PATCH" >> $GITHUB_OUTPUT
           echo "hash=$GIT_HASH" >> $GITHUB_OUTPUT
 
       - name: Login Docker Hub
