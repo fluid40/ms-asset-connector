@@ -6,7 +6,7 @@ on:
       - dk/dockerization-pipeline
 
 permissions:
-  contents: write
+  contents: write   # wichtig, damit git push funktioniert
 
 jobs:
   build-image:
@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Login Docker Hub
         uses: docker/login-action@v3
@@ -29,7 +31,6 @@ jobs:
       - name: Get next version from pyproject.toml
         id: semver
         run: |
-          # get version from pyproject.toml
           BASE_VERSION=$(grep '^version' pyproject.toml | head -1 | cut -d'"' -f2)
           echo "Base Version: $BASE_VERSION"
 
@@ -38,30 +39,40 @@ jobs:
           PATCH=$(echo $BASE_VERSION | cut -d. -f3)
 
           NEW_PATCH=$((PATCH+1))
-          NEW_TAG="v$MAJOR.$MINOR.$NEW_PATCH"
+          NEW_VERSION="$MAJOR.$MINOR.$NEW_PATCH"
+          NEW_TAG="v$NEW_VERSION"
 
-          echo "New Version: $NEW_TAG"
+          echo "New Version: $NEW_VERSION"
+          echo "New Tag: $NEW_TAG"
+
+          # Outputs setzen
+          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "tag=$NEW_TAG" >> $GITHUB_OUTPUT
 
       - name: Build and push fluid-asset-connector-python image
         uses: docker/build-push-action@v5
         with:
           file: Dockerfile
           push: true
-          tags: engineeringmethodsag/fluid-asset-connector-python:latest
+          tags: |
+            engineeringmethodsag/fluid-asset-connector-python:latest
+            engineeringmethodsag/fluid-asset-connector-python:${{ steps.semver.outputs.version }}
 
       - name: Create Git Tag
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git tag ${{ steps.semver.outputs.tag }}
           git push origin ${{ steps.semver.outputs.tag }}
 
       - name: Update pyproject.toml with new version
         run: |
-          sed -i "s/^version = \".*\"/version = \"${{ steps.semver.outputs.tag#v }}\"/" pyproject.toml
+          sed -i "s/^version = \".*\"/version = \"${{ steps.semver.outputs.version }}\"/" pyproject.toml
 
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git add pyproject.toml
-          git commit -m "chore: bump version to ${{ steps.semver.outputs.tag#v }}"
-          git push origin main
+          git commit -m "chore: bump version to ${{ steps.semver.outputs.version }}"
+          git push origin HEAD:dk/dockerization-pipeline
