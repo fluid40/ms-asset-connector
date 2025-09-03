@@ -44,9 +44,11 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "hash=$GIT_HASH" >> $GITHUB_OUTPUT
 
-      - name: Show Docker tags
-        run: |
-          echo "Docker Tags:"
-          echo "latest"
-          echo "${{ steps.version.outputs.version }}"
-          echo "${{ steps.version.outputs.version }}-${{ steps.version.outputs.hash }}"
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v5
+        with:
+          file: Dockerfile
+          push: true
+          tags: |
+            engineeringmethodsag/fluid-asset-connector-python:latest
+            engineeringmethodsag/fluid-asset-connector-python:${{ steps.version.outputs.version }}-${{ steps.version.outputs.hash }}
