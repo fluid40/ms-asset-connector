@@ -6,7 +6,7 @@ on:
       - dk/dockerization-pipeline
 
 permissions:
-  contents: write   # wichtig, damit git push funktioniert
+  contents: write   # wichtig für git push
 
 jobs:
   build-image:
@@ -31,6 +31,7 @@ jobs:
       - name: Get next version from pyproject.toml
         id: semver
         run: |
+          # Version aus pyproject.toml lesen
           BASE_VERSION=$(grep '^version' pyproject.toml | head -1 | cut -d'"' -f2)
           echo "Base Version: $BASE_VERSION"
 
@@ -38,16 +39,22 @@ jobs:
           MINOR=$(echo $BASE_VERSION | cut -d. -f2)
           PATCH=$(echo $BASE_VERSION | cut -d. -f3)
 
-          NEW_PATCH=$((PATCH+1))
-          NEW_VERSION="$MAJOR.$MINOR.$NEW_PATCH"
+          # MINOR automatisch hochzählen
+          NEW_MINOR=$((MINOR+1))
+          NEW_VERSION="$MAJOR.$NEW_MINOR.$PATCH"
           NEW_TAG="v$NEW_VERSION"
+
+          # Git-Hash (kurz)
+          GIT_HASH=$(git rev-parse --short HEAD)
 
           echo "New Version: $NEW_VERSION"
           echo "New Tag: $NEW_TAG"
+          echo "Git Hash: $GIT_HASH"
 
           # Outputs setzen
           echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
           echo "tag=$NEW_TAG" >> $GITHUB_OUTPUT
+          echo "hash=$GIT_HASH" >> $GITHUB_OUTPUT
 
       - name: Build and push fluid-asset-connector-python image
         uses: docker/build-push-action@v5
@@ -56,7 +63,7 @@ jobs:
           push: true
           tags: |
             engineeringmethodsag/fluid-asset-connector-python:latest
-            engineeringmethodsag/fluid-asset-connector-python:${{ steps.semver.outputs.version }}
+            engineeringmethodsag/fluid-asset-connector-python:${{ steps.semver.outputs.version }}-${{ steps.semver.outputs.hash }}
 
       - name: Create Git Tag
         run: |
