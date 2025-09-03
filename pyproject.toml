@@ -3,7 +3,10 @@ name = "asset-connector"
 version = "0.1.0"
 description = ""
 readme = "README.md"
-authors = [{ name = "Tom Gneuss", email = "tom.gneuss@tu-dresden.de" }]
+authors = [
+    { name = "Tom Gneuss", email = "tom.gneuss@tu-dresden.de" },
+    { name = "Celina Adelhardt", email = "celina.adelhardt@em.ag" },
+]
 dependencies = [
     "basyx_python_sdk==1.2.1",
     "fastapi>=0.116.1",
