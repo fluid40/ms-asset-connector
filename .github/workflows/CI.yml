@@ -37,7 +37,6 @@ jobs:
           MINOR=$(echo $BASE_VERSION | cut -d. -f2)
           PATCH=$(echo $BASE_VERSION | cut -d. -f3)
 
-          # Minor hochzählen
           NEW_PATCH=$((PATCH+1))
           NEW_TAG="v$MAJOR.$MINOR.$NEW_PATCH"
 
@@ -59,7 +58,6 @@ jobs:
 
       - name: Update pyproject.toml with new version
         run: |
-          # pyproject.toml aktualisieren
           sed -i "s/^version = \".*\"/version = \"${{ steps.semver.outputs.tag#v }}\"/" pyproject.toml
 
           git config user.name "github-actions"
