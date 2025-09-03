@@ -68,7 +68,7 @@ jobs:
           git tag v${{ steps.version.outputs.version }}
           git push origin v${{ steps.version.outputs.version }}
 
-      - name: Update VERSION_PATCH repository variable
+      - name: Update repository variable
         env:
           PAT_GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
         run: |
