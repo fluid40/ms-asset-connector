@@ -66,3 +66,12 @@ jobs:
           git remote set-url origin https://x-access-token:${{ secrets.PAT_GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git tag v${{ steps.version.outputs.version }}
           git push origin v${{ steps.version.outputs.version }}
+
+      - name: Update VERSION_PATCH repository variable
+        run: |
+          echo "Updating VERSION_PATCH to ${{ steps.version.outputs.patch }}"
+          curl -X PATCH \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: token $GITHUB_TOKEN_PAT" \
+            https://api.github.com/repos/${{ github.repository }}/actions/variables/VERSION_PATCH \
+            -d "{\"value\":\"${{ steps.version.outputs.patch }}\"}"
