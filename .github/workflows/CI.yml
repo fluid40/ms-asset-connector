@@ -22,7 +22,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Compute version
+      - name: Generate version number
         id: version
         run: |
           MAJOR_MINOR=${VERSION_MAJOR_MINOR}
@@ -35,12 +35,9 @@ jobs:
           VERSION="$MAJOR_MINOR.$PATCH"
           echo "New version $VERSION"
 
-          # Git Hash (kurz)
           GIT_HASH=$(git rev-parse --short HEAD)
-
           echo "Git Hash: $GIT_HASH"
 
-          # Outputs setzen
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "patch=$PATCH" >> $GITHUB_OUTPUT
           echo "hash=$GIT_HASH" >> $GITHUB_OUTPUT
@@ -68,7 +65,7 @@ jobs:
           git tag v${{ steps.version.outputs.version }}
           git push origin v${{ steps.version.outputs.version }}
 
-      - name: Update repository variable
+      - name: Update Version variable
         env:
           PAT_GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
         run: |
