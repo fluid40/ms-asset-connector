@@ -5,6 +5,9 @@ on:
     branches:
       - dk/dockerization-pipeline
 
+permissions:
+  contents: write
+
 jobs:
   build-image:
     runs-on: ubuntu-latest
@@ -38,6 +41,8 @@ jobs:
           NEW_PATCH=$((PATCH+1))
           NEW_TAG="v$MAJOR.$MINOR.$NEW_PATCH"
 
+          echo "New Version: $NEW_TAG"
+
       - name: Build and push fluid-asset-connector-python image
         uses: docker/build-push-action@v5
         with:
@@ -51,3 +56,14 @@ jobs:
           git config user.email "github-actions@github.com"
           git tag ${{ steps.semver.outputs.tag }}
           git push origin ${{ steps.semver.outputs.tag }}
+
+      - name: Update pyproject.toml with new version
+        run: |
+          # pyproject.toml aktualisieren
+          sed -i "s/^version = \".*\"/version = \"${{ steps.semver.outputs.tag#v }}\"/" pyproject.toml
+
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add pyproject.toml
+          git commit -m "chore: bump version to ${{ steps.semver.outputs.tag#v }}"
+          git push origin main
