@@ -26,24 +26,22 @@ jobs:
         id: version
         run: |
           # Major/Minor sauber extrahieren
-          MAJOR=$(echo $VERSION_MAJOR_MINOR | cut -d. -f1)
-          MINOR=$(echo $VERSION_MAJOR_MINOR | cut -d. -f2)
-
-          # Patch hochzählen (Default 0)
+          MAJOR_MINOR=${VERSION_MAJOR_MINOR:-0}
           PATCH=${VERSION_PATCH:-0}
+          echo "Current version $MAJOR_MINOR.$PATCH"
+
+          # update patch number
           PATCH=$((PATCH + 1))
 
-          # Versionsnummer korrekt zusammensetzen
-          VERSION="$MAJOR.$MINOR.$PATCH"
+          VERSION="$MAJOR_MINOR.$PATCH"
+          echo "New version $VERSION"
 
           # Git Hash (kurz)
           GIT_HASH=$(git rev-parse --short HEAD)
 
-          echo "Computed Version: $VERSION"
           echo "Git Hash: $GIT_HASH"
 
           # Outputs setzen
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "patch=$PATCH" >> $GITHUB_OUTPUT
           echo "hash=$GIT_HASH" >> $GITHUB_OUTPUT
 
