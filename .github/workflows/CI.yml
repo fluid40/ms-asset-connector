@@ -54,8 +54,8 @@ jobs:
           file: Dockerfile
           push: true
           tags: |
-            engineeringmethodsag/fluid-asset-connector-python:latest
             engineeringmethodsag/fluid-asset-connector-python:${{ steps.version.outputs.version }}-${{ steps.version.outputs.hash }}
+            engineeringmethodsag/fluid-asset-connector-python:latest
 
       - name: Create Git Tag
         run: |
