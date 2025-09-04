@@ -181,6 +181,10 @@
         "WORKDIR",
         "xlink",
         "zfunc",
-        "zstd"
+        "zstd",
+        "basyx",
+        "MQTT",
+        "Submodel",
+        "Submodels"
     ]
 }

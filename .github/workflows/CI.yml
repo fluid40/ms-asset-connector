@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  docker-build-and-release:
+    runs-on: ubuntu-latest
+    env:
+      VERSION_MAJOR_MINOR: ${{ vars.VERSION_MAJOR_MINOR }}
+      VERSION_PATCH: ${{ vars.VERSION_PATCH }}
+      GITHUB_TOKEN_PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate version number
+        id: version
+        run: |
+          MAJOR_MINOR=${VERSION_MAJOR_MINOR}
+          PATCH=${VERSION_PATCH}
+          echo "Current version $MAJOR_MINOR.$PATCH"
+
+          # update patch number
+          PATCH=$((PATCH + 1))
+
+          VERSION="$MAJOR_MINOR.$PATCH"
+          echo "New version $VERSION"
+
+          GIT_HASH=$(git rev-parse --short HEAD)
+          echo "Git Hash: $GIT_HASH"
+
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "patch=$PATCH" >> $GITHUB_OUTPUT
+          echo "hash=$GIT_HASH" >> $GITHUB_OUTPUT
+
+      - name: Login Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v5
+        with:
+          file: Dockerfile
+          push: true
+          tags: |
+            engineeringmethodsag/fluid-asset-connector-python:${{ steps.version.outputs.version }}-${{ steps.version.outputs.hash }}
+            engineeringmethodsag/fluid-asset-connector-python:latest
+
+      - name: Create Git Tag
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.PAT_GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git tag v${{ steps.version.outputs.version }}
+          git push origin v${{ steps.version.outputs.version }}
+
+      - name: Update Version variable
+        env:
+          PAT_GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
+        run: |
+          echo "Updating VERSION_PATCH to ${{ steps.version.outputs.patch }}"
+          curl -X PATCH \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: token $PAT_GITHUB_TOKEN" \
+            https://api.github.com/repos/${{ github.repository }}/actions/variables/VERSION_PATCH \
+            -d "{\"value\":\"${{ steps.version.outputs.patch }}\"}"
