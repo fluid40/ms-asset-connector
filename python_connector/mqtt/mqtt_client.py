@@ -24,11 +24,10 @@ class MqttClient:
 
     def __init__(self, base_url: str, topics: List[str], auth: BasicAuthenticationDetails=None):
         """Initialize the MQTTConnector with broker host and port.
-
-        :param broker_host: The hostname or IP address of the MQTT broker.
-        :param broker_port: The port number of the MQTT broker.
         """
-        self.topics = topics
+        self.cache = {}
+        for t in topics:
+            self.cache[t] = None
 
         self.base_url = base_url
         self.auth = auth
@@ -99,7 +98,7 @@ class MqttClient:
 
         # Subscribe to all topics in self.topics
         if rc == 0:
-            for topic in self.topics:
+            for topic in self.cache.keys():
                 self.client.subscribe(topic)
                 print(f"Subscribed to topic: {topic}")
 

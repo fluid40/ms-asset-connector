@@ -56,6 +56,11 @@ class MqttAssetConnector(IAssetConnector):
 
             keys = self._property_to_href_map[property_idshort_path]["keys"]
             value_in_payload = self._mqtt_client.get_cached_value(topic_name)
+            if value_in_payload is None:
+                return None
+
+            # using the keys of the potentially nested properties, dive into the complex JSON object (MQTT payload)
+            # to retrieve the requested value
             for k in keys:
                 value_in_payload = json.dumps(json.loads(value_in_payload)[k])
 
