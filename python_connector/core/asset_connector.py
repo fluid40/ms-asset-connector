@@ -1,11 +1,10 @@
-from basyx.aas.model import SubmodelElementCollection, ModelReference
+from basyx.aas.model import ModelReference, SubmodelElementCollection
 
-from core.aid_interface_parser import get_base_url_from_interface, create_property_to_href_map, parse_auth
+from core.aid_interface_parser import create_property_to_href_map, get_base_url_from_interface, parse_auth
 from core.authentication_details import IAuthenticationDetails
 
 
 class IAssetConnector:
-
     def __init__(self, aid_id: str, interface_smc: SubmodelElementCollection):
         self._aid_id = aid_id
         self._interface = interface_smc

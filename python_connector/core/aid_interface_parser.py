@@ -1,20 +1,25 @@
 """This module provides functions to parse AID Submodels and extract MQTT interface descriptions."""
+
 import base64
+import logging
 from typing import Dict, List
 
 from basyx.aas.model import (
     ExternalReference,
     Key,
     KeyTypes,
+    ModelReference,
     NamespaceSet,
     Property,
     Reference,
     SubmodelElement,
-    SubmodelElementCollection, ModelReference, ReferenceElement, SubmodelElementList,
+    SubmodelElementCollection,
+    SubmodelElementList,
 )
-from basyx.aas.util import traversal
 
-from core.authentication_details import IAuthenticationDetails, BasicAuthenticationDetails
+from core.authentication_details import BasicAuthenticationDetails, IAuthenticationDetails
+
+logger = logging.getLogger(__name__)
 
 
 def find_all_by_semantic_id(parent: NamespaceSet[SubmodelElement], semantic_id_value: str) -> List[SubmodelElement]:
@@ -24,15 +29,8 @@ def find_all_by_semantic_id(parent: NamespaceSet[SubmodelElement], semantic_id_v
     :param semantic_id_value: The semantic ID value to search for.
     :return: The found SubmodelElement(s) or an empty list if not found.
     """
-    reference: Reference = ExternalReference(
-        (Key(
-            type_=KeyTypes.GLOBAL_REFERENCE,
-            value=semantic_id_value
-        ),)
-    )
-    found_elements: list[SubmodelElement] = [
-        element for element in parent if element.semantic_id.__eq__(reference)
-    ]
+    reference: Reference = ExternalReference((Key(type_=KeyTypes.GLOBAL_REFERENCE, value=semantic_id_value),))
+    found_elements: list[SubmodelElement] = [element for element in parent if element.semantic_id.__eq__(reference)]
     return found_elements
 
 
@@ -43,14 +41,8 @@ def find_by_semantic_id(parent: NamespaceSet[SubmodelElement], semantic_id_value
     :param semantic_id_value: The semantic ID value to search for.
     :return: The first found SubmodelElement, or None if not found.
     """
-
     # create a Reference that acts like the to-be-matched semanticId
-    reference: Reference = ExternalReference(
-        (Key(
-            type_=KeyTypes.GLOBAL_REFERENCE,
-            value=semantic_id_value
-        ),)
-    )
+    reference: Reference = ExternalReference((Key(type_=KeyTypes.GLOBAL_REFERENCE, value=semantic_id_value),))
 
     # check if the constructed Reference appears as semanticId of the child elements
     for element in parent:
@@ -67,7 +59,6 @@ def find_by_id_short(parent: NamespaceSet[SubmodelElement], id_short_value: str)
     return None
 
 
-
 def find_by_supplemental_semantic_id(parent: NamespaceSet[SubmodelElement], semantic_id_value: str) -> SubmodelElement:
     """Find a SubmodelElement by its supplemental semantic ID.
 
@@ -80,6 +71,7 @@ def find_by_supplemental_semantic_id(parent: NamespaceSet[SubmodelElement], sema
             return element
     return None
 
+
 def contains_supplemental_semantic_id(element: SubmodelElement, semantic_id_value: str) -> bool:
     """Check if the element contains a specific supplemental semantic ID.
 
@@ -87,12 +79,7 @@ def contains_supplemental_semantic_id(element: SubmodelElement, semantic_id_valu
     :param semantic_id_value: The supplemental semantic ID value to search for.
     :return: True if the element contains the supplemental semantic ID, False otherwise.
     """
-    reference: Reference = ExternalReference(
-        (Key(
-            type_=KeyTypes.GLOBAL_REFERENCE,
-            value=semantic_id_value
-        ),)
-    )
+    reference: Reference = ExternalReference((Key(type_=KeyTypes.GLOBAL_REFERENCE, value=semantic_id_value),))
     return element.supplemental_semantic_id.__contains__(reference)
 
 
@@ -104,12 +91,11 @@ def get_base_url_from_interface(aid_interface: SubmodelElementCollection) -> str
     if endpoint_metadata is None:
         raise ValueError("EndpointMetadata SMC not found in AID Submodel.")
 
-    base: Property | None = find_by_semantic_id(
-        endpoint_metadata.value, "https://www.w3.org/2019/wot/td#base"
-    )
+    base: Property | None = find_by_semantic_id(endpoint_metadata.value, "https://www.w3.org/2019/wot/td#base")
     if base is None:
         raise ValueError("base Property not found in EndpointMetadata SMC.")
 
+    logger.debug(f"Base URL for AID interface '{aid_interface.id_short}' is '{base.value}'")
     return base.value
 
 
@@ -139,15 +125,15 @@ def create_property_to_href_map(aid_interface: SubmodelElementCollection) -> Dic
     if fl_properties is None:
         raise ValueError("{property} SMC not found in properties SMC.")
 
-    def traverse_property(smc: SubmodelElementCollection, parent_path: str, href: str, key_path: List[str | int], is_items=False, idx=None, is_top_level=False):
+    def traverse_property(
+        smc: SubmodelElementCollection, parent_path: str, href: str, key_path: List[str | int], is_items=False, idx=None, is_top_level=False
+    ):
         # determine local key only if not top-level
         if not is_top_level:
             if is_items and idx is not None:
                 local_key = idx  # integer index
             else:
-                key_prop = find_by_semantic_id(
-                    smc.value, "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/key"
-                )
+                key_prop = find_by_semantic_id(smc.value, "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/key")
                 local_key = key_prop.value if key_prop else smc.id_short  # string
             new_key_path = key_path + [local_key]
         else:
@@ -162,7 +148,7 @@ def create_property_to_href_map(aid_interface: SubmodelElementCollection) -> Dic
         for nested_sem_id in [
             "https://www.w3.org/2019/wot/json-schema#properties",
             "https://www.w3.org/2019/wot/json-schema#items",
-            "https://www.w3.org/2019/wot/td#PropertyAffordance"     # TODO: some apparently use this semanticId
+            "https://www.w3.org/2019/wot/td#PropertyAffordance",  # TODO: some apparently use this semanticId
         ]:
             nested_group: SubmodelElementCollection | None = find_by_semantic_id(smc.value, nested_sem_id)
             if nested_group:
@@ -183,9 +169,7 @@ def create_property_to_href_map(aid_interface: SubmodelElementCollection) -> Dic
 
     # process all first-level properties
     for fl_property in fl_properties:
-        forms: SubmodelElementCollection | None = find_by_semantic_id(
-            fl_property.value, "https://www.w3.org/2019/wot/td#hasForm"
-        )
+        forms: SubmodelElementCollection | None = find_by_semantic_id(fl_property.value, "https://www.w3.org/2019/wot/td#hasForm")
         if forms is None:
             raise ValueError("forms SMC not found in {property} SMC.")
 
@@ -196,14 +180,9 @@ def create_property_to_href_map(aid_interface: SubmodelElementCollection) -> Dic
         href_value = href.value
         idshort_path_prefix = f"{aid_interface.id_short}.{interaction_metadata.id_short}.{properties.id_short}"
 
-        traverse_property(
-            fl_property,
-            idshort_path_prefix,
-            href_value,
-            [],
-            is_top_level=True
-        )
+        traverse_property(fl_property, idshort_path_prefix, href_value, [], is_top_level=True)
 
+    logger.debug(f"Mapped {len(mapping)} properties to hrefs using the AID {aid_interface.id_short}.")
     return mapping
 
 
@@ -212,7 +191,7 @@ def construct_idshort_path_from_reference(reference: ModelReference) -> str:
 
     # start from the second Key and omit the Identifiable at the beginning of the list
     for key in reference.key[1:]:
-        idshort_path += (key.value + ".")
+        idshort_path += key.value + "."
 
     # get rid of the trailing dot
     return idshort_path[:-1]
@@ -225,9 +204,7 @@ def parse_auth(aid_interface: SubmodelElementCollection) -> IAuthenticationDetai
     if endpoint_metadata is None:
         raise ValueError("EndpointMetadata SMC not found in AID Submodel.")
 
-    security: SubmodelElementList | None = find_by_semantic_id(
-        endpoint_metadata.value, "https://www.w3.org/2019/wot/td#hasSecurityConfiguration"
-    )
+    security: SubmodelElementList | None = find_by_semantic_id(endpoint_metadata.value, "https://www.w3.org/2019/wot/td#hasSecurityConfiguration")
     if security is None:
         raise ValueError("security SML not found in EndpointMetadata SMC.")
 
@@ -244,20 +221,17 @@ def parse_auth(aid_interface: SubmodelElementCollection) -> IAuthenticationDetai
     if security_definitions is None:
         raise ValueError("securitySchemes Property not found in EndpointMetadata SMC.")
 
-    security_details: SubmodelElementCollection | None = find_by_id_short(
-        security_definitions.value, sc
-    )
+    security_details: SubmodelElementCollection | None = find_by_id_short(security_definitions.value, sc)
     if security_details is None:
         raise ValueError("Referenced security scheme SMC not found in securityDefinitions SMC")
 
     # TODO: check if "scheme" property (sem-id: https://www.w3.org/2019/wot/security#SecurityScheme) has value "basic"
 
-    basic_sc_name: Property | None = find_by_semantic_id(
-        security_details.value, "https://www.w3.org/2019/wot/security#name"
-    )
+    basic_sc_name: Property | None = find_by_semantic_id(security_details.value, "https://www.w3.org/2019/wot/security#name")
     if basic_sc_name is None:
         raise ValueError("name Property not found in referenced security scheme SMC")
 
+    logger.debug("Found authentication details in AID interface to use for the asset connection.")
     auth_base64 = basic_sc_name.value
     auth_plain = base64.b64decode(auth_base64).decode("utf-8")
 

@@ -3,16 +3,15 @@
 This module provides endpoints to set configuration and retrieve values using JSON payloads.
 """
 
-import base64
 import json
+import logging
 import threading
 from typing import Dict
 
 import uvicorn
 from basyx.aas.model import Submodel
-from fastapi import FastAPI
-
 from core.asset_connector import IAssetConnector
+from fastapi import FastAPI
 from models.get_value_payload import GetValuePayload
 from models.response_body import ResponseBody, create_response
 from models.set_config_payload import SetConfigPayload
@@ -25,6 +24,8 @@ app = FastAPI()
 connector_store: Dict[str, IAssetConnector] = {}
 connector_store_lock = threading.Lock()
 
+logger = logging.getLogger(__name__)
+
 
 @app.get("/")
 async def root():
@@ -36,6 +37,7 @@ async def root():
 async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
     """Set configuration using a specific AID submodel."""
     aid_sm: Submodel = payload._aid_sm  # noqa: SLF001
+    logger.debug(f"Received payload for /set-config: {payload}")
 
     try:
         # iterate over all interface SMCs and create IAssetConnector for each of them
@@ -48,16 +50,14 @@ async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
                 pass
 
             connector_id = f"{aid_sm.id}-{iface_smc.id_short}"
+            logger.debug(f"Setting config for connector id: {connector_id}")
             with connector_store_lock:
                 connector_store[connector_id] = asset_connector
 
             asset_connector.connect()
 
         return create_response(
-            status_code=200,
-            message="Successfully invoked `/set-config` with raw JSON in payload",
-            payload=None,
-            value=connector_id
+            status_code=200, message="Successfully invoked `/set-config` with raw JSON in payload", payload=None, value=connector_id
         )
     except (ValueError, RuntimeError, ConnectionError) as e:
         return create_response(
@@ -89,7 +89,7 @@ async def get_value(payload: GetValuePayload) -> ResponseBody:
             return create_response(
                 status_code=200,
                 message=f"Successfully invoked `/get-value/{id}` with raw JSON in payload",
-                payload=json.loads(result) if result else None
+                payload=json.loads(result) if result else None,
             )
         except (ValueError, RuntimeError, ConnectionError) as e:
             return create_response(

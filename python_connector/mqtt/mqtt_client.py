@@ -4,13 +4,15 @@ Provides the MQTTConnector class for subscribing to topics, receiving messages,
 and storing the latest payload for each topic.
 """
 
+import logging
 import ssl
 from typing import List, Tuple
 from urllib.parse import urlparse
 
+from core.authentication_details import BasicAuthenticationDetails
 from paho.mqtt.client import Client
 
-from core.authentication_details import BasicAuthenticationDetails
+logger = logging.getLogger(__name__)
 
 
 class MqttClient:
@@ -22,7 +24,7 @@ class MqttClient:
     port: int
     path: str
 
-    def __init__(self, base_url: str, topics: List[str], auth: BasicAuthenticationDetails=None):
+    def __init__(self, base_url: str, topics: List[str], auth: BasicAuthenticationDetails = None):
         """Initialize the MQTTConnector with broker host and port.
         """
         self.cache = {}
@@ -30,6 +32,8 @@ class MqttClient:
             self.cache[t] = None
 
         self.base_url = base_url
+        logger.debug(f"Initializing MQTT client with broker URL: {self.base_url}")
+
         self.auth = auth
         self.host, self.port, self.path, use_tls = self._parse_url()
 
@@ -43,6 +47,7 @@ class MqttClient:
             self.client.tls_insecure_set(True)
 
         if self._detect_transport() == "websockets" and self.path != "/":
+            logger.debug(f"Detected WebSocket transport with path: {self.path}")
             self.client.ws_set_options(path=self.path)
 
         self.client.on_connect = self._on_connect
@@ -82,6 +87,7 @@ class MqttClient:
         This method should be called after initializing the MQTTConnector.
         """
         try:
+            logging.debug(f"Try to connect to MQTT broker at {self.base_url}")
             self.client.connect(self.host, self.port, 60)
         except Exception as e:
             raise ConnectionError(f"Error connecting to MQTT broker at {self.base_url}: {e}")
@@ -174,12 +180,11 @@ class MqttClient:
         """Add topics to the MQTTConnector."""
         self.topics = topics
 
-
-
     def get_cached_value(self, topic):
         """Retrieve the cached value for a specific topic.
 
         :param topic: The topic to retrieve the cached value for.
         :return: The cached value if it exists, otherwise None.
         """
+        logger.debug(f"Retrieving cached value for topic: {topic}")
         return self.cache.get(topic, None)
