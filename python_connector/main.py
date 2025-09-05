@@ -11,6 +11,7 @@ from typing import Dict
 import uvicorn
 from basyx.aas.model import Submodel
 from core.asset_connector import IAssetConnector
+from core.logging_handler import initialize_logging
 from fastapi import FastAPI
 from models.get_value_payload import GetValuePayload
 from models.response_body import ResponseBody, create_response
@@ -101,4 +102,5 @@ async def get_value(payload: GetValuePayload) -> ResponseBody:
 
 if __name__ == "__main__":
     """Run the FastAPI application."""
+    initialize_logging(logging.DEBUG)
     uvicorn.run(app, host="127.0.0.1", port=8090)
