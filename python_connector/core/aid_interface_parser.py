@@ -166,6 +166,10 @@ def create_property_to_href_map(aid_interface: SubmodelElementCollection) -> Dic
         ]:
             nested_group: SubmodelElementCollection | None = find_by_semantic_id(smc.value, nested_sem_id)
             if nested_group:
+                # attach the name of that SMC ("items" or "properties" or similar) to the key_path
+                full_path += "." + nested_group.id_short
+
+                # find all nested properties/items by semantic-ID
                 nested_properties: List[SubmodelElement] = find_all_by_semantic_id(
                     nested_group.value, "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/PropertyDefinition"
                 )
@@ -174,6 +178,8 @@ def create_property_to_href_map(aid_interface: SubmodelElementCollection) -> Dic
                     nested_group.value, "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
                 )
                 nested_properties.extend(nested_properties_alternative)
+
+                # traverse all nested properties/items recursively
                 for idx, nested in enumerate(nested_properties):
                     if nested_sem_id.endswith("#items"):
                         # for arrays: append index instead of property key
