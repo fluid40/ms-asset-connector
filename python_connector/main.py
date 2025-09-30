@@ -17,6 +17,7 @@ from models.get_value_payload import GetValuePayload
 from models.response_body import ResponseBody, create_response
 from models.set_config_payload import SetConfigPayload
 from mqtt.mqtt_asset_connector import MqttAssetConnector
+from python_connector.opcua.opcua_asset_connector import OpcuaAssetConnector
 
 app = FastAPI()
 
@@ -43,6 +44,9 @@ async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
             asset_connector: IAssetConnector = None
             if iface_smc.supplemental_semantic_id[0].key[0].value == "http://www.w3.org/2011/mqtt":
                 asset_connector = MqttAssetConnector(aid_sm.id, iface_smc)
+            # TODO: confirm that is semanticId exists
+            elif iface_smc.supplemental_semantic_id[0].key[0].value == "http://www.w3.org/2011/opcua":
+                asset_connector = OpcuaAssetConnector(aid_sm.id, iface_smc)
             else:
                 # TODO: check for other protocols
                 pass
