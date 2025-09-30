@@ -1,1 +1,1949 @@
-{"assetAdministrationShells":[{"idShort":"OPCUADemoAsset","administration":{"version":"0","revision":"1","creator":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"Tom Gneu\u00DF @ AAS Designer"}]}},"id":"https://fluid40.de/ids/aas/1063_7568_1809_1415","assetInformation":{"assetKind":"Instance","globalAssetId":"https://fluid40.de/ids/asset/9116_5479_1178_9967"},"submodels":[{"type":"ModelReference","keys":[{"type":"Submodel","value":"https://fluid40.de/ids/sm/8831_8151_1563_5778"}]},{"type":"ModelReference","keys":[{"type":"Submodel","value":"https://fluid40.de/ids/sm/6593_1393_8828_3834"}]},{"type":"ModelReference","keys":[{"type":"Submodel","value":"https://fluid40.de/ids/Submodel/7934_9946_9230_1729"}]},{"type":"ModelReference","keys":[{"type":"Submodel","value":"https://fluid40.de/ids/sm/3926_7897_7524_8058"}]}],"modelType":"AssetAdministrationShell"}],"submodels":[{"idShort":"AasDesignerChangelog","displayName":[{"language":"en","text":"AAS Designer Changelog"},{"language":"de","text":"AAS Designer Changelog"}],"description":[{"language":"en","text":"Contains the log of changes made to the AAS by the AAS Designer"},{"language":"de","text":"Enth\u00E4lt das Protokoll der \u00C4nderungen an der AAS die durch den AAS Designer durchgef\u00FChrt wurden"}],"administration":{"version":"0","revision":"1","creator":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"AasDesigner"}]}},"id":"https://fluid40.de/ids/sm/8831_8151_1563_5778","kind":"Instance","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"AasDesignerChangelog"}]},"submodelElements":[{"idShort":"Changes","value":[{"idShort":"Creation","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T09:33:12Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Creation","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update1","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T09:34:09.796Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update2","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T09:35:47.407Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update3","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T09:36:48.546Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update4","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T09:37:36.065Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update5","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T09:40:02.511Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update6","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T09:42:52.444Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update7","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T09:43:47.631Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update8","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T09:44:39.956Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update9","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T09:45:31.804Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update10","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T09:45:40.317Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update11","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T09:53:45.954Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update12","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T09:54:03.852Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update13","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T09:54:27.703Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update14","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T09:54:36.258Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update15","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T09:56:19.077Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update16","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T09:56:42.216Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update17","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T10:00:09.606Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update18","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T10:00:32.528Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update19","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T10:00:49.016Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update20","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T10:00:54.552Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update21","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T10:01:00.931Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update22","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T10:03:17.466Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update23","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T10:03:25.205Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update24","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-29T10:05:22.98Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update25","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-30T08:26:39.026Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"Update26","value":[{"idShort":"Date","valueType":"xs:dateTime","value":"2025-09-30T08:26:55.202Z","modelType":"Property"},{"idShort":"User","valueType":"xs:string","value":"tom.gneuss@tu-dresden.de","modelType":"Property"},{"idShort":"Action","valueType":"xs:string","value":"Update","modelType":"Property"},{"idShort":"Comment","valueType":"xs:string","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"}],"modelType":"SubmodelElementCollection"}],"modelType":"Submodel"},{"idShort":"AssetInterfacesDescription","description":[{"language":"en","text":"AID Template Sample"}],"id":"https://fluid40.de/ids/sm/6593_1393_8828_3834","kind":"Instance","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/idta/AssetInterfacesDescription/1/0/Submodel"}]},"submodelElements":[{"idShort":"Interface_OPCUA","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/idta/AssetInterfacesDescription/1/0/Interface"}]},"supplementalSemanticIds":[{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://www.w3.org/2011/opcua"}]},{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/td"}]}],"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToMany"}],"value":[{"idShort":"EndpointMetadata","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/idta/AssetInterfacesDescription/1/0/EndpointMetadata"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"One"}],"value":[{"idShort":"base","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/td#baseURI"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"One"}],"valueType":"xs:anyURI","value":"opc.tcp://127.0.0.1:4840","modelType":"Property"},{"idShort":"contentType","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/hypermedia#forContentType"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"One"}],"valueType":"xs:string","value":"application/json","modelType":"Property"},{"idShort":"security","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/td#hasSecurityConfiguration"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"One"}],"orderRelevant":true,"typeValueListElement":"SubmodelElement","value":[{"value":{"type":"ModelReference","keys":[{"type":"Submodel","value":"AssetInterfacesDescription"},{"type":"SubmodelElementCollection","value":"Interface_OPCUA"},{"type":"SubmodelElementCollection","value":"EndpointMetadata"},{"type":"SubmodelElementCollection","value":"securityDefinitions"},{"type":"SubmodelElementCollection","value":"nosec_sc"}]},"modelType":"ReferenceElement"}],"modelType":"SubmodelElementList"},{"idShort":"securityDefinitions","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/td#definesSecurityScheme"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"One"}],"value":[{"idShort":"nosec_sc","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#NoSecurityScheme"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"value":[{"idShort":"scheme","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#SecurityScheme"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"One"}],"valueType":"xs:string","value":"nosec","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"auto_sc","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#AutoSecurityScheme"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"value":[{"idShort":"scheme","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#SecurityScheme"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"One"}],"valueType":"xs:string","value":"auto","modelType":"Property"},{"idShort":"proxy","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#proxy"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"basic_sc","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#BasicSecurityScheme"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"value":[{"idShort":"scheme","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#SecurityScheme"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"One"}],"valueType":"xs:string","value":"basic","modelType":"Property"},{"idShort":"name","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#name"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","modelType":"Property"},{"idShort":"in","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#in"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","modelType":"Property"},{"idShort":"proxy","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#proxy"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"combo_sc","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#ComboSecurityScheme"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"value":[{"idShort":"scheme","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#SecurityScheme"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"One"}],"valueType":"xs:string","value":"combo","modelType":"Property"},{"idShort":"oneOf","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#oneOf"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"One"}],"orderRelevant":true,"typeValueListElement":"SubmodelElement","modelType":"SubmodelElementList"},{"idShort":"allOf","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#allOf"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"One"}],"orderRelevant":true,"typeValueListElement":"SubmodelElement","modelType":"SubmodelElementList"},{"idShort":"proxy","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#proxy"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"apikey_sc","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#APIKeySecurityScheme"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"value":[{"idShort":"scheme","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#SecurityScheme"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"One"}],"valueType":"xs:string","value":"apikey","modelType":"Property"},{"idShort":"name","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#name"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","modelType":"Property"},{"idShort":"in","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#in"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","modelType":"Property"},{"idShort":"proxy","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#proxy"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"psk_sc","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#PSKSecurityScheme"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"value":[{"idShort":"scheme","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#SecurityScheme"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"One"}],"valueType":"xs:string","value":"psk","modelType":"Property"},{"idShort":"identity","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#identity"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","modelType":"Property"},{"idShort":"proxy","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#proxy"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"digest_sc","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#DigestSecurityScheme"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"value":[{"idShort":"scheme","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#SecurityScheme"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"One"}],"valueType":"xs:string","value":"digest","modelType":"Property"},{"idShort":"name","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#name"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","modelType":"Property"},{"idShort":"in","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#in"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","modelType":"Property"},{"idShort":"qop","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#qop"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","modelType":"Property"},{"idShort":"proxy","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#proxy"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"bearer_sc","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#BearerSecurityScheme"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"value":[{"idShort":"scheme","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#SecurityScheme"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"One"}],"valueType":"xs:string","value":"bearer","modelType":"Property"},{"idShort":"name","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#name"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","modelType":"Property"},{"idShort":"in","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#in"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","modelType":"Property"},{"idShort":"authorization","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#authorization"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","modelType":"Property"},{"idShort":"alg","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#alg"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","modelType":"Property"},{"idShort":"format","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#format"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","modelType":"Property"},{"idShort":"proxy","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#proxy"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","modelType":"Property"}],"modelType":"SubmodelElementCollection"},{"idShort":"oauth2_sc","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#OAuth2SecurityScheme"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"value":[{"idShort":"scheme","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#SecurityScheme"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"One"}],"valueType":"xs:string","value":"oauth2","modelType":"Property"},{"idShort":"token","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#token"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:anyURI","value":"","modelType":"Property"},{"idShort":"refresh","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#refresh"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:anyURI","value":"","modelType":"Property"},{"idShort":"authorization","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#authorization"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:anyURI","value":"","modelType":"Property"},{"idShort":"scopes","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#scopes"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","value":"","modelType":"Property"},{"idShort":"flow","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#flow"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","value":"code","modelType":"Property"},{"idShort":"proxy","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/security#proxy"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:anyURI","value":"","modelType":"Property"}],"modelType":"SubmodelElementCollection"}],"modelType":"SubmodelElementCollection"}],"modelType":"SubmodelElementCollection"},{"idShort":"InteractionMetadata","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/idta/AssetInterfacesDescription/1/0/InteractionMetadata"}]},"supplementalSemanticIds":[{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/td#InteractionAffordance"}]}],"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"One"}],"value":[{"idShort":"properties","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/td#PropertyAffordance"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"value":[{"idShort":"TopLevelObject","description":[{"language":"en","text":"Current counter value"},{"language":"de","text":"Derzeitiger Z\u00E4hlerwert"},{"language":"it","text":"Valore attuale del contatore"}],"semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/idta/AssetInterfacesDescription/1/0/PropertyDefinition"}]},"supplementalSemanticIds":[{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/td#name"}]}],"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToMany"}],"value":[{"idShort":"type","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/1999/02/22-rdf-syntax-ns#type"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","value":"object","modelType":"Property"},{"idShort":"forms","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/td#hasForm"}]},"value":[{"idShort":"href","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/hypermedia#hasTarget"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"One"}],"valueType":"xs:string","value":"ns=2;s=TopLevelObject","modelType":"Property"}],"modelType":"SubmodelElementCollection"}],"modelType":"SubmodelElementCollection"},{"idShort":"NestedObject","description":[{"language":"en","text":"Current counter value"},{"language":"de","text":"Derzeitiger Z\u00E4hlerwert"},{"language":"it","text":"Valore attuale del contatore"}],"semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/idta/AssetInterfacesDescription/1/0/PropertyDefinition"}]},"supplementalSemanticIds":[{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/td#name"}]}],"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToMany"}],"value":[{"idShort":"type","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/1999/02/22-rdf-syntax-ns#type"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","value":"object","modelType":"Property"},{"idShort":"forms","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/td#hasForm"}]},"value":[{"idShort":"href","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/hypermedia#hasTarget"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"One"}],"valueType":"xs:string","value":"ns=2;s=NestedObject","modelType":"Property"}],"modelType":"SubmodelElementCollection"}],"modelType":"SubmodelElementCollection"},{"idShort":"DynamicVariable","description":[{"language":"en","text":"Some automatically ever-increasing value"}],"semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/idta/AssetInterfacesDescription/1/0/PropertyDefinition"}]},"supplementalSemanticIds":[{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/td#name"}]}],"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToMany"}],"value":[{"idShort":"type","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/1999/02/22-rdf-syntax-ns#type"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","value":"number","modelType":"Property"},{"idShort":"forms","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/td#hasForm"}]},"value":[{"idShort":"href","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/hypermedia#hasTarget"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"One"}],"valueType":"xs:string","value":"ns=2;s=DynamicVariable","modelType":"Property"}],"modelType":"SubmodelElementCollection"}],"modelType":"SubmodelElementCollection"},{"idShort":"StaticVariable","description":[{"language":"en","text":"Some fixed value that can be overwritten manually"}],"semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/idta/AssetInterfacesDescription/1/0/PropertyDefinition"}]},"supplementalSemanticIds":[{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/td#name"}]}],"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToMany"}],"value":[{"idShort":"type","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/1999/02/22-rdf-syntax-ns#type"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","value":"integer","modelType":"Property"},{"idShort":"forms","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/td#hasForm"}]},"value":[{"idShort":"href","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/hypermedia#hasTarget"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"One"}],"valueType":"xs:string","value":"ns=2;s=StaticVariable","modelType":"Property"}],"modelType":"SubmodelElementCollection"}],"modelType":"SubmodelElementCollection"}],"modelType":"SubmodelElementCollection"},{"idShort":"actions","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/td#ActionAffordance"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"value":[{"idShort":"IncrementStaticVariable","description":[{"language":"en","text":"Some fixed value that can be overwritten manually"}],"semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/idta/AssetInterfacesDescription/1/0/ActionDefinition"}]},"supplementalSemanticIds":[{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/td#name"}]}],"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToMany"}],"value":[{"idShort":"forms","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/td#hasForm"}]},"value":[{"idShort":"href","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/hypermedia#hasTarget"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"One"}],"valueType":"xs:string","value":"ns=2;s=IncrementStaticVariable","modelType":"Property"}],"modelType":"SubmodelElementCollection"}],"modelType":"SubmodelElementCollection"},{"idShort":"MultiplyBy2","description":[{"language":"en","text":"Some fixed value that can be overwritten manually"}],"semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/idta/AssetInterfacesDescription/1/0/ActionDefinition"}]},"supplementalSemanticIds":[{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/td#name"}]}],"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToMany"}],"value":[{"idShort":"type","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/1999/02/22-rdf-syntax-ns#type"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"valueType":"xs:string","value":"number","modelType":"Property"},{"idShort":"forms","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/td#hasForm"}]},"value":[{"idShort":"href","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/hypermedia#hasTarget"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"One"}],"valueType":"xs:string","value":"ns=2;s=MultiplyBy2","modelType":"Property"}],"modelType":"SubmodelElementCollection"}],"modelType":"SubmodelElementCollection"}],"modelType":"SubmodelElementCollection"},{"idShort":"events","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://www.w3.org/2019/wot/td#EventAffordance"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"Cardinality","valueType":"xs:string","value":"ZeroToOne"}],"modelType":"SubmodelElementCollection"}],"modelType":"SubmodelElementCollection"}],"modelType":"SubmodelElementCollection"}],"modelType":"Submodel"},{"idShort":"OperationalData","id":"https://fluid40.de/ids/Submodel/7934_9946_9230_1729","kind":"Instance","submodelElements":[{"idShort":"StaticVariableSink","valueType":"xs:string","modelType":"Property"},{"idShort":"DynamicVariableSink","valueType":"xs:string","modelType":"Property"}],"modelType":"Submodel"},{"idShort":"AIMC","description":[{"language":"en","text":"This Submodel specifies an information model for describing the mapping of interface(s) of an asset service or asset-related service already described in an Asset Interfaces Description (AID) Submodel."}],"administration":{"version":"1","revision":"0"},"id":"https://fluid40.de/ids/sm/3926_7897_7524_8058","kind":"Instance","semanticId":{"type":"ModelReference","keys":[{"type":"Submodel","value":"https://admin-shell.io/idta/AssetInterfacesMappingConfiguration/1/0/Submodel"}]},"submodelElements":[{"idShort":"MappingConfigurations","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/idta/AssetInterfacesMappingConfiguration/1/0/MappingConfigurations"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"SMT/Cardinality","valueType":"xs:string","value":"One"}],"orderRelevant":true,"semanticIdListElement":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/idta/AssetInterfacesMappingConfiguration/1/0/MappingConfiguration"}]},"typeValueListElement":"SubmodelElementCollection","value":[{"semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/idta/AssetInterfacesMappingConfiguration/1/0/MappingConfiguration"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"SMT/Cardinality","valueType":"xs:string","value":"ZeroToMany"}],"value":[{"idShort":"InterfaceReference","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/idta/AssetInterfacesMappingConfiguration/1/0/InterfaceReference"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"SMT/Cardinality","valueType":"xs:string","value":"One"}],"value":{"type":"ModelReference","keys":[{"type":"Submodel","value":"AssetInterfacesDescription"},{"type":"SubmodelElementCollection","value":"Interface_OPCUA"}]},"modelType":"ReferenceElement"},{"idShort":"MappingSourceSinkRelations","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/idta/AssetInterfacesMappingConfiguration/1/0/MappingSourceSinkRelations"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"SMT/Cardinality","valueType":"xs:string","value":"One"}],"orderRelevant":true,"semanticIdListElement":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/idta/AssetInterfacesMappingConfiguration/1/0/MappingSourceSinkRelation"}]},"typeValueListElement":"RelationshipElement","value":[{"semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/idta/AssetInterfacesMappingConfiguration/1/0/MappingSourceSinkRelation"}]},"qualifiers":[{"kind":"ConceptQualifier","type":"SMT/Cardinality","valueType":"xs:string","value":"ZeroToMany"}],"first":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://fluid40.de/ids/sm/6593_1393_8828_3834"},{"type":"FragmentReference","value":"Interface_OPCUA"},{"type":"FragmentReference","value":"InteractionMetadata"},{"type":"FragmentReference","value":"properties"},{"type":"FragmentReference","value":"StaticVariable"}]},"second":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://fluid40.de/ids/Submodel/7934_9946_9230_1729"},{"type":"FragmentReference","value":"StaticVariableSink"}]},"modelType":"RelationshipElement"},{"first":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://fluid40.de/ids/sm/6593_1393_8828_3834"},{"type":"FragmentReference","value":"Interface_OPCUA"},{"type":"FragmentReference","value":"InteractionMetadata"},{"type":"FragmentReference","value":"properties"},{"type":"FragmentReference","value":"DynamicVariable"}]},"second":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://fluid40.de/ids/Submodel/7934_9946_9230_1729"},{"type":"FragmentReference","value":"DynamicVariableSink"}]},"modelType":"RelationshipElement"}],"modelType":"SubmodelElementList"}],"modelType":"SubmodelElementCollection"}],"modelType":"SubmodelElementList"}],"modelType":"Submodel"}],"conceptDescriptions":[{"idShort":"alg","id":"https://www.w3.org/2019/wot/security#alg","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"alg"}],"definition":[{"language":"en","text":"alg"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"apikey_sc","id":"https://www.w3.org/2019/wot/security#APIKeySecurityScheme","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"apikey_sc"}],"definition":[{"language":"en","text":"apikey_sc"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"AssetInterfacesDescription","description":[{"language":"en","text":"AID Template Sample"}],"id":"https://admin-shell.io/idta/AssetInterfacesDescription/1/0/Submodel","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"AssetInterfacesDescription"}],"definition":[{"language":"en","text":"AID Template Sample"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"authorization","id":"https://www.w3.org/2019/wot/security#authorization","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"authorization"}],"definition":[{"language":"en","text":"authorization"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"auto_sc","id":"https://www.w3.org/2019/wot/security#AutoSecurityScheme","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"auto_sc"}],"definition":[{"language":"en","text":"auto"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"basic_sc","id":"https://www.w3.org/2019/wot/security#BasicSecurityScheme","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"basic_sc"}],"definition":[{"language":"en","text":"basic"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"bearer_sc","id":"https://www.w3.org/2019/wot/security#BearerSecurityScheme","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"bearer_sc"}],"definition":[{"language":"en","text":"bearer"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"Changelog","description":[{"language":"en","text":"Enth\u00E4lt das Protokoll der \u00C4nderungen an der AAS die durch den AAS Designer durchgef\u00FChrt wurden"},{"language":"de","text":"Contains the log of changes made to the AAS by the AAS Designer"}],"id":"AasDesignerChangelog","modelType":"ConceptDescription"},{"idShort":"combo_sc","id":"https://www.w3.org/2019/wot/security#ComboSecurityScheme","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"combo_sc"}],"definition":[{"language":"en","text":"combo"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"contentType","id":"https://www.w3.org/2019/wot/hypermedia#forContentType","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"contentType"}],"definition":[{"language":"en","text":"content"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"digest_sc","id":"https://www.w3.org/2019/wot/security#DigestSecurityScheme","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"digest_sc"}],"definition":[{"language":"en","text":"digest"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"EndpointMetadata","id":"https://admin-shell.io/idta/AssetInterfacesDescription/1/0/EndpointMetadata","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"EndpointMetadata"}],"definition":[{"language":"en","text":"ednpoint"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"flow","id":"https://www.w3.org/2019/wot/security#flow","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"flow"}],"definition":[{"language":"en","text":"flow"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"format","id":"https://www.w3.org/2019/wot/security#format","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"format"}],"definition":[{"language":"en","text":"format"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"forms","id":"https://www.w3.org/2019/wot/td#hasForm","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"forms"}],"definition":[{"language":"en","text":"forms"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"GenericInterface","id":"https://admin-shell.io/idta/AssetInterfacesDescription/1/0/Interface","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"InterfaceHTTP(it can be any name but the semanticId must give context to the protocol been used)"}],"definition":[{"language":"en","text":"interface"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"href","id":"https://www.w3.org/2019/wot/hypermedia#hasTarget","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"href"}],"definition":[{"language":"en","text":"href"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"identity","id":"https://www.w3.org/2019/wot/security#identity","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"identity"}],"definition":[{"language":"en","text":"identity"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"in","id":"https://www.w3.org/2019/wot/security#in","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"in"}],"definition":[{"language":"en","text":"in"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"InteractionMetadata","id":"https://admin-shell.io/idta/AssetInterfacesDescription/1/0/InteractionMetadata","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"InteractionMetadata"}],"definition":[{"language":"en","text":"interaction"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"name","id":"https://www.w3.org/2019/wot/security#name","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"name"}],"definition":[{"language":"en","text":"name"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"nosec_sc","id":"https://www.w3.org/2019/wot/security#NoSecurityScheme","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"nosec_sc"}],"definition":[{"language":"en","text":"nosec"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"oauth2_sc","id":"https://www.w3.org/2019/wot/security#OAuth2SecurityScheme","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"oauth2_sc"}],"definition":[{"language":"en","text":"oauth"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"propertiesAffordance","id":"https://www.w3.org/2019/wot/td#PropertyAffordance","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"properties"}],"definition":[{"language":"en","text":"properties"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"proxy","id":"https://www.w3.org/2019/wot/security#proxy","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"proxy"}],"definition":[{"language":"en","text":"proxy"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"psk_sc","id":"https://www.w3.org/2019/wot/security#PSKSecurityScheme","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"psk_sc"}],"definition":[{"language":"en","text":"psk"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"refresh","id":"https://www.w3.org/2019/wot/security#refresh","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"refresh"}],"definition":[{"language":"en","text":"refresh"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"scopes","id":"https://www.w3.org/2019/wot/security#scopes","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"scopes"}],"definition":[{"language":"en","text":"scopes"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"security","id":"https://www.w3.org/2019/wot/td#hasSecurityConfiguration","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"security"}],"definition":[{"language":"en","text":"security"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"securityDefinitions","id":"https://www.w3.org/2019/wot/td#definesSecurityScheme","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"securityDefinitions"}],"definition":[{"language":"en","text":"security"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"token","id":"https://www.w3.org/2019/wot/security#token","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"token"}],"definition":[{"language":"en","text":"token"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"},{"idShort":"type","id":"https://www.w3.org/1999/02/22-rdf-syntax-ns#type","embeddedDataSpecifications":[{"dataSpecification":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0"}]},"dataSpecificationContent":{"preferredName":[{"language":"en","text":"type"}],"definition":[{"language":"en","text":"type"}],"modelType":"DataSpecificationIec61360"}}],"modelType":"ConceptDescription"}]}
+{
+    "idShort": "AssetInterfacesDescription",
+    "description": [
+        {
+            "language": "en",
+            "text": "AID Template Sample"
+        }
+    ],
+    "id": "https://fluid40.de/ids/sm/6593_1393_8828_3834",
+    "kind": "Instance",
+    "semanticId": {
+        "type": "ExternalReference",
+        "keys": [
+            {
+                "type": "GlobalReference",
+                "value": "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/Submodel"
+            }
+        ]
+    },
+    "submodelElements": [
+        {
+            "idShort": "Interface_OPCUA",
+            "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                    {
+                        "type": "GlobalReference",
+                        "value": "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/Interface"
+                    }
+                ]
+            },
+            "supplementalSemanticIds": [
+                {
+                    "type": "ExternalReference",
+                    "keys": [
+                        {
+                            "type": "GlobalReference",
+                            "value": "http://www.w3.org/2011/opcua"
+                        }
+                    ]
+                },
+                {
+                    "type": "ExternalReference",
+                    "keys": [
+                        {
+                            "type": "GlobalReference",
+                            "value": "https://www.w3.org/2019/wot/td"
+                        }
+                    ]
+                }
+            ],
+            "qualifiers": [
+                {
+                    "kind": "ConceptQualifier",
+                    "type": "Cardinality",
+                    "valueType": "xs:string",
+                    "value": "ZeroToMany"
+                }
+            ],
+            "value": [
+                {
+                    "idShort": "EndpointMetadata",
+                    "semanticId": {
+                        "type": "ExternalReference",
+                        "keys": [
+                            {
+                                "type": "GlobalReference",
+                                "value": "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/EndpointMetadata"
+                            }
+                        ]
+                    },
+                    "qualifiers": [
+                        {
+                            "kind": "ConceptQualifier",
+                            "type": "Cardinality",
+                            "valueType": "xs:string",
+                            "value": "One"
+                        }
+                    ],
+                    "value": [
+                        {
+                            "idShort": "base",
+                            "semanticId": {
+                                "type": "ExternalReference",
+                                "keys": [
+                                    {
+                                        "type": "GlobalReference",
+                                        "value": "https://www.w3.org/2019/wot/td#baseURI"
+                                    }
+                                ]
+                            },
+                            "qualifiers": [
+                                {
+                                    "kind": "ConceptQualifier",
+                                    "type": "Cardinality",
+                                    "valueType": "xs:string",
+                                    "value": "One"
+                                }
+                            ],
+                            "valueType": "xs:anyURI",
+                            "value": "opc.tcp://127.0.0.1:4840",
+                            "modelType": "Property"
+                        },
+                        {
+                            "idShort": "contentType",
+                            "semanticId": {
+                                "type": "ExternalReference",
+                                "keys": [
+                                    {
+                                        "type": "GlobalReference",
+                                        "value": "https://www.w3.org/2019/wot/hypermedia#forContentType"
+                                    }
+                                ]
+                            },
+                            "qualifiers": [
+                                {
+                                    "kind": "ConceptQualifier",
+                                    "type": "Cardinality",
+                                    "valueType": "xs:string",
+                                    "value": "One"
+                                }
+                            ],
+                            "valueType": "xs:string",
+                            "value": "application/json",
+                            "modelType": "Property"
+                        },
+                        {
+                            "idShort": "security",
+                            "semanticId": {
+                                "type": "ExternalReference",
+                                "keys": [
+                                    {
+                                        "type": "GlobalReference",
+                                        "value": "https://www.w3.org/2019/wot/td#hasSecurityConfiguration"
+                                    }
+                                ]
+                            },
+                            "qualifiers": [
+                                {
+                                    "kind": "ConceptQualifier",
+                                    "type": "Cardinality",
+                                    "valueType": "xs:string",
+                                    "value": "One"
+                                }
+                            ],
+                            "orderRelevant": true,
+                            "typeValueListElement": "SubmodelElement",
+                            "value": [
+                                {
+                                    "value": {
+                                        "type": "ModelReference",
+                                        "keys": [
+                                            {
+                                                "type": "Submodel",
+                                                "value": "AssetInterfacesDescription"
+                                            },
+                                            {
+                                                "type": "SubmodelElementCollection",
+                                                "value": "Interface_OPCUA"
+                                            },
+                                            {
+                                                "type": "SubmodelElementCollection",
+                                                "value": "EndpointMetadata"
+                                            },
+                                            {
+                                                "type": "SubmodelElementCollection",
+                                                "value": "securityDefinitions"
+                                            },
+                                            {
+                                                "type": "SubmodelElementCollection",
+                                                "value": "nosec_sc"
+                                            }
+                                        ]
+                                    },
+                                    "modelType": "ReferenceElement"
+                                }
+                            ],
+                            "modelType": "SubmodelElementList"
+                        },
+                        {
+                            "idShort": "securityDefinitions",
+                            "semanticId": {
+                                "type": "ExternalReference",
+                                "keys": [
+                                    {
+                                        "type": "GlobalReference",
+                                        "value": "https://www.w3.org/2019/wot/td#definesSecurityScheme"
+                                    }
+                                ]
+                            },
+                            "qualifiers": [
+                                {
+                                    "kind": "ConceptQualifier",
+                                    "type": "Cardinality",
+                                    "valueType": "xs:string",
+                                    "value": "One"
+                                }
+                            ],
+                            "value": [
+                                {
+                                    "idShort": "nosec_sc",
+                                    "semanticId": {
+                                        "type": "ExternalReference",
+                                        "keys": [
+                                            {
+                                                "type": "GlobalReference",
+                                                "value": "https://www.w3.org/2019/wot/security#NoSecurityScheme"
+                                            }
+                                        ]
+                                    },
+                                    "qualifiers": [
+                                        {
+                                            "kind": "ConceptQualifier",
+                                            "type": "Cardinality",
+                                            "valueType": "xs:string",
+                                            "value": "ZeroToOne"
+                                        }
+                                    ],
+                                    "value": [
+                                        {
+                                            "idShort": "scheme",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#SecurityScheme"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "One"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "value": "nosec",
+                                            "modelType": "Property"
+                                        }
+                                    ],
+                                    "modelType": "SubmodelElementCollection"
+                                },
+                                {
+                                    "idShort": "auto_sc",
+                                    "semanticId": {
+                                        "type": "ExternalReference",
+                                        "keys": [
+                                            {
+                                                "type": "GlobalReference",
+                                                "value": "https://www.w3.org/2019/wot/security#AutoSecurityScheme"
+                                            }
+                                        ]
+                                    },
+                                    "qualifiers": [
+                                        {
+                                            "kind": "ConceptQualifier",
+                                            "type": "Cardinality",
+                                            "valueType": "xs:string",
+                                            "value": "ZeroToOne"
+                                        }
+                                    ],
+                                    "value": [
+                                        {
+                                            "idShort": "scheme",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#SecurityScheme"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "One"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "value": "auto",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "proxy",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#proxy"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "modelType": "Property"
+                                        }
+                                    ],
+                                    "modelType": "SubmodelElementCollection"
+                                },
+                                {
+                                    "idShort": "basic_sc",
+                                    "semanticId": {
+                                        "type": "ExternalReference",
+                                        "keys": [
+                                            {
+                                                "type": "GlobalReference",
+                                                "value": "https://www.w3.org/2019/wot/security#BasicSecurityScheme"
+                                            }
+                                        ]
+                                    },
+                                    "qualifiers": [
+                                        {
+                                            "kind": "ConceptQualifier",
+                                            "type": "Cardinality",
+                                            "valueType": "xs:string",
+                                            "value": "ZeroToOne"
+                                        }
+                                    ],
+                                    "value": [
+                                        {
+                                            "idShort": "scheme",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#SecurityScheme"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "One"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "value": "basic",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "name",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#name"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "in",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#in"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "proxy",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#proxy"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "modelType": "Property"
+                                        }
+                                    ],
+                                    "modelType": "SubmodelElementCollection"
+                                },
+                                {
+                                    "idShort": "combo_sc",
+                                    "semanticId": {
+                                        "type": "ExternalReference",
+                                        "keys": [
+                                            {
+                                                "type": "GlobalReference",
+                                                "value": "https://www.w3.org/2019/wot/security#ComboSecurityScheme"
+                                            }
+                                        ]
+                                    },
+                                    "qualifiers": [
+                                        {
+                                            "kind": "ConceptQualifier",
+                                            "type": "Cardinality",
+                                            "valueType": "xs:string",
+                                            "value": "ZeroToOne"
+                                        }
+                                    ],
+                                    "value": [
+                                        {
+                                            "idShort": "scheme",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#SecurityScheme"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "One"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "value": "combo",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "oneOf",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#oneOf"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "One"
+                                                }
+                                            ],
+                                            "orderRelevant": true,
+                                            "typeValueListElement": "SubmodelElement",
+                                            "modelType": "SubmodelElementList"
+                                        },
+                                        {
+                                            "idShort": "allOf",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#allOf"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "One"
+                                                }
+                                            ],
+                                            "orderRelevant": true,
+                                            "typeValueListElement": "SubmodelElement",
+                                            "modelType": "SubmodelElementList"
+                                        },
+                                        {
+                                            "idShort": "proxy",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#proxy"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "modelType": "Property"
+                                        }
+                                    ],
+                                    "modelType": "SubmodelElementCollection"
+                                },
+                                {
+                                    "idShort": "apikey_sc",
+                                    "semanticId": {
+                                        "type": "ExternalReference",
+                                        "keys": [
+                                            {
+                                                "type": "GlobalReference",
+                                                "value": "https://www.w3.org/2019/wot/security#APIKeySecurityScheme"
+                                            }
+                                        ]
+                                    },
+                                    "qualifiers": [
+                                        {
+                                            "kind": "ConceptQualifier",
+                                            "type": "Cardinality",
+                                            "valueType": "xs:string",
+                                            "value": "ZeroToOne"
+                                        }
+                                    ],
+                                    "value": [
+                                        {
+                                            "idShort": "scheme",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#SecurityScheme"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "One"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "value": "apikey",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "name",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#name"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "in",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#in"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "proxy",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#proxy"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "modelType": "Property"
+                                        }
+                                    ],
+                                    "modelType": "SubmodelElementCollection"
+                                },
+                                {
+                                    "idShort": "psk_sc",
+                                    "semanticId": {
+                                        "type": "ExternalReference",
+                                        "keys": [
+                                            {
+                                                "type": "GlobalReference",
+                                                "value": "https://www.w3.org/2019/wot/security#PSKSecurityScheme"
+                                            }
+                                        ]
+                                    },
+                                    "qualifiers": [
+                                        {
+                                            "kind": "ConceptQualifier",
+                                            "type": "Cardinality",
+                                            "valueType": "xs:string",
+                                            "value": "ZeroToOne"
+                                        }
+                                    ],
+                                    "value": [
+                                        {
+                                            "idShort": "scheme",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#SecurityScheme"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "One"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "value": "psk",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "identity",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#identity"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "proxy",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#proxy"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "modelType": "Property"
+                                        }
+                                    ],
+                                    "modelType": "SubmodelElementCollection"
+                                },
+                                {
+                                    "idShort": "digest_sc",
+                                    "semanticId": {
+                                        "type": "ExternalReference",
+                                        "keys": [
+                                            {
+                                                "type": "GlobalReference",
+                                                "value": "https://www.w3.org/2019/wot/security#DigestSecurityScheme"
+                                            }
+                                        ]
+                                    },
+                                    "qualifiers": [
+                                        {
+                                            "kind": "ConceptQualifier",
+                                            "type": "Cardinality",
+                                            "valueType": "xs:string",
+                                            "value": "ZeroToOne"
+                                        }
+                                    ],
+                                    "value": [
+                                        {
+                                            "idShort": "scheme",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#SecurityScheme"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "One"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "value": "digest",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "name",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#name"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "in",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#in"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "qop",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#qop"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "proxy",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#proxy"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "modelType": "Property"
+                                        }
+                                    ],
+                                    "modelType": "SubmodelElementCollection"
+                                },
+                                {
+                                    "idShort": "bearer_sc",
+                                    "semanticId": {
+                                        "type": "ExternalReference",
+                                        "keys": [
+                                            {
+                                                "type": "GlobalReference",
+                                                "value": "https://www.w3.org/2019/wot/security#BearerSecurityScheme"
+                                            }
+                                        ]
+                                    },
+                                    "qualifiers": [
+                                        {
+                                            "kind": "ConceptQualifier",
+                                            "type": "Cardinality",
+                                            "valueType": "xs:string",
+                                            "value": "ZeroToOne"
+                                        }
+                                    ],
+                                    "value": [
+                                        {
+                                            "idShort": "scheme",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#SecurityScheme"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "One"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "value": "bearer",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "name",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#name"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "in",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#in"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "authorization",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#authorization"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "alg",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#alg"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "format",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#format"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "proxy",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#proxy"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "modelType": "Property"
+                                        }
+                                    ],
+                                    "modelType": "SubmodelElementCollection"
+                                },
+                                {
+                                    "idShort": "oauth2_sc",
+                                    "semanticId": {
+                                        "type": "ExternalReference",
+                                        "keys": [
+                                            {
+                                                "type": "GlobalReference",
+                                                "value": "https://www.w3.org/2019/wot/security#OAuth2SecurityScheme"
+                                            }
+                                        ]
+                                    },
+                                    "qualifiers": [
+                                        {
+                                            "kind": "ConceptQualifier",
+                                            "type": "Cardinality",
+                                            "valueType": "xs:string",
+                                            "value": "ZeroToOne"
+                                        }
+                                    ],
+                                    "value": [
+                                        {
+                                            "idShort": "scheme",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#SecurityScheme"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "One"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "value": "oauth2",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "token",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#token"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:anyURI",
+                                            "value": "",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "refresh",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#refresh"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:anyURI",
+                                            "value": "",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "authorization",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#authorization"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:anyURI",
+                                            "value": "",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "scopes",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#scopes"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "value": "",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "flow",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#flow"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "value": "code",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "proxy",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/security#proxy"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:anyURI",
+                                            "value": "",
+                                            "modelType": "Property"
+                                        }
+                                    ],
+                                    "modelType": "SubmodelElementCollection"
+                                }
+                            ],
+                            "modelType": "SubmodelElementCollection"
+                        }
+                    ],
+                    "modelType": "SubmodelElementCollection"
+                },
+                {
+                    "idShort": "InteractionMetadata",
+                    "semanticId": {
+                        "type": "ExternalReference",
+                        "keys": [
+                            {
+                                "type": "GlobalReference",
+                                "value": "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/InteractionMetadata"
+                            }
+                        ]
+                    },
+                    "supplementalSemanticIds": [
+                        {
+                            "type": "ExternalReference",
+                            "keys": [
+                                {
+                                    "type": "GlobalReference",
+                                    "value": "https://www.w3.org/2019/wot/td#InteractionAffordance"
+                                }
+                            ]
+                        }
+                    ],
+                    "qualifiers": [
+                        {
+                            "kind": "ConceptQualifier",
+                            "type": "Cardinality",
+                            "valueType": "xs:string",
+                            "value": "One"
+                        }
+                    ],
+                    "value": [
+                        {
+                            "idShort": "properties",
+                            "semanticId": {
+                                "type": "ExternalReference",
+                                "keys": [
+                                    {
+                                        "type": "GlobalReference",
+                                        "value": "https://www.w3.org/2019/wot/td#PropertyAffordance"
+                                    }
+                                ]
+                            },
+                            "qualifiers": [
+                                {
+                                    "kind": "ConceptQualifier",
+                                    "type": "Cardinality",
+                                    "valueType": "xs:string",
+                                    "value": "ZeroToOne"
+                                }
+                            ],
+                            "value": [
+                                {
+                                    "idShort": "TopLevelObject",
+                                    "description": [
+                                        {
+                                            "language": "en",
+                                            "text": "Current counter value"
+                                        },
+                                        {
+                                            "language": "de",
+                                            "text": "Derzeitiger Z\u00E4hlerwert"
+                                        },
+                                        {
+                                            "language": "it",
+                                            "text": "Valore attuale del contatore"
+                                        }
+                                    ],
+                                    "semanticId": {
+                                        "type": "ExternalReference",
+                                        "keys": [
+                                            {
+                                                "type": "GlobalReference",
+                                                "value": "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/PropertyDefinition"
+                                            }
+                                        ]
+                                    },
+                                    "supplementalSemanticIds": [
+                                        {
+                                            "type": "ExternalReference",
+                                            "keys": [
+                                                {
+                                                    "type": "GlobalReference",
+                                                    "value": "https://www.w3.org/2019/wot/td#name"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "qualifiers": [
+                                        {
+                                            "kind": "ConceptQualifier",
+                                            "type": "Cardinality",
+                                            "valueType": "xs:string",
+                                            "value": "ZeroToMany"
+                                        }
+                                    ],
+                                    "value": [
+                                        {
+                                            "idShort": "type",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "value": "object",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "forms",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/td#hasForm"
+                                                    }
+                                                ]
+                                            },
+                                            "value": [
+                                                {
+                                                    "idShort": "href",
+                                                    "semanticId": {
+                                                        "type": "ExternalReference",
+                                                        "keys": [
+                                                            {
+                                                                "type": "GlobalReference",
+                                                                "value": "https://www.w3.org/2019/wot/hypermedia#hasTarget"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "qualifiers": [
+                                                        {
+                                                            "kind": "ConceptQualifier",
+                                                            "type": "Cardinality",
+                                                            "valueType": "xs:string",
+                                                            "value": "One"
+                                                        }
+                                                    ],
+                                                    "valueType": "xs:string",
+                                                    "value": "ns=2;s=TopLevelObject",
+                                                    "modelType": "Property"
+                                                }
+                                            ],
+                                            "modelType": "SubmodelElementCollection"
+                                        }
+                                    ],
+                                    "modelType": "SubmodelElementCollection"
+                                },
+                                {
+                                    "idShort": "NestedObject",
+                                    "description": [
+                                        {
+                                            "language": "en",
+                                            "text": "Current counter value"
+                                        },
+                                        {
+                                            "language": "de",
+                                            "text": "Derzeitiger Z\u00E4hlerwert"
+                                        },
+                                        {
+                                            "language": "it",
+                                            "text": "Valore attuale del contatore"
+                                        }
+                                    ],
+                                    "semanticId": {
+                                        "type": "ExternalReference",
+                                        "keys": [
+                                            {
+                                                "type": "GlobalReference",
+                                                "value": "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/PropertyDefinition"
+                                            }
+                                        ]
+                                    },
+                                    "supplementalSemanticIds": [
+                                        {
+                                            "type": "ExternalReference",
+                                            "keys": [
+                                                {
+                                                    "type": "GlobalReference",
+                                                    "value": "https://www.w3.org/2019/wot/td#name"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "qualifiers": [
+                                        {
+                                            "kind": "ConceptQualifier",
+                                            "type": "Cardinality",
+                                            "valueType": "xs:string",
+                                            "value": "ZeroToMany"
+                                        }
+                                    ],
+                                    "value": [
+                                        {
+                                            "idShort": "type",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "value": "object",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "forms",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/td#hasForm"
+                                                    }
+                                                ]
+                                            },
+                                            "value": [
+                                                {
+                                                    "idShort": "href",
+                                                    "semanticId": {
+                                                        "type": "ExternalReference",
+                                                        "keys": [
+                                                            {
+                                                                "type": "GlobalReference",
+                                                                "value": "https://www.w3.org/2019/wot/hypermedia#hasTarget"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "qualifiers": [
+                                                        {
+                                                            "kind": "ConceptQualifier",
+                                                            "type": "Cardinality",
+                                                            "valueType": "xs:string",
+                                                            "value": "One"
+                                                        }
+                                                    ],
+                                                    "valueType": "xs:string",
+                                                    "value": "ns=2;s=NestedObject",
+                                                    "modelType": "Property"
+                                                }
+                                            ],
+                                            "modelType": "SubmodelElementCollection"
+                                        }
+                                    ],
+                                    "modelType": "SubmodelElementCollection"
+                                },
+                                {
+                                    "idShort": "DynamicVariable",
+                                    "description": [
+                                        {
+                                            "language": "en",
+                                            "text": "Some automatically ever-increasing value"
+                                        }
+                                    ],
+                                    "semanticId": {
+                                        "type": "ExternalReference",
+                                        "keys": [
+                                            {
+                                                "type": "GlobalReference",
+                                                "value": "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/PropertyDefinition"
+                                            }
+                                        ]
+                                    },
+                                    "supplementalSemanticIds": [
+                                        {
+                                            "type": "ExternalReference",
+                                            "keys": [
+                                                {
+                                                    "type": "GlobalReference",
+                                                    "value": "https://www.w3.org/2019/wot/td#name"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "qualifiers": [
+                                        {
+                                            "kind": "ConceptQualifier",
+                                            "type": "Cardinality",
+                                            "valueType": "xs:string",
+                                            "value": "ZeroToMany"
+                                        }
+                                    ],
+                                    "value": [
+                                        {
+                                            "idShort": "type",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "value": "number",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "forms",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/td#hasForm"
+                                                    }
+                                                ]
+                                            },
+                                            "value": [
+                                                {
+                                                    "idShort": "href",
+                                                    "semanticId": {
+                                                        "type": "ExternalReference",
+                                                        "keys": [
+                                                            {
+                                                                "type": "GlobalReference",
+                                                                "value": "https://www.w3.org/2019/wot/hypermedia#hasTarget"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "qualifiers": [
+                                                        {
+                                                            "kind": "ConceptQualifier",
+                                                            "type": "Cardinality",
+                                                            "valueType": "xs:string",
+                                                            "value": "One"
+                                                        }
+                                                    ],
+                                                    "valueType": "xs:string",
+                                                    "value": "ns=2;s=DynamicVariable",
+                                                    "modelType": "Property"
+                                                }
+                                            ],
+                                            "modelType": "SubmodelElementCollection"
+                                        }
+                                    ],
+                                    "modelType": "SubmodelElementCollection"
+                                },
+                                {
+                                    "idShort": "StaticVariable",
+                                    "description": [
+                                        {
+                                            "language": "en",
+                                            "text": "Some fixed value that can be overwritten manually"
+                                        }
+                                    ],
+                                    "semanticId": {
+                                        "type": "ExternalReference",
+                                        "keys": [
+                                            {
+                                                "type": "GlobalReference",
+                                                "value": "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/PropertyDefinition"
+                                            }
+                                        ]
+                                    },
+                                    "supplementalSemanticIds": [
+                                        {
+                                            "type": "ExternalReference",
+                                            "keys": [
+                                                {
+                                                    "type": "GlobalReference",
+                                                    "value": "https://www.w3.org/2019/wot/td#name"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "qualifiers": [
+                                        {
+                                            "kind": "ConceptQualifier",
+                                            "type": "Cardinality",
+                                            "valueType": "xs:string",
+                                            "value": "ZeroToMany"
+                                        }
+                                    ],
+                                    "value": [
+                                        {
+                                            "idShort": "type",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "value": "integer",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "forms",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/td#hasForm"
+                                                    }
+                                                ]
+                                            },
+                                            "value": [
+                                                {
+                                                    "idShort": "href",
+                                                    "semanticId": {
+                                                        "type": "ExternalReference",
+                                                        "keys": [
+                                                            {
+                                                                "type": "GlobalReference",
+                                                                "value": "https://www.w3.org/2019/wot/hypermedia#hasTarget"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "qualifiers": [
+                                                        {
+                                                            "kind": "ConceptQualifier",
+                                                            "type": "Cardinality",
+                                                            "valueType": "xs:string",
+                                                            "value": "One"
+                                                        }
+                                                    ],
+                                                    "valueType": "xs:string",
+                                                    "value": "ns=2;s=StaticVariable",
+                                                    "modelType": "Property"
+                                                }
+                                            ],
+                                            "modelType": "SubmodelElementCollection"
+                                        }
+                                    ],
+                                    "modelType": "SubmodelElementCollection"
+                                }
+                            ],
+                            "modelType": "SubmodelElementCollection"
+                        },
+                        {
+                            "idShort": "actions",
+                            "semanticId": {
+                                "type": "ExternalReference",
+                                "keys": [
+                                    {
+                                        "type": "GlobalReference",
+                                        "value": "https://www.w3.org/2019/wot/td#ActionAffordance"
+                                    }
+                                ]
+                            },
+                            "qualifiers": [
+                                {
+                                    "kind": "ConceptQualifier",
+                                    "type": "Cardinality",
+                                    "valueType": "xs:string",
+                                    "value": "ZeroToOne"
+                                }
+                            ],
+                            "value": [
+                                {
+                                    "idShort": "IncrementStaticVariable",
+                                    "description": [
+                                        {
+                                            "language": "en",
+                                            "text": "Some fixed value that can be overwritten manually"
+                                        }
+                                    ],
+                                    "semanticId": {
+                                        "type": "ExternalReference",
+                                        "keys": [
+                                            {
+                                                "type": "GlobalReference",
+                                                "value": "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/ActionDefinition"
+                                            }
+                                        ]
+                                    },
+                                    "supplementalSemanticIds": [
+                                        {
+                                            "type": "ExternalReference",
+                                            "keys": [
+                                                {
+                                                    "type": "GlobalReference",
+                                                    "value": "https://www.w3.org/2019/wot/td#name"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "qualifiers": [
+                                        {
+                                            "kind": "ConceptQualifier",
+                                            "type": "Cardinality",
+                                            "valueType": "xs:string",
+                                            "value": "ZeroToMany"
+                                        }
+                                    ],
+                                    "value": [
+                                        {
+                                            "idShort": "forms",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/td#hasForm"
+                                                    }
+                                                ]
+                                            },
+                                            "value": [
+                                                {
+                                                    "idShort": "href",
+                                                    "semanticId": {
+                                                        "type": "ExternalReference",
+                                                        "keys": [
+                                                            {
+                                                                "type": "GlobalReference",
+                                                                "value": "https://www.w3.org/2019/wot/hypermedia#hasTarget"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "qualifiers": [
+                                                        {
+                                                            "kind": "ConceptQualifier",
+                                                            "type": "Cardinality",
+                                                            "valueType": "xs:string",
+                                                            "value": "One"
+                                                        }
+                                                    ],
+                                                    "valueType": "xs:string",
+                                                    "value": "ns=2;s=IncrementStaticVariable",
+                                                    "modelType": "Property"
+                                                }
+                                            ],
+                                            "modelType": "SubmodelElementCollection"
+                                        }
+                                    ],
+                                    "modelType": "SubmodelElementCollection"
+                                },
+                                {
+                                    "idShort": "MultiplyBy2",
+                                    "description": [
+                                        {
+                                            "language": "en",
+                                            "text": "Some fixed value that can be overwritten manually"
+                                        }
+                                    ],
+                                    "semanticId": {
+                                        "type": "ExternalReference",
+                                        "keys": [
+                                            {
+                                                "type": "GlobalReference",
+                                                "value": "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/ActionDefinition"
+                                            }
+                                        ]
+                                    },
+                                    "supplementalSemanticIds": [
+                                        {
+                                            "type": "ExternalReference",
+                                            "keys": [
+                                                {
+                                                    "type": "GlobalReference",
+                                                    "value": "https://www.w3.org/2019/wot/td#name"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "qualifiers": [
+                                        {
+                                            "kind": "ConceptQualifier",
+                                            "type": "Cardinality",
+                                            "valueType": "xs:string",
+                                            "value": "ZeroToMany"
+                                        }
+                                    ],
+                                    "value": [
+                                        {
+                                            "idShort": "type",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+                                                    }
+                                                ]
+                                            },
+                                            "qualifiers": [
+                                                {
+                                                    "kind": "ConceptQualifier",
+                                                    "type": "Cardinality",
+                                                    "valueType": "xs:string",
+                                                    "value": "ZeroToOne"
+                                                }
+                                            ],
+                                            "valueType": "xs:string",
+                                            "value": "number",
+                                            "modelType": "Property"
+                                        },
+                                        {
+                                            "idShort": "forms",
+                                            "semanticId": {
+                                                "type": "ExternalReference",
+                                                "keys": [
+                                                    {
+                                                        "type": "GlobalReference",
+                                                        "value": "https://www.w3.org/2019/wot/td#hasForm"
+                                                    }
+                                                ]
+                                            },
+                                            "value": [
+                                                {
+                                                    "idShort": "href",
+                                                    "semanticId": {
+                                                        "type": "ExternalReference",
+                                                        "keys": [
+                                                            {
+                                                                "type": "GlobalReference",
+                                                                "value": "https://www.w3.org/2019/wot/hypermedia#hasTarget"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "qualifiers": [
+                                                        {
+                                                            "kind": "ConceptQualifier",
+                                                            "type": "Cardinality",
+                                                            "valueType": "xs:string",
+                                                            "value": "One"
+                                                        }
+                                                    ],
+                                                    "valueType": "xs:string",
+                                                    "value": "ns=2;s=MultiplyBy2",
+                                                    "modelType": "Property"
+                                                }
+                                            ],
+                                            "modelType": "SubmodelElementCollection"
+                                        }
+                                    ],
+                                    "modelType": "SubmodelElementCollection"
+                                }
+                            ],
+                            "modelType": "SubmodelElementCollection"
+                        },
+                        {
+                            "idShort": "events",
+                            "semanticId": {
+                                "type": "ExternalReference",
+                                "keys": [
+                                    {
+                                        "type": "GlobalReference",
+                                        "value": "https://www.w3.org/2019/wot/td#EventAffordance"
+                                    }
+                                ]
+                            },
+                            "qualifiers": [
+                                {
+                                    "kind": "ConceptQualifier",
+                                    "type": "Cardinality",
+                                    "valueType": "xs:string",
+                                    "value": "ZeroToOne"
+                                }
+                            ],
+                            "modelType": "SubmodelElementCollection"
+                        }
+                    ],
+                    "modelType": "SubmodelElementCollection"
+                }
+            ],
+            "modelType": "SubmodelElementCollection"
+        }
+    ],
+    "modelType": "Submodel"
+}
