@@ -17,12 +17,11 @@ class MqttClient:
     """Connector for managing connections to MQTT topics."""
 
     base_url: str
-    auth: Tuple[str, str]
     host: str
     port: int
     path: str
 
-    def __init__(self, base_url: str, topics: List[str], auth: IAuthenticationDetails=None):
+    def __init__(self, base_url: str, topics: List[str], auth: IAuthenticationDetails):
         """Initialize the MQTTConnector with broker host and port.
         """
         self.cache = {}
@@ -30,13 +29,12 @@ class MqttClient:
             self.cache[t] = None
 
         self.base_url = base_url
-        self.auth = auth
         self.host, self.port, self.path, use_tls = self._parse_url()
 
         self.client = Client(transport=self._detect_transport())
 
         if isinstance(auth, BasicAuthenticationDetails):
-            self.client.username_pw_set(auth._user, auth._password)
+            self.client.username_pw_set(auth.user, auth.password)
 
         if use_tls:
             self.client.tls_set(cert_reqs=ssl.CERT_REQUIRED, ca_certs=None)

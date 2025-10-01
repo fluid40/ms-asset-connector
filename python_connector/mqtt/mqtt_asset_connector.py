@@ -20,7 +20,7 @@ class MqttAssetConnector(IAssetConnector):
         self._interface = interface_smc
         super().__init__(aid_id, interface_smc)
 
-    def connect(self):
+    async def connect(self):
         try:
             topics = list(set([v["href"] for v in self._property_to_href_map.values()]))
             self._connect_to_mqtt_topics(topics)
@@ -30,9 +30,7 @@ class MqttAssetConnector(IAssetConnector):
     def _connect_to_mqtt_topics(self, mqtt_topics: List[str]):
         """Connect to the MQTT topics using a MQTT connector.
 
-        :param base_url: The base URL for the MQTT broker.
         :param mqtt_topics: A dictionary of MQTT topics to subscribe to.
-        :param use_websocket: Whether to use WebSocket for the connection.
         """
         try:
             self._mqtt_client = MqttClient(self._base, mqtt_topics, self._auth)
@@ -41,7 +39,7 @@ class MqttAssetConnector(IAssetConnector):
         except ConnectionError as ce:
             print(f"MQTT protocol connection failed: {ce}.")
 
-    def get_value(self, model_reference: ModelReference) -> str | None:
+    async def get_value(self, model_reference: ModelReference) -> str | None:
         """Get the value for a specific model reference."""
 
         if not self._mqtt_client.is_connected:

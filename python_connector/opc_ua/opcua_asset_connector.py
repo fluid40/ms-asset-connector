@@ -16,7 +16,7 @@ class OpcuaAssetConnector(IAssetConnector):
         self._interface = interface_smc
         super().__init__(aid_id, interface_smc)
 
-    def connect(self):
+    async def connect(self):
         try:
             self._client = Client(self._base)
             self._client.connect()
@@ -50,6 +50,3 @@ class OpcuaAssetConnector(IAssetConnector):
 
         result = str(value_in_payload)
         return result
-
-    async def set_value(self, endpoint_reference: ModelReference, *args):
-        await super().set_value(endpoint_reference, *args)

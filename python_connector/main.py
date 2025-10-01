@@ -3,7 +3,6 @@
 This module provides endpoints to set configuration and retrieve values using JSON payloads.
 """
 
-import base64
 import json
 import threading
 from typing import Dict
@@ -55,7 +54,7 @@ async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
             with connector_store_lock:
                 connector_store[connector_id] = asset_connector
 
-            asset_connector.connect()
+            await asset_connector.connect()
 
         return create_response(
             status_code=200,
