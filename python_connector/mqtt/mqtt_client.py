@@ -10,7 +10,7 @@ from urllib.parse import urlparse
 
 from paho.mqtt.client import Client
 
-from core.authentication_details import BasicAuthenticationDetails
+from python_connector.core.authentication_details import IAuthenticationDetails, BasicAuthenticationDetails
 
 
 class MqttClient:
@@ -22,7 +22,7 @@ class MqttClient:
     port: int
     path: str
 
-    def __init__(self, base_url: str, topics: List[str], auth: BasicAuthenticationDetails=None):
+    def __init__(self, base_url: str, topics: List[str], auth: IAuthenticationDetails=None):
         """Initialize the MQTTConnector with broker host and port.
         """
         self.cache = {}
@@ -35,7 +35,7 @@ class MqttClient:
 
         self.client = Client(transport=self._detect_transport())
 
-        if auth:
+        if isinstance(auth, BasicAuthenticationDetails):
             self.client.username_pw_set(auth._user, auth._password)
 
         if use_tls:

@@ -17,7 +17,7 @@ from models.get_value_payload import GetValuePayload
 from models.response_body import ResponseBody, create_response
 from models.set_config_payload import SetConfigPayload
 from mqtt.mqtt_asset_connector import MqttAssetConnector
-from python_connector.opcua.opcua_asset_connector import OpcuaAssetConnector
+from opc_ua.opcua_asset_connector import OpcuaAssetConnector
 
 app = FastAPI()
 
@@ -63,7 +63,7 @@ async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
             payload=None,
             value=connector_id
         )
-    except (ValueError, RuntimeError, ConnectionError) as e:
+    except Exception as e:
         return create_response(
             status_code=500,
             message=f"Error processing `/set-config`: {e!s}",
@@ -71,7 +71,6 @@ async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
         )
 
 
-# Get value for a specific AID submodel id
 @app.post("/get-value")
 async def get_value(payload: GetValuePayload) -> ResponseBody:
     """Get value from a specified protocol-specific endpoint in an AID submodel."""
@@ -85,20 +84,20 @@ async def get_value(payload: GetValuePayload) -> ResponseBody:
         if asset_connector is None:
             return create_response(
                 status_code=404,
-                message=f"No AssetConnector found for id {id} (decoded: {connector_id})",
+                message=f"No AssetConnector found for AID (decoded: {connector_id})",
                 payload=None,
             )
         try:
-            result = asset_connector.get_value(payload._aid_ref)  # noqa: SLF001
+            result = await asset_connector.get_value(payload._aid_ref)  # noqa: SLF001
             return create_response(
                 status_code=200,
-                message=f"Successfully invoked `/get-value/{id}` with raw JSON in payload",
+                message=f"Successfully invoked `/get-value` with raw JSON in payload",
                 payload=json.loads(result) if result else None
             )
-        except (ValueError, RuntimeError, ConnectionError) as e:
+        except Exception as e:
             return create_response(
                 status_code=500,
-                message=f"Error processing `/get-value/{id}`: {e!s}",
+                message=f"Error processing `/get-value`: {e!s}",
                 payload=None,
             )
 
