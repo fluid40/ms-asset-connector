@@ -45,6 +45,8 @@ class MqttClient:
         if self._detect_transport() == "websockets" and self.path != "/":
             self.client.ws_set_options(path=self.path)
 
+        self._is_connected = False
+
         self.client.on_connect = self._on_connect
         self.client.on_message = self._on_message
 
@@ -98,6 +100,7 @@ class MqttClient:
 
         # Subscribe to all topics in self.topics
         if rc == 0:
+            self._is_connected = True
             for topic in self.cache.keys():
                 self.client.subscribe(topic)
                 print(f"Subscribed to topic: {topic}")
@@ -183,3 +186,7 @@ class MqttClient:
         :return: The cached value if it exists, otherwise None.
         """
         return self.cache.get(topic, None)
+
+    @property
+    def is_connected(self):
+        return self._is_connected

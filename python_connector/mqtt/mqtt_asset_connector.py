@@ -14,7 +14,6 @@ class MqttAssetConnector(IAssetConnector):
     """Class to connect to an asset using its AID."""
 
     _mqtt_client: MqttClient = None
-    _is_connected: bool = False
 
     def __init__(self, aid_id: str, interface_smc: SubmodelElementCollection):  # noqa: D107
         self._aid_id = aid_id
@@ -24,13 +23,11 @@ class MqttAssetConnector(IAssetConnector):
     def connect(self):
         try:
             topics = list(set([v["href"] for v in self._property_to_href_map.values()]))
-
-            self._is_connected = self._connect_to_mqtt_topics(topics)
+            self._connect_to_mqtt_topics(topics)
         except Exception as e:
             print(f"Failed to connect MQTTConnector: {e}")
-            self._is_connected = False
 
-    def _connect_to_mqtt_topics(self, mqtt_topics: List[str]) -> bool:
+    def _connect_to_mqtt_topics(self, mqtt_topics: List[str]):
         """Connect to the MQTT topics using a MQTT connector.
 
         :param base_url: The base URL for the MQTT broker.
@@ -41,15 +38,13 @@ class MqttAssetConnector(IAssetConnector):
             self._mqtt_client = MqttClient(self._base, mqtt_topics, self._auth)
             self._mqtt_client.connect()
             self._mqtt_client.start_async()
-            return True
         except ConnectionError as ce:
             print(f"MQTT protocol connection failed: {ce}.")
-            return False
 
     def get_value(self, model_reference: ModelReference) -> str | None:
         """Get the value for a specific model reference."""
 
-        if not self._is_connected:
+        if not self._mqtt_client.is_connected:
             raise ConnectionError("AssetConnector is not connected.")
 
         if self._mqtt_client is None:
