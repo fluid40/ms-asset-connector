@@ -4,16 +4,17 @@ from typing import List
 
 from basyx.aas.model import ModelReference, SubmodelElementCollection
 
-from core.aid_interface_parser import construct_idshort_path_from_reference
-from core.asset_connector import IAssetConnector
-from mqtt.mqtt_client import MqttClient
+from python_connector.core.aid_interface_parser import construct_idshort_path_from_reference
+from python_connector.core.asset_connector import IAssetConnector
+from python_connector.mqtt.mqtt_client import MqttClient
+
 
 
 class MqttAssetConnector(IAssetConnector):
     """Class to connect to an asset using its AID."""
 
     _mqtt_client: MqttClient = None
-    connected: bool = False
+    _is_connected: bool = False
 
     def __init__(self, aid_id: str, interface_smc: SubmodelElementCollection):  # noqa: D107
         self._aid_id = aid_id
@@ -24,10 +25,10 @@ class MqttAssetConnector(IAssetConnector):
         try:
             topics = list(set([v["href"] for v in self._property_to_href_map.values()]))
 
-            self.connected = self._connect_to_mqtt_topics(topics)
+            self._is_connected = self._connect_to_mqtt_topics(topics)
         except Exception as e:
             print(f"Failed to connect MQTTConnector: {e}")
-            self.connected = False
+            self._is_connected = False
 
     def _connect_to_mqtt_topics(self, mqtt_topics: List[str]) -> bool:
         """Connect to the MQTT topics using a MQTT connector.
@@ -45,25 +46,28 @@ class MqttAssetConnector(IAssetConnector):
             print(f"MQTT protocol connection failed: {ce}.")
             return False
 
-    def get_value(self, model_reference: ModelReference) -> str:
+    def get_value(self, model_reference: ModelReference) -> str | None:
         """Get the value for a specific model reference."""
-        result: str = None
-        if not self.connected:
+
+        if not self._is_connected:
             raise ConnectionError("AssetConnector is not connected.")
-        if self._mqtt_client is not None:
-            property_idshort_path = construct_idshort_path_from_reference(model_reference)
-            topic_name = self._property_to_href_map[property_idshort_path]["href"]
 
-            keys = self._property_to_href_map[property_idshort_path]["keys"]
-            value_in_payload = self._mqtt_client.get_cached_value(topic_name)
-            if value_in_payload is None:
-                return None
+        if self._mqtt_client is None:
+            raise ConnectionError("MQTT Client not properly initialized.")
 
-            # using the keys of the potentially nested properties, dive into the complex JSON object (MQTT payload)
-            # to retrieve the requested value
-            for k in keys:
-                value_in_payload = json.dumps(json.loads(value_in_payload)[k])
+        property_idshort_path = construct_idshort_path_from_reference(model_reference)
+        topic_name = self._property_to_href_map[property_idshort_path]["href"]
 
-            result = value_in_payload
+        keys = self._property_to_href_map[property_idshort_path]["keys"]
+        value_in_payload = self._mqtt_client.get_cached_value(topic_name)
 
+        if value_in_payload is None:
+            return None
+
+        # using the keys of the potentially nested properties, dive into the complex JSON object (MQTT payload)
+        # to retrieve the requested value
+        for k in keys:
+            value_in_payload = json.dumps(json.loads(value_in_payload)[k])
+
+        result = str(value_in_payload)
         return result

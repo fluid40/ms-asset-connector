@@ -31,10 +31,14 @@ class OpcuaAssetConnector(IAssetConnector):
         node_id = self._property_to_href_map[property_idshort_path]["href"]
         keys = self._property_to_href_map[property_idshort_path]["keys"]
 
-        value_in_payload = None
-        if self._is_connected:
-            node = self._client.get_node(node_id)
-            value_in_payload = node.get_value()
+        if not self._is_connected:
+            raise ConnectionError("AssetConnector is not connected.")
+
+        if self._client is None:
+            raise ConnectionError("OPCUA Client not properly initialized.")
+
+        node = self._client.get_node(node_id)
+        value_in_payload = node.get_value()
 
         if value_in_payload is None:
             return None
@@ -44,8 +48,8 @@ class OpcuaAssetConnector(IAssetConnector):
         for k in keys:
             value_in_payload = json.dumps(json.loads(value_in_payload)[k])
 
-        result = value_in_payload
-        return str(result)
+        result = str(value_in_payload)
+        return result
 
     async def set_value(self, endpoint_reference: ModelReference, *args):
         await super().set_value(endpoint_reference, *args)

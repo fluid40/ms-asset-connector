@@ -21,11 +21,11 @@ class IAssetConnector:
     def connect(self):
         pass
 
-    def get_value(self, endpoint_reference: ModelReference) -> str:
+    async def get_value(self, endpoint_reference: ModelReference) -> str | None:
         pass
 
-    def set_value(self, endpoint_reference: ModelReference, *args):
+    async def set_value(self, endpoint_reference: ModelReference, *args):
         pass
 
-    def do_action(self, endpoint_reference: ModelReference, *args):
+    async def do_action(self, endpoint_reference: ModelReference, *args):
         pass
