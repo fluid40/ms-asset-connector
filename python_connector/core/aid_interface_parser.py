@@ -16,6 +16,8 @@ from basyx.aas.util import traversal
 
 from core.authentication_details import IAuthenticationDetails, BasicAuthenticationDetails
 
+from python_connector.core.authentication_details import NoAuthenticationDetails
+
 
 def find_all_by_semantic_id(parent: NamespaceSet[SubmodelElement], semantic_id_value: str) -> List[SubmodelElement]:
     """Find all SubmodelElements having a specific Semantic ID.
@@ -105,7 +107,7 @@ def get_base_url_from_interface(aid_interface: SubmodelElementCollection) -> str
         raise ValueError("EndpointMetadata SMC not found in AID Submodel.")
 
     base: Property | None = find_by_semantic_id(
-        endpoint_metadata.value, "https://www.w3.org/2019/wot/td#base"
+        endpoint_metadata.value, "https://www.w3.org/2019/wot/td#baseURI"
     )
     if base is None:
         raise ValueError("base Property not found in EndpointMetadata SMC.")
@@ -244,30 +246,45 @@ def parse_auth(aid_interface: SubmodelElementCollection) -> IAuthenticationDetai
     # -> can just use the last key to determine the type of security
     sc = security.value[0].value.key[-1].value
 
+    # get the securityDefinitions SMC
     security_definitions: SubmodelElementCollection | None = find_by_semantic_id(
         endpoint_metadata.value, "https://www.w3.org/2019/wot/td#definesSecurityScheme"
     )
     if security_definitions is None:
         raise ValueError("securitySchemes Property not found in EndpointMetadata SMC.")
 
+    # find the security scheme SMC with the same idShort as mentioned in the reference "sc"
     security_details: SubmodelElementCollection | None = find_by_id_short(
         security_definitions.value, sc
     )
     if security_details is None:
         raise ValueError("Referenced security scheme SMC not found in securityDefinitions SMC")
 
-    # TODO: check if "scheme" property (sem-id: https://www.w3.org/2019/wot/security#SecurityScheme) has value "basic"
-
-    basic_sc_name: Property | None = find_by_semantic_id(
-        security_details.value, "https://www.w3.org/2019/wot/security#name"
+    # get the name of the security scheme
+    scheme: Property | None = find_by_semantic_id(
+        security_details.value, "https://www.w3.org/2019/wot/security#SecurityScheme"
     )
-    if basic_sc_name is None:
-        raise ValueError("name Property not found in referenced security scheme SMC")
+    if scheme is None:
+        raise ValueError("scheme Property not found in referenced security scheme SMC.")
 
-    auth_base64 = basic_sc_name.value
-    auth_plain = base64.b64decode(auth_base64).decode("utf-8")
 
-    # TODO: case distinction depending on security scheme (determined by semantic id)
-    # for now, assume it is basic security
-    auth_details: IAuthenticationDetails = BasicAuthenticationDetails(auth_plain.split(":")[0], auth_plain.split(":")[1])
+    auth_details: IAuthenticationDetails = None
+
+    match scheme:
+        case "nosec":
+            auth_details = NoAuthenticationDetails()
+
+        case "basic":
+            basic_sc_name: Property | None = find_by_semantic_id(
+                security_details.value, "https://www.w3.org/2019/wot/security#name"
+            )
+            if basic_sc_name is None:
+                raise ValueError("name Property not found in referenced security scheme SMC")
+
+            auth_base64 = basic_sc_name.value
+            auth_plain = base64.b64decode(auth_base64).decode("utf-8")
+            auth_details = BasicAuthenticationDetails(auth_plain.split(":")[0], auth_plain.split(":")[1])
+
+        # TODO: remaining cases
+
     return auth_details

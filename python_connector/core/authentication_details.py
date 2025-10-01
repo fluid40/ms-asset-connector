@@ -10,3 +10,9 @@ class BasicAuthenticationDetails(IAuthenticationDetails):
         self._user = user
         self._password = password
         super().__init__()
+
+
+class NoAuthenticationDetails(IAuthenticationDetails):
+
+    def __init__(self):
+        super().__init__()
