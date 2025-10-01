@@ -10,11 +10,10 @@ from basyx.aas.model import (
     Property,
     Reference,
     SubmodelElement,
-    SubmodelElementCollection, ModelReference, ReferenceElement, SubmodelElementList,
+    SubmodelElementCollection, ModelReference, SubmodelElementList,
 )
-from basyx.aas.util import traversal
 
-from core.authentication_details import IAuthenticationDetails, BasicAuthenticationDetails
+from python_connector.core.authentication_details import IAuthenticationDetails, BasicAuthenticationDetails
 
 from python_connector.core.authentication_details import NoAuthenticationDetails
 
@@ -270,7 +269,7 @@ def parse_auth(aid_interface: SubmodelElementCollection) -> IAuthenticationDetai
 
     auth_details: IAuthenticationDetails = None
 
-    match scheme:
+    match scheme.value:
         case "nosec":
             auth_details = NoAuthenticationDetails()
 
