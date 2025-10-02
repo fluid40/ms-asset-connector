@@ -5,12 +5,11 @@ and storing the latest payload for each topic.
 """
 
 import ssl
-from typing import List, Tuple
+from typing import List
 from urllib.parse import urlparse
 
+from aas_standard_parser.aid_parser import IAuthenticationDetails, BasicAuthenticationDetails
 from paho.mqtt.client import Client
-
-from python_connector.core.authentication_details import IAuthenticationDetails, BasicAuthenticationDetails
 
 
 class MqttClient:

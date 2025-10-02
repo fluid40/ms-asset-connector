@@ -1,7 +1,6 @@
+from aas_standard_parser import AIDParser
+from aas_standard_parser.aid_parser import IAuthenticationDetails
 from basyx.aas.model import SubmodelElementCollection, ModelReference
-
-from python_connector.core.aid_interface_parser import get_base_url_from_interface, create_property_to_href_map, parse_auth
-from python_connector.core.authentication_details import IAuthenticationDetails
 
 
 class IAssetConnector:
@@ -14,9 +13,13 @@ class IAssetConnector:
 
     def _parse_aid_interface(self):
         # extract the base url
-        self._base = get_base_url_from_interface(self._interface)
-        self._property_to_href_map = create_property_to_href_map(self._interface)
-        self._auth: IAuthenticationDetails = parse_auth(self._interface)
+        aid_parser = AIDParser()
+        try:
+            self._base = aid_parser.get_base_url_from_interface(self._interface)
+            self._property_to_href_map = aid_parser.create_property_to_href_map(self._interface)
+            self._auth: IAuthenticationDetails = aid_parser.parse_security(self._interface)
+        except ValueError as e:
+            print(f'Error parsing aid interface: {e}')
 
     async def connect(self):
         pass

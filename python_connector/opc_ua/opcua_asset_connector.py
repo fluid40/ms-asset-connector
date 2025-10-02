@@ -1,9 +1,9 @@
 import json
 
+from aas_standard_parser.reference_helpers import construct_idshort_path_from_reference
 from opcua import Client
 from basyx.aas.model import ModelReference, SubmodelElementCollection
 
-from python_connector.core.aid_interface_parser import construct_idshort_path_from_reference
 from python_connector.core.asset_connector import IAssetConnector
 
 
@@ -27,15 +27,15 @@ class OpcuaAssetConnector(IAssetConnector):
     async def get_value(self, endpoint_reference: ModelReference) -> str | None:
         """Get the value for a specific model reference."""
 
-        property_idshort_path = construct_idshort_path_from_reference(endpoint_reference)
-        node_id = self._property_to_href_map[property_idshort_path]["href"]
-        keys = self._property_to_href_map[property_idshort_path]["keys"]
-
         if not self._is_connected:
             raise ConnectionError("AssetConnector is not connected.")
 
         if self._client is None:
             raise ConnectionError("OPCUA Client not properly initialized.")
+
+        property_idshort_path = construct_idshort_path_from_reference(endpoint_reference)
+        node_id = self._property_to_href_map[property_idshort_path].href
+        keys = self._property_to_href_map[property_idshort_path].keys
 
         node = self._client.get_node(node_id)
         value_in_payload = node.get_value()

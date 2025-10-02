@@ -2,9 +2,9 @@
 import json
 from typing import List
 
+from aas_standard_parser.reference_helpers import construct_idshort_path_from_reference
 from basyx.aas.model import ModelReference, SubmodelElementCollection
 
-from python_connector.core.aid_interface_parser import construct_idshort_path_from_reference
 from python_connector.core.asset_connector import IAssetConnector
 from python_connector.mqtt.mqtt_client import MqttClient
 
@@ -22,7 +22,7 @@ class MqttAssetConnector(IAssetConnector):
 
     async def connect(self):
         try:
-            topics = list(set([v["href"] for v in self._property_to_href_map.values()]))
+            topics = list(set([v.href for v in self._property_to_href_map.values()]))
             self._connect_to_mqtt_topics(topics)
         except Exception as e:
             print(f"Failed to connect MQTTConnector: {e}")
@@ -42,6 +42,7 @@ class MqttAssetConnector(IAssetConnector):
     async def get_value(self, model_reference: ModelReference) -> str | None:
         """Get the value for a specific model reference."""
 
+        # TODO: maybe try to use last cached value (if any) anyway
         if not self._mqtt_client.is_connected:
             raise ConnectionError("AssetConnector is not connected.")
 
@@ -49,9 +50,13 @@ class MqttAssetConnector(IAssetConnector):
             raise ConnectionError("MQTT Client not properly initialized.")
 
         property_idshort_path = construct_idshort_path_from_reference(model_reference)
-        topic_name = self._property_to_href_map[property_idshort_path]["href"]
 
-        keys = self._property_to_href_map[property_idshort_path]["keys"]
+        try:
+            topic_name = self._property_to_href_map[property_idshort_path].href
+            keys = self._property_to_href_map[property_idshort_path].keys
+        except KeyError:
+            raise KeyError(f"Property {property_idshort_path} not found.")
+
         value_in_payload = self._mqtt_client.get_cached_value(topic_name)
 
         if value_in_payload is None:
