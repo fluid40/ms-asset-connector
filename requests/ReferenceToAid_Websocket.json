@@ -1,29 +1,33 @@
 {
-        "type": "ModelReference",
-        "keys": [
-            {
-                "type": "Submodel",
-                "value": "https://fluid40.de/ids/sm/4757_4856_8464_1441"
-            },
-            {
-                "type": "SubmodelElementCollection",
-                "value": "Interface_MQTT_Websocket"
-            },
-            {
-                "type": "SubmodelElementCollection",
-                "value": "InteractionMetadata"
-            },
-            {
-                "type": "SubmodelElementCollection",
-                "value": "properties"
-            },
-            {
-                "type": "SubmodelElementCollection",
-                "value": "axes_position"
-            },
-            {
-                "type": "SubmodelElementCollection",
-                "value": "HandlingX"
-            }
-        ]
-    }
+    "type": "ModelReference",
+    "keys": [
+        {
+            "type": "Submodel",
+            "value": "https://fluid40.de/ids/sm/4757_4856_8464_1441"
+        },
+        {
+            "type": "SubmodelElementCollection",
+            "value": "Interface_MQTT_Websocket"
+        },
+        {
+            "type": "SubmodelElementCollection",
+            "value": "InteractionMetadata"
+        },
+        {
+            "type": "SubmodelElementCollection",
+            "value": "properties"
+        },
+        {
+            "type": "SubmodelElementCollection",
+            "value": "axes_position"
+        },
+        {
+            "type": "SubmodelElementCollection",
+            "value": "properties"
+        },
+        {
+            "type": "SubmodelElementCollection",
+            "value": "HandlingX"
+        }
+    ]
+}

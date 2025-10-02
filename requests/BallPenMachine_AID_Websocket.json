@@ -1402,7 +1402,7 @@
                                                 "keys": [
                                                     {
                                                         "type": "GlobalReference",
-                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                        "value": "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/PropertyDefinition"
                                                     }
                                                 ]
                                             },
@@ -1650,7 +1650,7 @@
                                                         "keys": [
                                                             {
                                                                 "type": "GlobalReference",
-                                                                "value": "https://www.w3.org/2019/wot/td#PropertyAffordance"
+                                                                "value": "https://www.w3.org/2019/wot/json-schema#properties"
                                                             }
                                                         ]
                                                     },
@@ -1670,7 +1670,7 @@
                                                                 "keys": [
                                                                     {
                                                                         "type": "GlobalReference",
-                                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                                        "value": "https://www.w3.org/2019/wot/json-schema#propertyName"
                                                                     }
                                                                 ]
                                                             },
@@ -1750,7 +1750,7 @@
                                                                 "keys": [
                                                                     {
                                                                         "type": "GlobalReference",
-                                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                                        "value": "https://www.w3.org/2019/wot/json-schema#propertyName"
                                                                     }
                                                                 ]
                                                             },
@@ -1830,7 +1830,7 @@
                                                                 "keys": [
                                                                     {
                                                                         "type": "GlobalReference",
-                                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                                        "value": "https://www.w3.org/2019/wot/json-schema#propertyName"
                                                                     }
                                                                 ]
                                                             },
@@ -1910,7 +1910,7 @@
                                                                 "keys": [
                                                                     {
                                                                         "type": "GlobalReference",
-                                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                                        "value": "https://www.w3.org/2019/wot/json-schema#propertyName"
                                                                     }
                                                                 ]
                                                             },
@@ -1990,7 +1990,7 @@
                                                                 "keys": [
                                                                     {
                                                                         "type": "GlobalReference",
-                                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                                        "value": "https://www.w3.org/2019/wot/json-schema#propertyName"
                                                                     }
                                                                 ]
                                                             },
@@ -2070,7 +2070,7 @@
                                                                 "keys": [
                                                                     {
                                                                         "type": "GlobalReference",
-                                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                                        "value": "https://www.w3.org/2019/wot/json-schema#propertyName"
                                                                     }
                                                                 ]
                                                             },
@@ -2156,7 +2156,7 @@
                                                 "keys": [
                                                     {
                                                         "type": "GlobalReference",
-                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                        "value": "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/PropertyDefinition"
                                                     }
                                                 ]
                                             },
@@ -2404,7 +2404,7 @@
                                                         "keys": [
                                                             {
                                                                 "type": "GlobalReference",
-                                                                "value": "https://www.w3.org/2019/wot/td#PropertyAffordance"
+                                                                "value": "https://www.w3.org/2019/wot/json-schema#properties"
                                                             }
                                                         ]
                                                     },
@@ -2424,7 +2424,7 @@
                                                                 "keys": [
                                                                     {
                                                                         "type": "GlobalReference",
-                                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                                        "value": "https://www.w3.org/2019/wot/json-schema#propertyName"
                                                                     }
                                                                 ]
                                                             },
@@ -2504,7 +2504,7 @@
                                                                 "keys": [
                                                                     {
                                                                         "type": "GlobalReference",
-                                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                                        "value": "https://www.w3.org/2019/wot/json-schema#propertyName"
                                                                     }
                                                                 ]
                                                             },
@@ -2561,7 +2561,7 @@
                                                                 "keys": [
                                                                     {
                                                                         "type": "GlobalReference",
-                                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                                        "value": "https://www.w3.org/2019/wot/json-schema#propertyName"
                                                                     }
                                                                 ]
                                                             },
@@ -2618,7 +2618,7 @@
                                                                 "keys": [
                                                                     {
                                                                         "type": "GlobalReference",
-                                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                                        "value": "https://www.w3.org/2019/wot/json-schema#propertyName"
                                                                     }
                                                                 ]
                                                             },
@@ -2675,7 +2675,7 @@
                                                                 "keys": [
                                                                     {
                                                                         "type": "GlobalReference",
-                                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                                        "value": "https://www.w3.org/2019/wot/json-schema#propertyName"
                                                                     }
                                                                 ]
                                                             },
@@ -2732,7 +2732,7 @@
                                                                 "keys": [
                                                                     {
                                                                         "type": "GlobalReference",
-                                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                                        "value": "https://www.w3.org/2019/wot/json-schema#propertyName"
                                                                     }
                                                                 ]
                                                             },
@@ -2789,7 +2789,7 @@
                                                                 "keys": [
                                                                     {
                                                                         "type": "GlobalReference",
-                                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                                        "value": "https://www.w3.org/2019/wot/json-schema#propertyName"
                                                                     }
                                                                 ]
                                                             },
@@ -2846,7 +2846,7 @@
                                                                 "keys": [
                                                                     {
                                                                         "type": "GlobalReference",
-                                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                                        "value": "https://www.w3.org/2019/wot/json-schema#propertyName"
                                                                     }
                                                                 ]
                                                             },
@@ -2903,7 +2903,7 @@
                                                                 "keys": [
                                                                     {
                                                                         "type": "GlobalReference",
-                                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                                        "value": "https://www.w3.org/2019/wot/json-schema#propertyName"
                                                                     }
                                                                 ]
                                                             },
@@ -2960,7 +2960,7 @@
                                                                 "keys": [
                                                                     {
                                                                         "type": "GlobalReference",
-                                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                                        "value": "https://www.w3.org/2019/wot/json-schema#propertyName"
                                                                     }
                                                                 ]
                                                             },
@@ -3017,7 +3017,7 @@
                                                                 "keys": [
                                                                     {
                                                                         "type": "GlobalReference",
-                                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                                        "value": "https://www.w3.org/2019/wot/json-schema#propertyName"
                                                                     }
                                                                 ]
                                                             },
@@ -3074,7 +3074,7 @@
                                                                 "keys": [
                                                                     {
                                                                         "type": "GlobalReference",
-                                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                                        "value": "https://www.w3.org/2019/wot/json-schema#propertyName"
                                                                     }
                                                                 ]
                                                             },
@@ -3137,7 +3137,7 @@
                                                 "keys": [
                                                     {
                                                         "type": "GlobalReference",
-                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                        "value": "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/PropertyDefinition"
                                                     }
                                                 ]
                                             },
@@ -3385,7 +3385,7 @@
                                                         "keys": [
                                                             {
                                                                 "type": "GlobalReference",
-                                                                "value": "https://www.w3.org/2019/wot/td#PropertyAffordance"
+                                                                "value": "https://www.w3.org/2019/wot/json-schema#properties"
                                                             }
                                                         ]
                                                     },
@@ -3405,7 +3405,7 @@
                                                                 "keys": [
                                                                     {
                                                                         "type": "GlobalReference",
-                                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                                        "value": "https://www.w3.org/2019/wot/json-schema#propertyName"
                                                                     }
                                                                 ]
                                                             },
@@ -3485,7 +3485,7 @@
                                                                 "keys": [
                                                                     {
                                                                         "type": "GlobalReference",
-                                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                                        "value": "https://www.w3.org/2019/wot/json-schema#propertyName"
                                                                     }
                                                                 ]
                                                             },
@@ -3542,7 +3542,7 @@
                                                                 "keys": [
                                                                     {
                                                                         "type": "GlobalReference",
-                                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                                        "value": "https://www.w3.org/2019/wot/json-schema#propertyName"
                                                                     }
                                                                 ]
                                                             },
@@ -3605,7 +3605,7 @@
                                                 "keys": [
                                                     {
                                                         "type": "GlobalReference",
-                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                        "value": "https://admin-shell.io/idta/AssetInterfacesDescription/1/0/PropertyDefinition"
                                                     }
                                                 ]
                                             },
@@ -3853,7 +3853,7 @@
                                                         "keys": [
                                                             {
                                                                 "type": "GlobalReference",
-                                                                "value": "https://www.w3.org/2019/wot/td#PropertyAffordance"
+                                                                "value": "https://www.w3.org/2019/wot/json-schema#properties"
                                                             }
                                                         ]
                                                     },
@@ -3873,7 +3873,7 @@
                                                                 "keys": [
                                                                     {
                                                                         "type": "GlobalReference",
-                                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                                        "value": "https://www.w3.org/2019/wot/json-schema#propertyName"
                                                                     }
                                                                 ]
                                                             },
@@ -3953,7 +3953,7 @@
                                                                 "keys": [
                                                                     {
                                                                         "type": "GlobalReference",
-                                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                                        "value": "https://www.w3.org/2019/wot/json-schema#propertyName"
                                                                     }
                                                                 ]
                                                             },
@@ -4033,7 +4033,7 @@
                                                                 "keys": [
                                                                     {
                                                                         "type": "GlobalReference",
-                                                                        "value": "https://admin-shell.io/idta/AssetInterfaceDescription/1/0/PropertyDefinition"
+                                                                        "value": "https://www.w3.org/2019/wot/json-schema#propertyName"
                                                                     }
                                                                 ]
                                                             },
