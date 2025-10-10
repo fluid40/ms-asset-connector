@@ -1,4 +1,4 @@
-"""Asset connector module for interfacing with assets via AID and MQTT."""
+"""Asset connector module for interfacing with assets via AID and http."""
 
 import json
 from typing import List, Optional
@@ -11,7 +11,7 @@ from basyx.aas.model import (
     ExternalReference,
 )
 
-from core.asset_connector import IAssetConnector
+from python_connector.core.asset_connector import IAssetConnector
 import requests
 
 

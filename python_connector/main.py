@@ -11,13 +11,13 @@ import uvicorn
 from basyx.aas.model import Submodel, SubmodelElementCollection
 from fastapi import FastAPI
 
-from core.asset_connector import IAssetConnector
-from models.get_value_payload import GetValuePayload
-from models.response_body import ResponseBody, create_response
-from models.set_config_payload import SetConfigPayload
-from mqtt.mqtt_asset_connector import MqttAssetConnector
-from opc_ua.opcua_asset_connector import OpcuaAssetConnector
-from http_connector.http_asset_connector import HttpAssetConnector
+from python_connector.core.asset_connector import IAssetConnector
+from python_connector.models.get_value_payload import GetValuePayload
+from python_connector.models.response_body import ResponseBody, create_response
+from python_connector.models.set_config_payload import SetConfigPayload
+from python_connector.mqtt.mqtt_asset_connector import MqttAssetConnector
+from python_connector.opc_ua.opcua_asset_connector import OpcuaAssetConnector
+from python_connector.http_connector.http_asset_connector import HttpAssetConnector
 
 app = FastAPI()
 
@@ -42,10 +42,16 @@ async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
         # iterate over all interface SMCs and create IAssetConnector for each of them
         for iface_smc in aid_sm.submodel_element:
             asset_connector: IAssetConnector = None
-            if iface_smc.supplemental_semantic_id[0].key[0].value == "http://www.w3.org/2011/mqtt":
+            if (
+                iface_smc.supplemental_semantic_id[0].key[0].value
+                == "http://www.w3.org/2011/mqtt"
+            ):
                 asset_connector = MqttAssetConnector(aid_sm.id, iface_smc)
             # TODO: confirm that is semanticId exists
-            elif iface_smc.supplemental_semantic_id[0].key[0].value == "http://www.w3.org/2011/opcua":
+            elif (
+                iface_smc.supplemental_semantic_id[0].key[0].value
+                == "http://www.w3.org/2011/opcua"
+            ):
                 asset_connector = OpcuaAssetConnector(aid_sm.id, iface_smc)
             elif (
                 iface_smc.supplemental_semantic_id[0].key[0].value
@@ -68,7 +74,7 @@ async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
             status_code=200,
             message="Successfully invoked `/set-config` with raw JSON in payload",
             payload=None,
-            value=connector_id
+            value=connector_id,
         )
     except Exception as e:
         return create_response(
@@ -99,7 +105,7 @@ async def get_value(payload: GetValuePayload) -> ResponseBody:
             return create_response(
                 status_code=200,
                 message=f"Successfully invoked `/get-value` with raw JSON in payload",
-                payload=json.loads(result) if result else None
+                payload=json.loads(result) if result else None,
             )
         except Exception as e:
             return create_response(
