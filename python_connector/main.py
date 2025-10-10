@@ -5,10 +5,10 @@ This module provides endpoints to set configuration and retrieve values using JS
 
 import json
 import threading
-from typing import Dict
+from typing import Dict, cast
 
 import uvicorn
-from basyx.aas.model import Submodel
+from basyx.aas.model import Submodel, SubmodelElementCollection
 from fastapi import FastAPI
 
 from core.asset_connector import IAssetConnector
@@ -17,6 +17,7 @@ from models.response_body import ResponseBody, create_response
 from models.set_config_payload import SetConfigPayload
 from mqtt.mqtt_asset_connector import MqttAssetConnector
 from opc_ua.opcua_asset_connector import OpcuaAssetConnector
+from http_connector.http_asset_connector import HttpAssetConnector
 
 app = FastAPI()
 
@@ -46,6 +47,13 @@ async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
             # TODO: confirm that is semanticId exists
             elif iface_smc.supplemental_semantic_id[0].key[0].value == "http://www.w3.org/2011/opcua":
                 asset_connector = OpcuaAssetConnector(aid_sm.id, iface_smc)
+            elif (
+                iface_smc.supplemental_semantic_id[0].key[0].value
+                == "http://www.w3.org/2011/http"
+            ):
+                asset_connector = HttpAssetConnector(
+                    aid_sm.id, cast(SubmodelElementCollection, iface_smc)
+                )
             else:
                 # TODO: check for other protocols
                 pass
@@ -103,4 +111,4 @@ async def get_value(payload: GetValuePayload) -> ResponseBody:
 
 if __name__ == "__main__":
     """Run the FastAPI application."""
-    uvicorn.run(app, host="127.0.0.1", port=8090)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
