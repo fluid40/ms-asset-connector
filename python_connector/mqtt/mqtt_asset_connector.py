@@ -1,13 +1,12 @@
 """Asset connector module for interfacing with assets via AID and MQTT."""
+
 import json
 from typing import List
 
 from aas_standard_parser.reference_helpers import construct_idshort_path_from_reference
 from basyx.aas.model import ModelReference, SubmodelElementCollection
-
 from python_connector.core.asset_connector import IAssetConnector
 from python_connector.mqtt.mqtt_client import MqttClient
-
 
 
 class MqttAssetConnector(IAssetConnector):
@@ -21,6 +20,7 @@ class MqttAssetConnector(IAssetConnector):
         super().__init__(aid_id, interface_smc)
 
     async def connect(self):
+        """Connect to the MQTT broker and subscribe to relevant topics."""
         try:
             topics = list(set([v.href for v in self._property_to_href_map.values()]))
             self._connect_to_mqtt_topics(topics)
@@ -41,7 +41,6 @@ class MqttAssetConnector(IAssetConnector):
 
     async def get_value(self, model_reference: ModelReference) -> str | None:
         """Get the value for a specific model reference."""
-
         # TODO: maybe try to use last cached value (if any) anyway
         if not self._mqtt_client.is_connected:
             raise ConnectionError("AssetConnector is not connected.")
