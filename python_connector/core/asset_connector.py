@@ -8,9 +8,10 @@ class IAssetConnector:
         self._aid_id = aid_id
         self._interface = interface_smc
 
-        self._parse_aid_interface()
+        if not self._parse_aid_interface():
+            raise ValueError("Failed to parse AID interface.")
 
-    def _parse_aid_interface(self):
+    def _parse_aid_interface(self) -> bool:
         # extract the base url
         aid_parser = AIDParser()
         try:
@@ -19,6 +20,9 @@ class IAssetConnector:
             self._auth: IAuthenticationDetails = aid_parser.parse_security(self._interface)
         except ValueError as e:
             print(f"Error parsing aid interface: {e}")
+            return False
+
+        return True
 
     async def connect(self):
         pass
