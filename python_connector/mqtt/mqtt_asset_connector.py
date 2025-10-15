@@ -5,8 +5,7 @@ import json
 from aas_standard_parser.reference_helpers import construct_idshort_path_from_reference
 from basyx.aas.model import ModelReference, SubmodelElementCollection
 
-from python_connector.core.asset_connector import IAssetConnector
-
+from ..core.asset_connector import IAssetConnector
 from .mqtt_client import MqttClient
 
 

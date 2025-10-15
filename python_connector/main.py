@@ -10,12 +10,12 @@ import uvicorn
 from basyx.aas.model import Submodel
 from fastapi import FastAPI
 
-from python_connector.core.asset_connector import IAssetConnector
-from python_connector.models.get_value_payload import GetValuePayload
-from python_connector.models.response_body import ResponseBody, create_response
-from python_connector.models.set_config_payload import SetConfigPayload
-from python_connector.mqtt.mqtt_asset_connector import MqttAssetConnector
-from python_connector.opc_ua.opcua_asset_connector import OpcuaAssetConnector
+from .core.asset_connector import IAssetConnector
+from .models.get_value_payload import GetValuePayload
+from .models.response_body import ResponseBody, create_response
+from .models.set_config_payload import SetConfigPayload
+from .mqtt.mqtt_asset_connector import MqttAssetConnector
+from .opc_ua.opcua_asset_connector import OpcuaAssetConnector
 
 app = FastAPI()
 
@@ -95,6 +95,6 @@ async def get_value(payload: GetValuePayload) -> ResponseBody:
             )
 
 
-if __name__ == "__main__":
-    """Run the FastAPI application."""
+def start_app():
+    """Function to start the FastAPI application."""
     uvicorn.run(app, host="127.0.0.1", port=8090)

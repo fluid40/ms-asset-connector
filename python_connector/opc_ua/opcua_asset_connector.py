@@ -4,7 +4,7 @@ from aas_standard_parser.reference_helpers import construct_idshort_path_from_re
 from basyx.aas.model import ModelReference, SubmodelElementCollection
 from opcua import Client
 
-from python_connector.core.asset_connector import IAssetConnector
+from ..core.asset_connector import IAssetConnector
 
 
 class OpcuaAssetConnector(IAssetConnector):
