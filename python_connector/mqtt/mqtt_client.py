@@ -5,10 +5,9 @@ and storing the latest payload for each topic.
 """
 
 import ssl
-from typing import List
 from urllib.parse import urlparse
 
-from aas_standard_parser.aid_parser import IAuthenticationDetails, BasicAuthenticationDetails
+from aas_standard_parser.aid_parser import BasicAuthenticationDetails, IAuthenticationDetails
 from paho.mqtt.client import Client
 
 
@@ -20,9 +19,8 @@ class MqttClient:
     port: int
     path: str
 
-    def __init__(self, base_url: str, topics: List[str], auth: IAuthenticationDetails):
-        """Initialize the MQTTConnector with broker host and port.
-        """
+    def __init__(self, base_url: str, topics: list[str], auth: IAuthenticationDetails):
+        """Initialize the MQTTConnector with broker host and port."""
         self.cache = {}
         for t in topics:
             self.cache[t] = None
@@ -173,8 +171,6 @@ class MqttClient:
     def add_topics(self, topics):
         """Add topics to the MQTTConnector."""
         self.topics = topics
-
-
 
     def get_cached_value(self, topic):
         """Retrieve the cached value for a specific topic.

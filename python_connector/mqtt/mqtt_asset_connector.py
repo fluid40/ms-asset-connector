@@ -1,10 +1,10 @@
 """Asset connector module for interfacing with assets via AID and MQTT."""
 
 import json
-from typing import List
 
 from aas_standard_parser.reference_helpers import construct_idshort_path_from_reference
 from basyx.aas.model import ModelReference, SubmodelElementCollection
+
 from python_connector.core.asset_connector import IAssetConnector
 
 from .mqtt_client import MqttClient
@@ -27,7 +27,7 @@ class MqttAssetConnector(IAssetConnector):
         except Exception as e:
             print(f"Failed to connect MQTTConnector: {e}")
 
-    def _connect_to_mqtt_topics(self, mqtt_topics: List[str]):
+    def _connect_to_mqtt_topics(self, mqtt_topics: list[str]):
         """Connect to the MQTT topics using a MQTT connector.
 
         :param mqtt_topics: A dictionary of MQTT topics to subscribe to.

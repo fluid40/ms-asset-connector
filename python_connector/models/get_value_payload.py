@@ -11,6 +11,7 @@ KEY_TYPE_MAPPING: dict[str, str] = {
     "Property": "PROPERTY",
 }
 
+
 class GetValuePayload(BaseModel):  # noqa: D101
     aid_ref_dict: dict = Field(..., alias="Reference")
     _aid_ref: ModelReference = PrivateAttr(default=None)
