@@ -15,4 +15,4 @@ COPY python_connector/ .
 EXPOSE 8000
 
 # Run the app with Uvicorn
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+CMD ["uvicorn", "python_connector.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
