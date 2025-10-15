@@ -1,18 +1,16 @@
-# Use official Python image
 FROM python:3.11-slim
 
-# Set work directory
 WORKDIR /app
 
-# Copy requirements first and install
 COPY ./requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy only the app code
-COPY python_connector/ .
+# Kopiere den ganzen Ordner (nicht nur Inhalt)
+COPY python_connector/ ./python_connector/
 
-# Expose the port Uvicorn will run on
+# Optional, hilft Python beim Finden des Pakets
+ENV PYTHONPATH=/app
+
 EXPOSE 8000
 
-# Run the app with Uvicorn
-CMD ["uvicorn", "python_connector.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+CMD ["uvicorn", "python_connector.main:app", "--host", "0.0.0.0", "--port", "8000"]
