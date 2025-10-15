@@ -45,10 +45,7 @@ class ResponseBody(BaseModel):  # noqa: D101
 
     class Config:  # noqa: D106
         arbitrary_types_allowed = True
-        json_encoders: ClassVar = {
-            Reference: lambda v: json.dumps(v, cls=AASToJsonEncoder),
-            Submodel: lambda v: json.dumps(v, cls=AASToJsonEncoder)
-        }
+        json_encoders: ClassVar = {Reference: lambda v: json.dumps(v, cls=AASToJsonEncoder), Submodel: lambda v: json.dumps(v, cls=AASToJsonEncoder)}
 
 
 def create_response(status_code: int, message: str, payload: str = "{}", value: str = "") -> ResponseBody:

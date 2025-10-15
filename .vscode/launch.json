@@ -8,7 +8,7 @@
             "name": "Asset Connector",
             "type": "debugpy",
             "request": "launch",
-            "program": "python_connector/main.py",
+            "module": "python_connector.main",
             "console": "integratedTerminal"
         }
     ]
