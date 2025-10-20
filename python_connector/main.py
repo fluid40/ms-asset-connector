@@ -5,13 +5,14 @@ This module provides endpoints to set configuration and retrieve values using JS
 
 import json
 import threading
-from typing import Dict
+from typing import Dict, cast
 
 import uvicorn
 from basyx.aas.model import Submodel, SubmodelElementCollection
 from fastapi import FastAPI
 
 from .core.asset_connector import IAssetConnector
+from .http_connector.http_asset_connector import HttpAssetConnector
 from .models.get_value_payload import GetValuePayload
 from .models.response_body import ResponseBody, create_response
 from .models.set_config_payload import SetConfigPayload
