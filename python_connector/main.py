@@ -5,19 +5,18 @@ This module provides endpoints to set configuration and retrieve values using JS
 
 import json
 import threading
-from typing import Dict, cast
+from typing import Dict
 
 import uvicorn
 from basyx.aas.model import Submodel, SubmodelElementCollection
 from fastapi import FastAPI
 
-from python_connector.core.asset_connector import IAssetConnector
-from python_connector.models.get_value_payload import GetValuePayload
-from python_connector.models.response_body import ResponseBody, create_response
-from python_connector.models.set_config_payload import SetConfigPayload
-from python_connector.mqtt.mqtt_asset_connector import MqttAssetConnector
-from python_connector.opc_ua.opcua_asset_connector import OpcuaAssetConnector
-from python_connector.http_connector.http_asset_connector import HttpAssetConnector
+from .core.asset_connector import IAssetConnector
+from .models.get_value_payload import GetValuePayload
+from .models.response_body import ResponseBody, create_response
+from .models.set_config_payload import SetConfigPayload
+from .mqtt.mqtt_asset_connector import MqttAssetConnector
+from .opc_ua.opcua_asset_connector import OpcuaAssetConnector
 
 app = FastAPI()
 
@@ -71,10 +70,7 @@ async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
             await asset_connector.connect()
 
         return create_response(
-            status_code=200,
-            message="Successfully invoked `/set-config` with raw JSON in payload",
-            payload=None,
-            value=connector_id,
+            status_code=200, message="Successfully invoked `/set-config` with raw JSON in payload", payload=None, value=connector_id
         )
     except Exception as e:
         return create_response(
@@ -103,9 +99,7 @@ async def get_value(payload: GetValuePayload) -> ResponseBody:
         try:
             result = await asset_connector.get_value(payload._aid_ref)  # noqa: SLF001
             return create_response(
-                status_code=200,
-                message=f"Successfully invoked `/get-value` with raw JSON in payload",
-                payload=json.loads(result) if result else None,
+                status_code=200, message=f"Successfully invoked `/get-value` with raw JSON in payload", payload=json.loads(result) if result else None
             )
         except Exception as e:
             return create_response(
@@ -115,6 +109,6 @@ async def get_value(payload: GetValuePayload) -> ResponseBody:
             )
 
 
-if __name__ == "__main__":
-    """Run the FastAPI application."""
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+def start_app():
+    """Function to start the FastAPI application."""
+    uvicorn.run(app, host="127.0.0.1", port=8090)

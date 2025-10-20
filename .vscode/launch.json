@@ -8,8 +8,9 @@
             "name": "Asset Connector",
             "type": "debugpy",
             "request": "launch",
-            "program": "python_connector/main.py",
-            "console": "integratedTerminal"
+            "program": "cli.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
         }
     ]
 }
