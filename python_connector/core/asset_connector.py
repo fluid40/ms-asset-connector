@@ -16,7 +16,7 @@ class IAssetConnector:
         aid_parser = AIDParser()
         try:
             self._base = aid_parser.parse_base(self._interface)
-            self._property_to_href_map = aid_parser.parse_properties(self._interface)
+            self._parsed_properties = aid_parser.parse_properties(self._interface)
             self._auth: IAuthenticationDetails = aid_parser.parse_security(self._interface)
         except ValueError as e:
             print(f"Error parsing aid interface: {e}")

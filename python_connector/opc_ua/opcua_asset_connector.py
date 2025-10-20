@@ -33,8 +33,8 @@ class OpcuaAssetConnector(IAssetConnector):
             raise ConnectionError("OPCUA Client not properly initialized.")
 
         property_idshort_path = construct_idshort_path_from_reference(endpoint_reference)
-        node_id = self._property_to_href_map[property_idshort_path].href
-        keys = self._property_to_href_map[property_idshort_path].keys
+        node_id = self._parsed_properties[property_idshort_path].href
+        keys = self._parsed_properties[property_idshort_path].keys
 
         node = self._client.get_node(node_id)
         value_in_payload = node.get_value()

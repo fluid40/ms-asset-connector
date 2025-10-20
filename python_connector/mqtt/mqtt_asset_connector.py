@@ -21,7 +21,7 @@ class MqttAssetConnector(IAssetConnector):
 
     async def connect(self):
         try:
-            topics = list(set([v.href for v in self._property_to_href_map.values()]))
+            topics = list(set([v.href for v in self._parsed_properties.values()]))
             self._connect_to_mqtt_topics(topics)
         except Exception as e:
             print(f"Failed to connect MQTTConnector: {e}")
@@ -51,8 +51,8 @@ class MqttAssetConnector(IAssetConnector):
         property_idshort_path = construct_idshort_path_from_reference(model_reference)
 
         try:
-            topic_name = self._property_to_href_map[property_idshort_path].href
-            keys = self._property_to_href_map[property_idshort_path].keys
+            topic_name = self._parsed_properties[property_idshort_path].href
+            keys = self._parsed_properties[property_idshort_path].keys
         except KeyError:
             raise KeyError(f"Property {property_idshort_path} not found.")
 
