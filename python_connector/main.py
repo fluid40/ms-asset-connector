@@ -9,12 +9,12 @@ from typing import Dict
 
 import uvicorn
 from basyx.aas.model import Submodel
-from fastapi import FastAPI
-
 from core.asset_connector import IAssetConnector
+from fastapi import FastAPI
 from models.get_value_payload import GetValuePayload
 from models.response_body import ResponseBody, create_response
 from models.set_config_payload import SetConfigPayload
+from models.set_value_payload import SetValuePayload
 from mqtt.mqtt_asset_connector import MqttAssetConnector
 from opc_ua.opcua_asset_connector import OpcuaAssetConnector
 
@@ -57,10 +57,7 @@ async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
             await asset_connector.connect()
 
         return create_response(
-            status_code=200,
-            message="Successfully invoked `/set-config` with raw JSON in payload",
-            payload=None,
-            value=connector_id
+            status_code=200, message="Successfully invoked `/set-config` with raw JSON in payload", payload=None, value=connector_id
         )
     except Exception as e:
         return create_response(
@@ -89,14 +86,38 @@ async def get_value(payload: GetValuePayload) -> ResponseBody:
         try:
             result = await asset_connector.get_value(payload._aid_ref)  # noqa: SLF001
             return create_response(
-                status_code=200,
-                message=f"Successfully invoked `/get-value` with raw JSON in payload",
-                payload=json.loads(result) if result else None
+                status_code=200, message=f"Successfully invoked `/get-value` with raw JSON in payload", payload=json.loads(result) if result else None
             )
         except Exception as e:
             return create_response(
                 status_code=500,
                 message=f"Error processing `/get-value`: {e!s}",
+                payload=None,
+            )
+
+
+@app.post("/set-value")
+async def set_value(payload: SetValuePayload) -> ResponseBody:
+    """Set value to a specified protocol-specific endpoint from an AID submodel."""
+    reference = payload._aid_ref
+    aid_id = reference.key[0].value
+    iface_smc = reference.key[1].value
+    connector_id = f"{aid_id}-{iface_smc}"
+    with connector_store_lock:
+        asset_connector = connector_store.get(connector_id)
+        if asset_connector is None:
+            return create_response(
+                status_code=404,
+                message=f"No AssetConnector found for AID (decoded: {connector_id})",
+                payload=None,
+            )
+        try:
+            await asset_connector.set_value(reference, payload.value)  # noqa: SLF001
+            return create_response(status_code=200, message=f"Successfully invoked `/set-value` with raw JSON in payload", payload=None)
+        except Exception as e:
+            return create_response(
+                status_code=500,
+                message=f"Error processing `/set-value`: {e!s}",
                 payload=None,
             )
 
