@@ -5,7 +5,6 @@ and storing the latest payload for each topic.
 """
 
 import ssl
-from typing import List
 from urllib.parse import urlparse
 
 from aas_standard_parser.aid_parser import BasicAuthenticationDetails, IAuthenticationDetails
@@ -20,7 +19,7 @@ class MqttClient:
     port: int
     path: str
 
-    def __init__(self, base_url: str, topics: List[str], auth: IAuthenticationDetails):
+    def __init__(self, base_url: str, topics: list[str], auth: IAuthenticationDetails):
         """Initialize the MQTTConnector with broker host and port."""
         self.cache = {}
         for t in topics:

@@ -2,8 +2,9 @@ import json
 
 from aas_standard_parser.reference_helpers import construct_idshort_path_from_reference
 from basyx.aas.model import ModelReference, SubmodelElementCollection
-from core.asset_connector import IAssetConnector
 from opcua import Client
+
+from ..core.asset_connector import IAssetConnector
 
 
 class OpcuaAssetConnector(IAssetConnector):

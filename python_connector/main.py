@@ -5,24 +5,24 @@ This module provides endpoints to set configuration and retrieve values using JS
 
 import json
 import threading
-from typing import Dict
 
 import uvicorn
 from basyx.aas.model import Submodel
-from core.asset_connector import IAssetConnector
 from fastapi import FastAPI
-from models.get_value_payload import GetValuePayload
-from models.response_body import ResponseBody, create_response
-from models.set_config_payload import SetConfigPayload
-from models.set_value_payload import SetValuePayload
-from mqtt.mqtt_asset_connector import MqttAssetConnector
-from opc_ua.opcua_asset_connector import OpcuaAssetConnector
+
+from .core.asset_connector import IAssetConnector
+from .models.get_value_payload import GetValuePayload
+from .models.set_value_payload import SetValuePayload
+from .models.response_body import ResponseBody, create_response
+from .models.set_config_payload import SetConfigPayload
+from .mqtt.mqtt_asset_connector import MqttAssetConnector
+from .opc_ua.opcua_asset_connector import OpcuaAssetConnector
 
 app = FastAPI()
 
 
 # Store AssetConnector instances mapped by (submodel id + interface idshort) in thread-safe way
-connector_store: Dict[str, IAssetConnector] = {}
+connector_store: dict[str, IAssetConnector] = {}
 connector_store_lock = threading.Lock()
 
 
@@ -121,7 +121,6 @@ async def set_value(payload: SetValuePayload) -> ResponseBody:
                 payload=None,
             )
 
-
-if __name__ == "__main__":
-    """Run the FastAPI application."""
+def start_app():
+    """Function to start the FastAPI application."""
     uvicorn.run(app, host="127.0.0.1", port=8090)
