@@ -1,14 +1,12 @@
 import json
 
 from aas_standard_parser.reference_helpers import construct_idshort_path_from_reference
-from opcua import Client
 from basyx.aas.model import ModelReference, SubmodelElementCollection
-
-from python_connector.core.asset_connector import IAssetConnector
+from core.asset_connector import IAssetConnector
+from opcua import Client
 
 
 class OpcuaAssetConnector(IAssetConnector):
-
     def __init__(self, aid_id: str, interface_smc: SubmodelElementCollection):
         self._client = None
         self._is_connected = False
