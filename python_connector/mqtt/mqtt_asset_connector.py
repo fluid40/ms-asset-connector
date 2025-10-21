@@ -5,8 +5,9 @@ from typing import List
 
 from aas_standard_parser.reference_helpers import construct_idshort_path_from_reference
 from basyx.aas.model import ModelReference, SubmodelElementCollection
-from python_connector.core.asset_connector import IAssetConnector
-from python_connector.mqtt.mqtt_client import MqttClient
+from core.asset_connector import IAssetConnector
+
+from mqtt.mqtt_client import MqttClient
 
 
 class MqttAssetConnector(IAssetConnector):
@@ -68,3 +69,22 @@ class MqttAssetConnector(IAssetConnector):
 
         result = str(value_in_payload)
         return result
+
+    async def set_value(self, endpoint_reference: ModelReference, value: dict[str]):
+        """Set the value for a specific model reference."""
+        if not self._mqtt_client.is_connected:
+            raise ConnectionError("AssetConnector is not connected.")
+
+        if self._mqtt_client is None:
+            raise ConnectionError("MQTT Client not properly initialized.")
+
+        property_idshort_path = construct_idshort_path_from_reference(endpoint_reference)
+
+        try:
+            topic_name = self._property_to_href_map[property_idshort_path].href
+        except KeyError:
+            raise KeyError(f"Property {property_idshort_path} not found.")
+
+        payload = json.dumps(value)
+        self._mqtt_client.publish(topic_name, payload)
+        print(f"Published to topic {topic_name} with payload {payload}")

@@ -8,7 +8,7 @@ import ssl
 from typing import List
 from urllib.parse import urlparse
 
-from aas_standard_parser.aid_parser import IAuthenticationDetails, BasicAuthenticationDetails
+from aas_standard_parser.aid_parser import BasicAuthenticationDetails, IAuthenticationDetails
 from paho.mqtt.client import Client
 
 
@@ -21,8 +21,7 @@ class MqttClient:
     path: str
 
     def __init__(self, base_url: str, topics: List[str], auth: IAuthenticationDetails):
-        """Initialize the MQTTConnector with broker host and port.
-        """
+        """Initialize the MQTTConnector with broker host and port."""
         self.cache = {}
         for t in topics:
             self.cache[t] = None
@@ -174,8 +173,6 @@ class MqttClient:
         """Add topics to the MQTTConnector."""
         self.topics = topics
 
-
-
     def get_cached_value(self, topic):
         """Retrieve the cached value for a specific topic.
 
@@ -187,3 +184,11 @@ class MqttClient:
     @property
     def is_connected(self):
         return self._is_connected
+
+    def publish(self, topic: str, payload: str):
+        """Publish a message to a specific topic.
+
+        :param topic: The topic to publish the message to.
+        :param payload: The message payload to be published.
+        """
+        self.client.publish(topic, payload)
