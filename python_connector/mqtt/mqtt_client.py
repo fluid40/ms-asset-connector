@@ -183,3 +183,11 @@ class MqttClient:
     @property
     def is_connected(self):
         return self._is_connected
+
+    def publish(self, topic: str, payload: str):
+        """Publish a message to a specific topic.
+
+        :param topic: The topic to publish the message to.
+        :param payload: The message payload to be published.
+        """
+        self.client.publish(topic, payload)
