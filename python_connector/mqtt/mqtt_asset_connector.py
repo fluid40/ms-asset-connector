@@ -2,7 +2,7 @@
 
 import json
 
-from aas_standard_parser.reference_helpers import construct_idshort_path_from_reference
+from aas_standard_parser.reference_helpers import construct_id_short_path_from_reference
 from basyx.aas.model import ModelReference, SubmodelElementCollection
 
 from ..core.asset_connector import IAssetConnector
@@ -50,7 +50,7 @@ class MqttAssetConnector(IAssetConnector):
         if self._mqtt_client is None:
             raise ConnectionError("MQTT Client not properly initialized.")
 
-        property_idshort_path = construct_idshort_path_from_reference(model_reference)
+        property_idshort_path = construct_id_short_path_from_reference(model_reference)
 
         try:
             topic_name = self._parsed_properties[property_idshort_path].href
@@ -79,7 +79,7 @@ class MqttAssetConnector(IAssetConnector):
         if self._mqtt_client is None:
             raise ConnectionError("MQTT Client not properly initialized.")
 
-        property_idshort_path = construct_idshort_path_from_reference(endpoint_reference)
+        property_idshort_path = construct_id_short_path_from_reference(endpoint_reference)
 
         try:
             topic_name = self._property_to_href_map[property_idshort_path].href

@@ -5,7 +5,7 @@ from typing import List, Optional
 
 import requests
 from aas_standard_parser.aid_parser import HttpProtocolBinding
-from aas_standard_parser.reference_helpers import construct_idshort_path_from_reference
+from aas_standard_parser.reference_helpers import construct_id_short_path_from_reference
 from basyx.aas.model import (
     ExternalReference,
     Key,
@@ -30,7 +30,7 @@ class HttpAssetConnector(IAssetConnector):
     async def get_value(self, model_reference: ModelReference) -> Optional[str]:
         """Get the value for a specific model reference."""
 
-        property_idshort_path = construct_idshort_path_from_reference(model_reference)
+        property_idshort_path = construct_id_short_path_from_reference(model_reference)
         url_resource = self._parsed_properties[property_idshort_path].href
         keys = self._parsed_properties[property_idshort_path].keys
         protocol_binding: HttpProtocolBinding = self._parsed_properties[property_idshort_path].protocol_binding
