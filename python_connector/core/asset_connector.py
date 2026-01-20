@@ -15,7 +15,7 @@ class IAssetConnector:
         # extract the base url
         aid_parser = AIDParser()
         try:
-            self._base = aid_parser.parse_base(self._interface)
+            self.base = aid_parser.parse_base(self._interface)
             self._parsed_properties = aid_parser.parse_properties(self._interface)
             self._auth: IAuthenticationDetails = aid_parser.parse_security(self._interface)
         except ValueError as e:

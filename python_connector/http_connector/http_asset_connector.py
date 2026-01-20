@@ -3,18 +3,18 @@
 import json
 from typing import List, Optional
 
+import requests
 from aas_standard_parser.aid_parser import HttpProtocolBinding
 from aas_standard_parser.reference_helpers import construct_idshort_path_from_reference
 from basyx.aas.model import (
-    ModelReference,
+    ExternalReference,
     Key,
     KeyTypes,
+    ModelReference,
     SubmodelElementCollection,
-    ExternalReference,
 )
 
 from python_connector.core.asset_connector import IAssetConnector
-import requests
 
 
 class HttpAssetConnector(IAssetConnector):
@@ -24,6 +24,7 @@ class HttpAssetConnector(IAssetConnector):
 
     def __init__(self, aid_id: str, interface_smc: SubmodelElementCollection):
         super().__init__(aid_id, interface_smc)
+        self.is_connected = True
         self.property_cache = []
 
     async def get_value(self, model_reference: ModelReference) -> Optional[str]:
@@ -38,7 +39,7 @@ class HttpAssetConnector(IAssetConnector):
 
         match http_method:
             case "GET":
-                response = requests.get(self._base + url_resource, headers=http_headers)
+                response = requests.get(self.base + url_resource, headers=http_headers)
             case method:
                 raise ValueError(f"http method {method} not implemented.")
         response.raise_for_status()

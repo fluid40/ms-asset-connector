@@ -10,23 +10,23 @@ from ..core.asset_connector import IAssetConnector
 class OpcuaAssetConnector(IAssetConnector):
     def __init__(self, aid_id: str, interface_smc: SubmodelElementCollection):
         self._client = None
-        self._is_connected = False
+        self.is_connected = False
         self._aid_id = aid_id
         self._interface = interface_smc
         super().__init__(aid_id, interface_smc)
 
     async def connect(self):
         try:
-            self._client = Client(self._base)
+            self._client = Client(self.base)
             self._client.connect()
-            self._is_connected = True
+            self.is_connected = True
         except Exception as e:
             print(e)
 
     async def get_value(self, endpoint_reference: ModelReference) -> str | None:
         """Get the value for a specific model reference."""
 
-        if not self._is_connected:
+        if not self.is_connected:
             raise ConnectionError("AssetConnector is not connected.")
 
         if self._client is None:

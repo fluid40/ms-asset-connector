@@ -5,6 +5,8 @@ services:
     volumes:
       - ../..:/workspaces:cached
     command: sleep infinity
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
 networks:
   bridge:

@@ -16,6 +16,7 @@ class MqttAssetConnector(IAssetConnector):
 
     def __init__(self, aid_id: str, interface_smc: SubmodelElementCollection):  # noqa: D107
         self._aid_id = aid_id
+        self.is_connected = False
         self._interface = interface_smc
         super().__init__(aid_id, interface_smc)
 
@@ -24,6 +25,7 @@ class MqttAssetConnector(IAssetConnector):
         try:
             topics = list(set([v.href for v in self._parsed_properties.values()]))
             self._connect_to_mqtt_topics(topics)
+            self.is_connected = True
         except Exception as e:
             print(f"Failed to connect MQTTConnector: {e}")
 
@@ -33,7 +35,7 @@ class MqttAssetConnector(IAssetConnector):
         :param mqtt_topics: A dictionary of MQTT topics to subscribe to.
         """
         try:
-            self._mqtt_client = MqttClient(self._base, mqtt_topics, self._auth)
+            self._mqtt_client = MqttClient(self.base, mqtt_topics, self._auth)
             self._mqtt_client.connect()
             self._mqtt_client.start_async()
         except ConnectionError as ce:

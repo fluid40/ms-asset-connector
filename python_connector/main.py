@@ -4,8 +4,9 @@ This module provides endpoints to set configuration and retrieve values using JS
 """
 
 import json
+import logging
 import threading
-from typing import Dict, cast
+from typing import cast
 
 import uvicorn
 from basyx.aas.model import Submodel, SubmodelElementCollection
@@ -14,24 +15,24 @@ from fastapi import FastAPI
 from .core.asset_connector import IAssetConnector
 from .http_connector.http_asset_connector import HttpAssetConnector
 from .models.get_value_payload import GetValuePayload
-from .models.set_value_payload import SetValuePayload
 from .models.response_body import ResponseBody, create_response
 from .models.set_config_payload import SetConfigPayload
+from .models.set_value_payload import SetValuePayload
 from .mqtt.mqtt_asset_connector import MqttAssetConnector
 from .opc_ua.opcua_asset_connector import OpcuaAssetConnector
 
 app = FastAPI()
 
-
+logger = logging.getLogger(__name__)
 # Store AssetConnector instances mapped by (submodel id + interface idshort) in thread-safe way
-connector_store: Dict[str, IAssetConnector] = {}
+connector_store: dict[str, IAssetConnector] = {}
 connector_store_lock = threading.Lock()
 
 
 @app.get("/")
-async def root():
+async def root() -> ResponseBody:
     """Root endpoint that returns available endpoints."""
-    return {"message": "Available endpoints are `/add-config` and `/get-value`"}
+    return create_response(status_code=200, message="Available endpoints are `/add-config` and `/get-value`", payload=None)
 
 
 @app.post("/add-config")
@@ -43,24 +44,13 @@ async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
         # iterate over all interface SMCs and create IAssetConnector for each of them
         for iface_smc in aid_sm.submodel_element:
             asset_connector: IAssetConnector = None
-            if (
-                iface_smc.supplemental_semantic_id[0].key[0].value
-                == "http://www.w3.org/2011/mqtt"
-            ):
+            if iface_smc.supplemental_semantic_id[0].key[0].value == "http://www.w3.org/2011/mqtt":
                 asset_connector = MqttAssetConnector(aid_sm.id, iface_smc)
             # TODO: confirm that is semanticId exists
-            elif (
-                iface_smc.supplemental_semantic_id[0].key[0].value
-                == "http://www.w3.org/2011/opcua"
-            ):
+            elif iface_smc.supplemental_semantic_id[0].key[0].value == "http://www.w3.org/2011/opcua":
                 asset_connector = OpcuaAssetConnector(aid_sm.id, iface_smc)
-            elif (
-                iface_smc.supplemental_semantic_id[0].key[0].value
-                == "http://www.w3.org/2011/http"
-            ):
-                asset_connector = HttpAssetConnector(
-                    aid_sm.id, cast(SubmodelElementCollection, iface_smc)
-                )
+            elif iface_smc.supplemental_semantic_id[0].key[0].value == "http://www.w3.org/2011/http":
+                asset_connector = HttpAssetConnector(aid_sm.id, cast(SubmodelElementCollection, iface_smc))
             else:
                 # TODO: check for other protocols
                 pass
@@ -71,9 +61,18 @@ async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
 
             await asset_connector.connect()
 
-        return create_response(
-            status_code=200, message="Successfully invoked `/set-config` with raw JSON in payload", payload=None, value=connector_id
-        )
+        if asset_connector.is_connected:
+            return create_response(
+                status_code=200,
+                message=f"Successfully invoked `/set-config` with raw JSON in payload. Connected to {asset_connector.base}",
+                payload=None,
+                value=connector_id,
+            )
+
+        logger.error("Failed to connect AssetConnector")
+
+        return create_response(status_code=500, message=f"Failed to connect AssetConnector to {asset_connector.base}", payload=payload)
+
     except Exception as e:
         return create_response(
             status_code=500,
@@ -85,7 +84,6 @@ async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
 @app.post("/get-value")
 async def get_value(payload: GetValuePayload) -> ResponseBody:
     """Get value from a specified protocol-specific endpoint in an AID submodel."""
-
     reference = payload._aid_ref
     aid_id = reference.key[0].value
     iface_smc = reference.key[1].value
@@ -101,7 +99,7 @@ async def get_value(payload: GetValuePayload) -> ResponseBody:
         try:
             result = await asset_connector.get_value(payload._aid_ref)  # noqa: SLF001
             return create_response(
-                status_code=200, message=f"Successfully invoked `/get-value` with raw JSON in payload", payload=json.loads(result) if result else None
+                status_code=200, message="Successfully invoked `/get-value` with raw JSON in payload", payload=json.loads(result) if result else None
             )
         except Exception as e:
             return create_response(
@@ -127,14 +125,15 @@ async def set_value(payload: SetValuePayload) -> ResponseBody:
                 payload=None,
             )
         try:
-            await asset_connector.set_value(reference, payload.value)  # noqa: SLF001
-            return create_response(status_code=200, message=f"Successfully invoked `/set-value` with raw JSON in payload", payload=None)
+            await asset_connector.set_value(reference, payload.value)
+            return create_response(status_code=200, message="Successfully invoked `/set-value` with raw JSON in payload", payload=None)
         except Exception as e:
             return create_response(
                 status_code=500,
                 message=f"Error processing `/set-value`: {e!s}",
                 payload=None,
             )
+
 
 def start_app():
     """Function to start the FastAPI application."""
