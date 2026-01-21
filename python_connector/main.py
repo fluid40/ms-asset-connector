@@ -5,10 +5,12 @@ This module provides endpoints to set configuration and retrieve values using JS
 
 import json
 import logging
+import os
 import threading
 from typing import cast
 
 import uvicorn
+from aas_standard_parser import collection_helpers
 from basyx.aas.model import Submodel, SubmodelElementCollection
 from fastapi import FastAPI
 
@@ -24,6 +26,7 @@ from .opc_ua.opcua_asset_connector import OpcuaAssetConnector
 app = FastAPI()
 
 logger = logging.getLogger(__name__)
+
 # Store AssetConnector instances mapped by (submodel id + interface idshort) in thread-safe way
 connector_store: dict[str, IAssetConnector] = {}
 connector_store_lock = threading.Lock()
@@ -40,28 +43,44 @@ async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
     """Set configuration using a specific AID submodel."""
     aid_sm: Submodel = payload._aid_sm  # noqa: SLF001
 
+    logger.info(f"Received `/set-config` request with AID submodel ID: {aid_sm.id}")
+
     try:
         # iterate over all interface SMCs and create IAssetConnector for each of them
         for iface_smc in aid_sm.submodel_element:
             asset_connector: IAssetConnector = None
-            if iface_smc.supplemental_semantic_id[0].key[0].value == "http://www.w3.org/2011/mqtt":
+
+            if iface_smc.supplemental_semantic_id is None or len(iface_smc.supplemental_semantic_id) == 0:
+                logger.warning(f"Skipping interface submodel '{iface_smc.id_short}' as it has no supplemental semantic ID")
+                continue
+
+            if collection_helpers.contains_supplemental_semantic_id(iface_smc, "http://www.w3.org/2011/mqtt"):
+                logger.info("Creating MQTT AssetConnector")
                 asset_connector = MqttAssetConnector(aid_sm.id, iface_smc)
-            # TODO: confirm that is semanticId exists
-            elif iface_smc.supplemental_semantic_id[0].key[0].value == "http://www.w3.org/2011/opcua":
+
+            elif collection_helpers.contains_supplemental_semantic_id(iface_smc, "http://www.w3.org/2011/opcua"):
+                logger.info("Creating OPC UA AssetConnector")
                 asset_connector = OpcuaAssetConnector(aid_sm.id, iface_smc)
-            elif iface_smc.supplemental_semantic_id[0].key[0].value == "http://www.w3.org/2011/http":
+
+            elif collection_helpers.contains_supplemental_semantic_id(iface_smc, "http://www.w3.org/2011/http"):
+                logger.info("Creating HTTP AssetConnector")
                 asset_connector = HttpAssetConnector(aid_sm.id, cast(SubmodelElementCollection, iface_smc))
-            else:
                 # TODO: check for other protocols
-                pass
+
+            else:
+                logger.warning(
+                    f"Unsupported protocol '{iface_smc.supplemental_semantic_id[0].key[0].value}' in interface submodel '{iface_smc.id_short}'."
+                )
+                continue
 
             connector_id = f"{aid_sm.id}-{iface_smc.id_short}"
+            logger.debug(f"Storing AssetConnector with ID '{connector_id}'")
             with connector_store_lock:
                 connector_store[connector_id] = asset_connector
 
             await asset_connector.connect()
 
-        if asset_connector.is_connected:
+        if asset_connector is not None and asset_connector.is_connected:
             return create_response(
                 status_code=200,
                 message=f"Successfully invoked `/set-config` with raw JSON in payload. Connected to {asset_connector.base}",
@@ -71,7 +90,7 @@ async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
 
         logger.error("Failed to connect AssetConnector")
 
-        return create_response(status_code=500, message=f"Failed to connect AssetConnector to {asset_connector.base}", payload=payload)
+        return create_response(status_code=500, message=f"Failed to connect AssetConnector to '{asset_connector.base}'", payload=payload)
 
     except Exception as e:
         return create_response(
@@ -137,4 +156,6 @@ async def set_value(payload: SetValuePayload) -> ResponseBody:
 
 def start_app():
     """Function to start the FastAPI application."""
-    uvicorn.run(app, host="127.0.0.1", port=8090)
+    host = os.getenv("APP_HOST", "127.0.0.1")
+    port = int(os.getenv("APP_PORT", "8090"))
+    uvicorn.run(app, host=host, port=port)
