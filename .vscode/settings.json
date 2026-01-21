@@ -115,12 +115,14 @@
         "makefiles",
         "maxdepth",
         "mccabe",
+        "MQTT",
         "Mypy",
         "ncipollo",
         "netrc",
         "noninteractive",
         "noqa",
         "noreply",
+        "Opcua",
         "pathlib",
         "pathspec",
         "peaceiris",
@@ -162,7 +164,9 @@
         "sphinxcontrib",
         "strftime",
         "submodel",
+        "Submodel",
         "submodels",
+        "Submodels",
         "testfiles",
         "testpaths",
         "TLDR",
@@ -181,10 +185,6 @@
         "WORKDIR",
         "xlink",
         "zfunc",
-        "zstd",
-        "basyx",
-        "MQTT",
-        "Submodel",
-        "Submodels"
+        "zstd"
     ]
 }

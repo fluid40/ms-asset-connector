@@ -1,12 +1,15 @@
 """Asset connector module for interfacing with assets via AID and MQTT."""
 
 import json
+import logging
 
 from aas_standard_parser.reference_helpers import construct_id_short_path_from_reference
 from basyx.aas.model import ModelReference, SubmodelElementCollection
 
 from ..core.asset_connector import IAssetConnector
 from .mqtt_client import MqttClient
+
+logger = logging.getLogger(__name__)
 
 
 class MqttAssetConnector(IAssetConnector):
@@ -15,6 +18,7 @@ class MqttAssetConnector(IAssetConnector):
     _mqtt_client: MqttClient = None
 
     def __init__(self, aid_id: str, interface_smc: SubmodelElementCollection):  # noqa: D107
+        logger.debug(f"Initializing MQTTAssetConnector for AID '{aid_id}'")
         self._aid_id = aid_id
         self.is_connected = False
         self._interface = interface_smc
@@ -22,24 +26,31 @@ class MqttAssetConnector(IAssetConnector):
 
     async def connect(self):
         """Connect to the MQTT broker and subscribe to relevant topics."""
+        logger.info(f"Connecting to MQTT Asset for AID '{self._aid_id}'")
         try:
-            topics = list(set([v.href for v in self._parsed_properties.values()]))
-            self._connect_to_mqtt_topics(topics)
-            self.is_connected = True
+            topics = list({v.href for v in self._parsed_properties.values()})
+            self.is_connected = self._connect_to_mqtt_topics(topics)
         except Exception as e:
-            print(f"Failed to connect MQTTConnector: {e}")
+            logger.error(f"Failed to connect to MQTT topics: {topics}. Error: {e}")
+            raise ConnectionError(f"Failed to connect to MQTT topics: {topics}. Error: {e}") from e
 
-    def _connect_to_mqtt_topics(self, mqtt_topics: list[str]):
+    def _connect_to_mqtt_topics(self, mqtt_topics: list[str]) -> bool:
         """Connect to the MQTT topics using a MQTT connector.
 
         :param mqtt_topics: A dictionary of MQTT topics to subscribe to.
         """
         try:
+            logger.info(f"Create MQTT client to '{self.base}'")
             self._mqtt_client = MqttClient(self.base, mqtt_topics, self._auth)
+            logger.info(f"Subscribing to MQTT topics: {mqtt_topics}")
             self._mqtt_client.connect()
             self._mqtt_client.start_async()
+            return True
         except ConnectionError as ce:
-            print(f"MQTT protocol connection failed: {ce}.")
+            logger.error(f"Failed to connect to MQTT topics: {mqtt_topics}. Error: {ce}")
+            raise ConnectionError(f"Failed to connect to MQTT topics: {mqtt_topics}. Error: {ce}") from ce
+
+        return False
 
     async def get_value(self, model_reference: ModelReference) -> str | None:
         """Get the value for a specific model reference."""

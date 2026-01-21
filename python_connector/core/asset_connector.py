@@ -1,12 +1,20 @@
+import logging
+
 from aas_standard_parser import AIDParser
 from aas_standard_parser.aid_parser import IAuthenticationDetails
 from basyx.aas.model import ModelReference, SubmodelElementCollection
 
+logger = logging.getLogger(__name__)
+
 
 class IAssetConnector:
+    """Interface for asset connectors."""
+
     def __init__(self, aid_id: str, interface_smc: SubmodelElementCollection):
+        """Initialize the AssetConnector with AID ID and interface submodel collection."""
         self._aid_id = aid_id
         self._interface = interface_smc
+        self.is_connected = False
 
         if not self._parse_aid_interface():
             raise ValueError("Failed to parse AID interface.")
@@ -19,19 +27,19 @@ class IAssetConnector:
             self._parsed_properties = aid_parser.parse_properties(self._interface)
             self._auth: IAuthenticationDetails = aid_parser.parse_security(self._interface)
         except ValueError as e:
-            print(f"Error parsing aid interface: {e}")
+            logger.error(f"Error parsing aid interface: {e}")
             return False
 
         return True
 
     async def connect(self):
-        pass
+        """Connect to the asset."""
 
     async def get_value(self, endpoint_reference: ModelReference) -> str | None:
-        pass
+        """Get value from the asset for the specified endpoint reference."""
 
     async def set_value(self, endpoint_reference: ModelReference, *args):
-        pass
+        """Set value on the asset for the specified endpoint reference."""
 
     async def do_action(self, endpoint_reference: ModelReference, *args):
-        pass
+        """Invoke action on the asset for the specified endpoint reference."""

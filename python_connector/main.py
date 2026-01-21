@@ -12,7 +12,7 @@ from typing import cast
 import uvicorn
 from aas_standard_parser import collection_helpers
 from basyx.aas.model import Submodel, SubmodelElementCollection
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 
 from .core.asset_connector import IAssetConnector
 from .http_connector.http_asset_connector import HttpAssetConnector
@@ -44,6 +44,8 @@ async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
     aid_sm: Submodel = payload._aid_sm  # noqa: SLF001
 
     logger.info(f"Received `/set-config` request with AID submodel ID: {aid_sm.id}")
+
+    error_messages = []
 
     try:
         # iterate over all interface SMCs and create IAssetConnector for each of them
@@ -78,26 +80,37 @@ async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
             with connector_store_lock:
                 connector_store[connector_id] = asset_connector
 
-            await asset_connector.connect()
+            try:
+                await asset_connector.connect()
+            except Exception as e:
+                logger.error(f"Failed to connect AssetConnector to '{asset_connector.base}': {e}")
+                error_messages.append(f"Failed to connect AssetConnector to '{asset_connector.base}': {e}")
 
-        if asset_connector is not None and asset_connector.is_connected:
-            return create_response(
-                status_code=200,
-                message=f"Successfully invoked `/set-config` with raw JSON in payload. Connected to {asset_connector.base}",
-                payload=None,
-                value=connector_id,
-            )
-
-        logger.error("Failed to connect AssetConnector")
-
-        return create_response(status_code=500, message=f"Failed to connect AssetConnector to '{asset_connector.base}'", payload=payload)
+            if asset_connector.is_connected:
+                logger.debug(f"Successfully connected AssetConnector to '{asset_connector.base}'")
+            else:
+                logger.error(f"AssetConnector to '{asset_connector.base}' is not connected after connect attempt")
+                error_messages.append(f"AssetConnector to '{asset_connector.base}' is not connected after connect attempt")
 
     except Exception as e:
-        return create_response(
-            status_code=500,
-            message=f"Error processing `/set-config`: {e!s}",
-            payload=None,
-        )
+        raise HTTPException(status_code=500, detail=f"Internal server error: {e}") from e
+
+    # search not connected connectors
+    with connector_store_lock:
+        connected = [connector_id for connector_id, asset_connector in connector_store.items() if asset_connector.is_connected]
+
+    if len(connected) == 0:
+        errors: str = "; ".join(error_messages)
+        raise HTTPException(status_code=500, detail=errors)
+
+    logger.debug(f"Connected AssetConnectors after `/set-config`: {len(connected)}")
+
+    return create_response(
+        status_code=200,
+        message="Successfully invoked `/set-config` with raw JSON in payload",
+        payload=None,
+        value=connector_id,
+    )
 
 
 @app.post("/get-value")
