@@ -4,11 +4,14 @@ Provides the MQTTConnector class for subscribing to topics, receiving messages,
 and storing the latest payload for each topic.
 """
 
+import logging
 import ssl
 from urllib.parse import urlparse
 
 from aas_standard_parser.aid_parser import BasicAuthenticationDetails, IAuthenticationDetails
 from paho.mqtt.client import Client
+
+logger = logging.getLogger(__name__)
 
 
 class MqttClient:
@@ -79,9 +82,10 @@ class MqttClient:
         This method should be called after initializing the MQTTConnector.
         """
         try:
+            logger.debug(f"Connecting to MQTT broker at '{self.base_url}:{self.port}'")
             self.client.connect(self.host, self.port, 60)
         except Exception as e:
-            raise ConnectionError(f"Error connecting to MQTT broker at {self.base_url}: {e}")
+            raise ConnectionError(f"Error connecting to MQTT broker at '{self.base_url}': {e}")
 
     def _on_connect(self, client, userdata, flags, rc):  # noqa: ARG002
         """Handle response from the server.
@@ -91,14 +95,14 @@ class MqttClient:
         :param flags: Response flags sent by the broker.
         :param rc: The connection result.
         """
-        print(f"Connected with result code {rc}")
+        logger.info(f"Connected with result code {rc}")
 
         # Subscribe to all topics in self.topics
         if rc == 0:
             self._is_connected = True
             for topic in self.cache.keys():
                 self.client.subscribe(topic)
-                print(f"Subscribed to topic: {topic}")
+                logger.info(f"Subscribed to topic: {topic}")
 
     def _on_message(self, client, userdata, message):  # noqa: ARG002
         """Handle incoming messages from subscribed topics.
@@ -109,7 +113,7 @@ class MqttClient:
         """
         topic = message.topic
         payload = message.payload.decode("utf-8")
-        print(f"Received message '{payload}' on topic '{topic}'")
+        logger.info(f"Received message '{payload}' on topic '{topic}'")
 
         # Cache the message
         self.cache[topic] = payload
@@ -150,7 +154,7 @@ class MqttClient:
             self.cache.clear()
 
         except (OSError, ConnectionError, RuntimeError) as e:
-            print(f"Error during disposal: {e}")
+            logger.error(f"Error during disposal: {e}")
 
     def __enter__(self):
         """Context manager entry point.
