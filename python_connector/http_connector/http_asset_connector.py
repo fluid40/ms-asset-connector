@@ -7,9 +7,6 @@ import requests
 from aas_standard_parser.aid_parser import HttpProtocolBinding
 from aas_standard_parser.reference_helpers import construct_id_short_path_from_reference
 from basyx.aas.model import (
-    ExternalReference,
-    Key,
-    KeyTypes,
     ModelReference,
     SubmodelElementCollection,
 )
@@ -20,16 +17,16 @@ from python_connector.core.asset_connector import IAssetConnector
 class HttpAssetConnector(IAssetConnector):
     """Class to connect to an asset using its AID."""
 
-    property_cache: List
+    property_cache: list
 
     def __init__(self, aid_id: str, interface_smc: SubmodelElementCollection):
+        """Initialize the HTTP asset connector."""
         super().__init__(aid_id, interface_smc)
         self.is_connected = True
         self.property_cache = []
 
-    async def get_value(self, model_reference: ModelReference) -> Optional[str]:
+    async def get_value(self, model_reference: ModelReference) -> str | None:
         """Get the value for a specific model reference."""
-
         property_idshort_path = construct_id_short_path_from_reference(model_reference)
         url_resource = self._parsed_properties[property_idshort_path].href
         keys = self._parsed_properties[property_idshort_path].keys
@@ -53,5 +50,4 @@ class HttpAssetConnector(IAssetConnector):
         for k in keys:
             value_in_payload = json.dumps(json.loads(value_in_payload)[k])
 
-        result = str(value_in_payload)
-        return result
+        return str(value_in_payload)
