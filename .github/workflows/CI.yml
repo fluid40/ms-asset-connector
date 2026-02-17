@@ -65,8 +65,8 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            engineeringmethodsag/fluid-asset-connector-python:${{ steps.version.outputs.version }}-${{ steps.version.outputs.hash }}
-            engineeringmethodsag/fluid-asset-connector-python:latest
+            engineeringmethodsag/ms-asset-connector-python:${{ steps.version.outputs.version }}-${{ steps.version.outputs.hash }}
+            engineeringmethodsag/ms-asset-connector-python:latest
 
       - name: Create Git Tag
         run: |
