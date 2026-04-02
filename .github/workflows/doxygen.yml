@@ -1,0 +1,66 @@
+name: Build Doxygen
+
+on:
+  push:
+    branches:
+      - "**"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    name: Publish Doxygen Pages
+    runs-on: ubuntu-latest
+
+    steps:
+      # Schritt 1: Das Repository auschecken
+      # Dieser Schritt lädt den Code deines Repositories auf die Runner-Maschine.
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Make doxypy wrapper executable
+        run: chmod +x ./doxypy-wrapper.sh
+
+      # Schritt 2: Doxygen und Abhängigkeiten installieren
+      # Graphviz wird für die Erstellung von Diagrammen benötigt.
+      - name: Install Doxygen and Graphviz
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y doxygen graphviz
+
+      # Schritt 3 (Optional, für Python-Projekte): Python-Filter installieren
+      # Wenn Sie doxypypy verwenden, müssen Sie es hier installieren.
+      - name: Install Python filter (doxypypy)
+        run: |
+          python -m pip install --upgrade pip
+          pip install doxypypy
+
+      # Schritt 4: Doxygen ausführen, um die Dokumentation zu bauen
+      # Doxygen liest die Doxyfile-Konfiguration und generiert die HTML-Dateien.
+      - name: Build Doxygen Documentation
+        run: doxygen Doxyfile
+
+      - name: Debug – list generated files
+        run: ls -R .
+
+      - name: Debug – Python modules recognized?
+        run: |
+          echo "Python files found:"
+          find aas_http_client -type f -name "*.py"
+
+      - name: Debug – What did Doxygen generate?
+        run: ls -R doc/html
+
+      # Schritt 5: Die generierte Dokumentation auf GitHub Pages veröffentlichen
+      # Dieser Schritt nimmt den Inhalt des 'docs'-Ordners (wie im Doxyfile definiert)
+      # und pusht ihn in einen speziellen 'gh-pages'-Branch, von dem aus die Seite bereitgestellt wird.
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./doc/html
+          user_name: "github-actions[bot]"
+          user_email: "github-actions[bot]@users.noreply.github.com"
