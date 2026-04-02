@@ -14,6 +14,51 @@ KEY_TYPE_MAPPING: dict[str, str] = {
 
 
 class SetValuePayload(BaseModel):  # noqa: D101
+    """Defines the model class of the payload for the `set_value` (URL `/set-value`) endpoint
+    of this application using Pydantic.
+
+    The JSON payload must contain exactly the following fields:
+    - `Reference`
+    - `Value`
+
+    Inside the `Reference`-field, a properly serialized AAS reference according to the AAS JSON serialization
+    must be provided.
+    Will be parsed as `basyx.aas.model.ModelReference`.
+    The reference shall point to a SME in an AID submodel known to this application (refer to `add_or_update_config`).
+
+    Example:
+    ```
+    {
+      "Reference": {
+        "type": "ModelReference",
+        "keys": [
+          {
+            "type": "Submodel",
+            "value": "https://fluid40.de/ids/sm/4757_4856_8464_1441"
+          },
+          {
+              "type": "SubmodelElementCollection",
+              "value": "Interface_MQTT"
+          },
+          {
+              "type": "SubmodelElementCollection",
+              "value": "InteractionMetadata"
+          },
+          {
+              "type": "SubmodelElementCollection",
+              "value": "properties"
+          },
+          {
+              "type": "SubmodelElementCollection",
+              "value": "my_endpoint"
+          }
+        ]
+      },
+      "Value": "my-value"
+    }
+    ```
+    """
+
     aid_ref_dict: dict = Field(..., alias="Reference")
     value: Any = Field(..., alias="Value")
     _aid_ref: ModelReference = PrivateAttr(default=None)

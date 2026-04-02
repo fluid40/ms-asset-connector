@@ -35,12 +35,26 @@ connector_store_lock = threading.Lock()
 @app.get("/")
 async def root() -> ResponseBody:
     """Root endpoint that returns available endpoints."""
+
     return create_response(status_code=200, message="Available endpoints are `/add-config` and `/get-value`", payload=None)
 
 
 @app.post("/add-config")
 async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
-    """Set configuration using a specific AID submodel."""
+    """Set or add configuration using an AID submodel.
+
+    All interfaces defined in the provided AID will be analyzed and cached in an internal data structure.
+    An interface is defined by the unique combination of submodel ID (ID of the AID) and interface name (IDshort).
+    If an interface with the same AID-ID and name already exists, it will be overwritten.
+
+    If the protocol of the interface it supported by the implementation, an according co-routine will be added
+    to handle the communication with the asset via the specified protocol and endpoints.
+    Supported protocols are: MQTT, OPC UA, HTTP.
+
+    :param payload: JSON object that is parsed as `SetConfigPayload`
+    :return: JSON object that is parsed as `ResponseBody` containing a status code and confirmation.
+    """
+
     aid_sm: Submodel = payload._aid_sm  # noqa: SLF001
 
     logger.info(f"Received `/set-config` request with AID submodel ID: {aid_sm.id}")
@@ -115,7 +129,16 @@ async def add_or_update_config(payload: SetConfigPayload) -> ResponseBody:
 
 @app.post("/get-value")
 async def get_value(payload: GetValuePayload) -> ResponseBody:
-    """Get value from a specified protocol-specific endpoint in an AID submodel."""
+    """Get a current reading from a protocol-specific endpoint of the asset as specified in the AID submodel.
+
+    Using a cached AID submodel (more concisely, an interface definition in the AID),
+    a connection to the asset is established.
+    A current reading from the endpoint of the asset if obtained and returned.
+
+    :param payload: JSON object that is parsed as `GetValuePayload`
+    :return: JSON object that is parsed as `ResponseBody` containing a status code and the read value.
+    """
+
     reference = payload._aid_ref
     aid_id = reference.key[0].value
     iface_smc = reference.key[1].value
@@ -143,7 +166,16 @@ async def get_value(payload: GetValuePayload) -> ResponseBody:
 
 @app.post("/set-value")
 async def set_value(payload: SetValuePayload) -> ResponseBody:
-    """Set value to a specified protocol-specific endpoint from an AID submodel."""
+    """Set a new value to a protocol-specific endpoint of the asset as specified in the AID submodel.
+
+    Using a cached AID submodel (more concisely, an interface definition in the AID),
+    a connection to the asset is established.
+    The provided value is written to the endpoint of the asset.
+
+    :param payload: JSON object that is parsed as `SetValuePayload`
+    :return: JSON object that is parsed as `ResponseBody` containing a status code and the read value.
+    """
+
     reference = payload._aid_ref
     aid_id = reference.key[0].value
     iface_smc = reference.key[1].value
@@ -168,7 +200,12 @@ async def set_value(payload: SetValuePayload) -> ResponseBody:
 
 
 def start_app():
-    """Function to start the FastAPI application."""
-    host = os.getenv("APP_HOST", "127.0.0.1")
+    """Function to start the FastAPI application.
+
+    Will use the `APP_HOST` and `APP_PORT` environment variables to specify IP interface and port for listening.
+    Default: `0.0.0.0:8090`
+    Overwritten by Dockerfile: `0.0.0.0:8000`
+    """
+    host = os.getenv("APP_HOST", "0.0.0.0")
     port = int(os.getenv("APP_PORT", "8090"))
     uvicorn.run(app, host=host, port=port)
