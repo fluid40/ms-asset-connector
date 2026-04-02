@@ -21,8 +21,6 @@ FILTER_PATTERNS         = *.py=./doxypy-wrapper.sh
 
 PYTHON_DOCSTRING        = NO
 
-EXCLUDE                 = aas_http_client/demo
-
 # -------------------------------------------------------------
 # Extraction settings
 # -------------------------------------------------------------

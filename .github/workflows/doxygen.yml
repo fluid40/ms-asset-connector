@@ -49,7 +49,7 @@ jobs:
       - name: Debug – Python modules recognized?
         run: |
           echo "Python files found:"
-          find aas_http_client -type f -name "*.py"
+          find python_connector -type f -name "*.py"
 
       - name: Debug – What did Doxygen generate?
         run: ls -R doc/html
