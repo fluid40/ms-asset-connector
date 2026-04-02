@@ -119,7 +119,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:adb350c20fc797b21d3246cc22c9e661f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get value from the asset for the specified endpoint reference.  <br /></td></tr>
 <tr class="separator:adb350c20fc797b21d3246cc22c9e661f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e701d9ae971577ca7a4502123dc73ef" id="r_a3e701d9ae971577ca7a4502123dc73ef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpython__connector_1_1core_1_1asset__connector_1_1IAssetConnector.html#a3e701d9ae971577ca7a4502123dc73ef">set_value</a> (self, ModelReference endpoint_reference, *args)</td></tr>
-<tr class="memdesc:a3e701d9ae971577ca7a4502123dc73ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set value on the asset for the specified endpoint reference.  <br /></td></tr>
+<tr class="memdesc:a3e701d9ae971577ca7a4502123dc73ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a value on the asset via the specified endpoint.  <br /></td></tr>
 <tr class="separator:a3e701d9ae971577ca7a4502123dc73ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f4432aafded9280102abe3739913eca" id="r_a1f4432aafded9280102abe3739913eca"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpython__connector_1_1core_1_1asset__connector_1_1IAssetConnector.html#a1f4432aafded9280102abe3739913eca">do_action</a> (self, ModelReference endpoint_reference, *args)</td></tr>
 <tr class="memdesc:a1f4432aafded9280102abe3739913eca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoke action on the asset for the specified endpoint reference.  <br /></td></tr>
@@ -135,6 +135,7 @@ Public Attributes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:ac2ad10cfb6aea22021289ee582871f47" id="r_ac2ad10cfb6aea22021289ee582871f47"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpython__connector_1_1core_1_1asset__connector_1_1IAssetConnector.html#ac2ad10cfb6aea22021289ee582871f47">_parse_aid_interface</a> (self)</td></tr>
+<tr class="memdesc:ac2ad10cfb6aea22021289ee582871f47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse the asset interface definition.  <br /></td></tr>
 <tr class="separator:ac2ad10cfb6aea22021289ee582871f47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -148,8 +149,9 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Interface for asset connectors. </p>
+<p>It serves as the base class for any protocol-specific implementations and provides common functionality. </p>
 
-<p class="definition">Definition at line <a class="el" href="asset__connector_8py_source.html#l00011">11</a> of file <a class="el" href="asset__connector_8py_source.html">asset_connector.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asset__connector_8py_source.html#l00013">13</a> of file <a class="el" href="asset__connector_8py_source.html">asset_connector.py</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a8b305b7f68da5523d552046d2e71720e" name="a8b305b7f68da5523d552046d2e71720e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8b305b7f68da5523d552046d2e71720e">&#9670;&#160;</a></span>__init__()</h2>
@@ -184,10 +186,17 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initialize the AssetConnector with AID ID and interface submodel collection. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">aid_id</td><td>The ID of the AID submodel. </td></tr>
+    <tr><td class="paramname">interface_smc</td><td>A SubmodelElementCollection inside the AID submodel specifying the asset interface. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Reimplemented in <a class="el" href="classpython__connector_1_1http__connector_1_1http__asset__connector_1_1HttpAssetConnector.html#aecee67f1c8148634887ca81c5f8cf0ff">python_connector.http_connector.http_asset_connector.HttpAssetConnector</a>, <a class="el" href="classpython__connector_1_1mqtt_1_1mqtt__asset__connector_1_1MqttAssetConnector.html#a5dcde5de6c88ae02841c51f21b96a704">python_connector.mqtt.mqtt_asset_connector.MqttAssetConnector</a>, and <a class="el" href="classpython__connector_1_1opc__ua_1_1opcua__asset__connector_1_1OpcuaAssetConnector.html#a08344a9297159e317c4403676b7aed1a">python_connector.opc_ua.opcua_asset_connector.OpcuaAssetConnector</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="asset__connector_8py_source.html#l00014">14</a> of file <a class="el" href="asset__connector_8py_source.html">asset_connector.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asset__connector_8py_source.html#l00020">20</a> of file <a class="el" href="asset__connector_8py_source.html">asset_connector.py</a>.</p>
 
 </div>
 </div>
@@ -216,7 +225,10 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="asset__connector_8py_source.html#l00022">22</a> of file <a class="el" href="asset__connector_8py_source.html">asset_connector.py</a>.</p>
+<p>Parse the asset interface definition. </p>
+<p>Extracts authentication details, base address, and property endpoints for connecting to the asset. Stores the extracted information in self._auth, <code>self.base</code>, and <code>self._parsed_properties</code>. </p>
+
+<p class="definition">Definition at line <a class="el" href="asset__connector_8py_source.html#l00033">33</a> of file <a class="el" href="asset__connector_8py_source.html">asset_connector.py</a>.</p>
 
 </div>
 </div>
@@ -240,7 +252,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classpython__connector_1_1mqtt_1_1mqtt__asset__connector_1_1MqttAssetConnector.html#afbc688c63966aaada30359123bdf3570">python_connector.mqtt.mqtt_asset_connector.MqttAssetConnector</a>, and <a class="el" href="classpython__connector_1_1opc__ua_1_1opcua__asset__connector_1_1OpcuaAssetConnector.html#a0f04611022997cf33e41f9f7f838d2f5">python_connector.opc_ua.opcua_asset_connector.OpcuaAssetConnector</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="asset__connector_8py_source.html#l00036">36</a> of file <a class="el" href="asset__connector_8py_source.html">asset_connector.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asset__connector_8py_source.html#l00047">47</a> of file <a class="el" href="asset__connector_8py_source.html">asset_connector.py</a>.</p>
 
 </div>
 </div>
@@ -277,8 +289,16 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Invoke action on the asset for the specified endpoint reference. </p>
+<p>Not implemented yet.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">endpoint_reference</td><td>A reference pointing to an endpoint inside the AID interface specification. </td></tr>
+    <tr><td class="paramname">args</td><td>Key-value pairs as parameters to the invoked action. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="asset__connector_8py_source.html#l00045">45</a> of file <a class="el" href="asset__connector_8py_source.html">asset_connector.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asset__connector_8py_source.html#l00068">68</a> of file <a class="el" href="asset__connector_8py_source.html">asset_connector.py</a>.</p>
 
 </div>
 </div>
@@ -309,10 +329,16 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get value from the asset for the specified endpoint reference. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">endpoint_reference</td><td>A reference pointing to an endpoint inside the AID interface specification. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Reimplemented in <a class="el" href="classpython__connector_1_1opc__ua_1_1opcua__asset__connector_1_1OpcuaAssetConnector.html#af00440f9f3e559f611d6cf204be35488">python_connector.opc_ua.opcua_asset_connector.OpcuaAssetConnector</a>, <a class="el" href="classpython__connector_1_1http__connector_1_1http__asset__connector_1_1HttpAssetConnector.html#a52799f232e5842a1248f1f1cbad8f45e">python_connector.http_connector.http_asset_connector.HttpAssetConnector</a>, and <a class="el" href="classpython__connector_1_1mqtt_1_1mqtt__asset__connector_1_1MqttAssetConnector.html#a2e2d0ba0202ba8b0d49486a5e99de29d">python_connector.mqtt.mqtt_asset_connector.MqttAssetConnector</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="asset__connector_8py_source.html#l00039">39</a> of file <a class="el" href="asset__connector_8py_source.html">asset_connector.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asset__connector_8py_source.html#l00053">53</a> of file <a class="el" href="asset__connector_8py_source.html">asset_connector.py</a>.</p>
 
 </div>
 </div>
@@ -348,11 +374,18 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Set value on the asset for the specified endpoint reference. </p>
+<p>Set a value on the asset via the specified endpoint. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">endpoint_reference</td><td>A reference pointing to an endpoint inside the AID interface specification. </td></tr>
+    <tr><td class="paramname">args</td><td>Key-value pairs to be written to the endpoint. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Reimplemented in <a class="el" href="classpython__connector_1_1mqtt_1_1mqtt__asset__connector_1_1MqttAssetConnector.html#ad918b0efd5ef454df3e90c9d73594f82">python_connector.mqtt.mqtt_asset_connector.MqttAssetConnector</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="asset__connector_8py_source.html#l00042">42</a> of file <a class="el" href="asset__connector_8py_source.html">asset_connector.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asset__connector_8py_source.html#l00060">60</a> of file <a class="el" href="asset__connector_8py_source.html">asset_connector.py</a>.</p>
 
 </div>
 </div>
@@ -377,7 +410,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="asset__connector_8py_source.html#l00015">15</a> of file <a class="el" href="asset__connector_8py_source.html">asset_connector.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asset__connector_8py_source.html#l00021">21</a> of file <a class="el" href="asset__connector_8py_source.html">asset_connector.py</a>.</p>
 
 </div>
 </div>
@@ -401,7 +434,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="asset__connector_8py_source.html#l00016">16</a> of file <a class="el" href="asset__connector_8py_source.html">asset_connector.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asset__connector_8py_source.html#l00022">22</a> of file <a class="el" href="asset__connector_8py_source.html">asset_connector.py</a>.</p>
 
 </div>
 </div>
@@ -425,7 +458,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="asset__connector_8py_source.html#l00027">27</a> of file <a class="el" href="asset__connector_8py_source.html">asset_connector.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asset__connector_8py_source.html#l00038">38</a> of file <a class="el" href="asset__connector_8py_source.html">asset_connector.py</a>.</p>
 
 </div>
 </div>
@@ -441,7 +474,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="asset__connector_8py_source.html#l00026">26</a> of file <a class="el" href="asset__connector_8py_source.html">asset_connector.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asset__connector_8py_source.html#l00037">37</a> of file <a class="el" href="asset__connector_8py_source.html">asset_connector.py</a>.</p>
 
 </div>
 </div>
@@ -457,7 +490,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="asset__connector_8py_source.html#l00017">17</a> of file <a class="el" href="asset__connector_8py_source.html">asset_connector.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asset__connector_8py_source.html#l00023">23</a> of file <a class="el" href="asset__connector_8py_source.html">asset_connector.py</a>.</p>
 
 </div>
 </div>
