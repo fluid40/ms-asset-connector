@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classpython__connector_1_1core_1_1asset__connector_1_1IAssetConnector.html" title="Interface for asset connectors." alt="" coords="5,85,213,125"/>
+<area shape="rect" id="Node000001" href="$classpython__connector_1_1http__connector_1_1http__asset__connector_1_1HttpAssetConnector.html" title="Class to connect to an asset using its AID." alt="" coords="283,5,510,60"/>
+<area shape="poly" id="edge5_Node000000_Node000001" title=" " alt="" coords="202,79,287,57,288,63,204,84"/>
+<area shape="rect" id="Node000002" href="$classpython__connector_1_1mqtt_1_1mqtt__asset__connector_1_1MqttAssetConnector.html" title="Class to connect to an asset using its AID." alt="" coords="261,85,532,125"/>
+<area shape="poly" id="edge6_Node000000_Node000002" title=" " alt="" coords="227,102,261,102,261,107,227,107"/>
+<area shape="rect" id="Node000003" href="$classpython__connector_1_1opc__ua_1_1opcua__asset__connector_1_1OpcuaAssetConnector.html" title="Class to connect to an asset using its AID." alt="" coords="274,149,519,204"/>
+<area shape="poly" id="edge7_Node000000_Node000003" title=" " alt="" coords="204,125,288,147,287,152,202,131"/>
+</map>

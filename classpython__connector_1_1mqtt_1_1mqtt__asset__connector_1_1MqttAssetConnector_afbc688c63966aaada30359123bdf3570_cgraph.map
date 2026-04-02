@@ -1,0 +1,7 @@
+<map id="python_connector.mqtt.mqtt_asset_connector.MqttAssetConnector.connect" name="python_connector.mqtt.mqtt_asset_connector.MqttAssetConnector.connect">
+<area shape="rect" id="Node000001" title="Connect to the MQTT broker and subscribe to relevant topics." alt="" coords="5,49,329,89"/>
+<area shape="rect" id="Node000002" href="$classpython__connector_1_1mqtt_1_1mqtt__asset__connector_1_1MqttAssetConnector.html#acf95d4b39db4c537e6daa41c7f9e8e63" title="Connect to the MQTT topics using a MQTT connector." alt="" coords="377,5,651,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="329,49,364,46,364,51,330,54"/>
+<area shape="rect" id="Node000003" href="$classpython__connector_1_1mqtt_1_1mqtt__client_1_1MqttClient.html#ae9ce8835fbf8b6c25d5b764c0182db94" title=" " alt="" coords="401,85,627,125"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="330,83,387,89,387,94,329,88"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="get_value_payload.GetValuePayload" name="get_value_payload.GetValuePayload">
+<area shape="rect" id="Node000001" title="Defines the model class of the payload for the get_value (URL /get&#45;value) endpoint of this applicatio..." alt="" coords="17,93,225,133"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,100,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,40,109,92,105,95,67,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="125,5,253,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="175,43,137,95,132,92,170,40"/>
+</map>

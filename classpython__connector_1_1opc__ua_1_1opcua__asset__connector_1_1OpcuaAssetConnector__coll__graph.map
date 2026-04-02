@@ -1,0 +1,5 @@
+<map id="python_connector.opc_ua.opcua_asset_connector.OpcuaAssetConnector" name="python_connector.opc_ua.opcua_asset_connector.OpcuaAssetConnector">
+<area shape="rect" id="Node000001" title="Class to connect to an asset using its AID." alt="" coords="5,93,251,148"/>
+<area shape="rect" id="Node000002" href="$classpython__connector_1_1core_1_1asset__connector_1_1IAssetConnector.html" title="Interface for asset connectors." alt="" coords="24,5,232,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,59,131,93,125,93,125,59"/>
+</map>

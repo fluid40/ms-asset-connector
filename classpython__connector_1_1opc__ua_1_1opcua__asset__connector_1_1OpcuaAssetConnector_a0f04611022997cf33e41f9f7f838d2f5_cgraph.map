@@ -1,0 +1,6 @@
+<map id="python_connector.opc_ua.opcua_asset_connector.OpcuaAssetConnector.connect" name="python_connector.opc_ua.opcua_asset_connector.OpcuaAssetConnector.connect">
+<area shape="rect" id="Node000001" title="Connect to the OPC UA server." alt="" coords="5,29,251,84"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="73,29,74,19,83,10,102,5,128,3,160,6,178,14,176,18,158,11,128,8,103,10,86,15,79,21,79,29"/>
+<area shape="rect" id="Node000002" href="$classpython__connector_1_1mqtt_1_1mqtt__client_1_1MqttClient.html#ae9ce8835fbf8b6c25d5b764c0182db94" title=" " alt="" coords="299,37,525,77"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="251,54,285,54,285,59,251,59"/>
+</map>

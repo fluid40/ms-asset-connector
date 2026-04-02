@@ -1,0 +1,9 @@
+<map id="set_value_payload.SetValuePayload" name="set_value_payload.SetValuePayload">
+<area shape="rect" id="Node000001" title="Defines the model class of the payload for the set_value (URL /set&#45;value) endpoint of this applicatio..." alt="" coords="45,93,250,133"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,100,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="76,38,130,91,126,95,72,42"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="124,5,171,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="150,44,150,93,145,93,145,44"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="195,5,323,31"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="237,41,172,95,168,91,234,37"/>
+</map>

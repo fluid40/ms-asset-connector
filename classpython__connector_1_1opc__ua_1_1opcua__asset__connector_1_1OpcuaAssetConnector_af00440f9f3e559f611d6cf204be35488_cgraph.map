@@ -1,0 +1,5 @@
+<map id="python_connector.opc_ua.opcua_asset_connector.OpcuaAssetConnector.get_value" name="python_connector.opc_ua.opcua_asset_connector.OpcuaAssetConnector.get_value">
+<area shape="rect" id="Node000001" title="Get the value for a specific model reference." alt="" coords="5,5,251,60"/>
+<area shape="rect" id="Node000002" href="$classpython__connector_1_1mqtt_1_1mqtt__client_1_1MqttClient.html#ae9ce8835fbf8b6c25d5b764c0182db94" title=" " alt="" coords="299,13,525,53"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="251,30,285,30,285,35,251,35"/>
+</map>

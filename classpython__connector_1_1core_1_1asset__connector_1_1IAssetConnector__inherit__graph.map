@@ -1,0 +1,9 @@
+<map id="python_connector.core.asset_connector.IAssetConnector" name="python_connector.core.asset_connector.IAssetConnector">
+<area shape="rect" id="Node000001" title="Interface for asset connectors." alt="" coords="5,85,213,125"/>
+<area shape="rect" id="Node000002" href="$classpython__connector_1_1http__connector_1_1http__asset__connector_1_1HttpAssetConnector.html" title="Class to connect to an asset using its AID." alt="" coords="283,5,510,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="202,79,287,57,288,63,204,84"/>
+<area shape="rect" id="Node000003" href="$classpython__connector_1_1mqtt_1_1mqtt__asset__connector_1_1MqttAssetConnector.html" title="Class to connect to an asset using its AID." alt="" coords="261,85,532,125"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="227,102,261,102,261,107,227,107"/>
+<area shape="rect" id="Node000004" href="$classpython__connector_1_1opc__ua_1_1opcua__asset__connector_1_1OpcuaAssetConnector.html" title="Class to connect to an asset using its AID." alt="" coords="274,149,519,204"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="204,125,288,147,287,152,202,131"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="python_connector.mqtt.mqtt_client.MqttClient.dispose" name="python_connector.mqtt.mqtt_client.MqttClient.dispose">
+<area shape="rect" id="Node000001" title="Clean up resources and disconnect from the MQTT broker." alt="" coords="260,5,467,45"/>
+<area shape="rect" id="Node000002" href="$classpython__connector_1_1mqtt_1_1mqtt__client_1_1MqttClient.html#a5715c6cc5d937101524fd9289d2b57f0" title="Context manager exit point &#45; ensures proper cleanup." alt="" coords="5,5,212,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="247,28,212,28,212,23,247,23"/>
+</map>
