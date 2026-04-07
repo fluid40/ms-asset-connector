@@ -1,56 +1,35 @@
-# Asset Connector Template
+# Asset Connector based on the AID Submodel
 
-In here you can find a template for implementing the asset connector.
-The example is given in two programming languages:
+The purpose of this microservice is to connect to industrial assets (e.g., a machine, motor, sensor, etc.),
+retrieve data, and even write data.
+The connection to the asset can be established using a range of protocols including MQTT, HTTP, and OPC UA.
+The details of the connection, i.e., base URL for the OPC UA server or MQTT broker,
+are provided in an interoperabel way using the [AID submodel](https://industrialdigitaltwin.org/en/wp-content/uploads/sites/2/2024/01/IDTA-02017-1-0_Submodel_Asset-Interfaces-Description.pdf) (Asset Interfaces Description) standardized by the [IDTA](https://industrialdigitaltwin.org/en/content-hub/submodels).
 
-- [Python](python-connector-template/README.md)
-- [C#](csharp-connector-template/README.md)
+An AID can specify one or more interfaces of an asset exposed via various protocols.
+Each of these interfaces has one or more so-called _properties_.
+These are communication _endpoints_ (e.g., MQTT topics, HTTP URLs, OPC UA nodes) that can be accessed to read/write data.
 
-Refer to the `README.md` file in the respective subdirectory for further deployment instructions.
+This microservice offers HTTP endpoints as well so that other services and users can interact with it.
+These are:
 
-## Overview
-
-The Connector is supposed to interact with the Runtime through the `IConnector` interface:
-
-![components](./docs/figures/Components.png)
-
-The Connector has to implement that interface:
-
-![classes](./docs/figures/Classes.png)
-
-## Testing
-
-The `IConnector` interface is currently implemented through a HTTP API.
-
-## Request Structure
-
-The implementations support two requests
-* POST `/set-config`
-* POST `/get-value`
-
-In both cases, a JSON payload has to be passed
-```json
-{
-    "jsonContent": "..."
-}
-```
-
-In the `jsonContent` field, the `...` have to be replaced with the actual content.
-This content is either
-* A complete JSON-serialized AID submodel (for the `/set-config` endpoint)
-* A JSON-serialized AAS Reference to a property in the AID (for the `/get-value` endpoint)
-
-That means, a JSON-serialized object (AID or Reference) is wrapped as string inside a JSON payload.
-This ensures that the application can freely choose a way to deserialize the `jsonContent`.
-
-Therefore, the JSON-serialized AID / Reference _cannot_ be put in there as JSON text: The `"` symbol must be escaped as `\"` and all line breaks need to be removed.
-Ultimately, it becomes a compact single-line JSON string with proper escaping which can be treated as any other string.
-
-Examples for both (AID and Reference) encoded as JSON string with proper escaping can be found in
-* `requests/BallPenMachine_AID_asPayload.txt`
-* `requests/ReferenceToAid_asPayload.txt`
+**Add Config**
+- configure the microservice with an additional AID submodel (it can handle multiple at once)
+- endpoint: `/add-config`
 
 
-## Postman
+**Get Value**
+- retrieve the value of a _property_ (read from a communication _endpoint_ of an asset)
+- endpoint: `/get-value`
 
-You can import the Postman collection `requests/PostmanCollection.json` which already contains two request examples according to the specification explained above.
+
+**Set Value**
+- set the value of a _property_ (write to a communication _endpoint_ of an asset)
+- endpoint: `/set-value`
+
+
+# Documentation
+
+Project setup and usage: [`python_connector/README.md`](./python_connector/README.md)
+
+Code documentation (Doxygen): []()
