@@ -28,8 +28,6 @@ These are:
 - endpoint: `/set-value`
 
 
-# Documentation
+# Full Documentation
 
-Project setup and usage: [`python_connector/README.md`](./python_connector/README.md)
-
-Code documentation (Doxygen): []()
+Available on GitHub Pages: [https://fluid40.github.io/ms-asset-connector/](https://fluid40.github.io/ms-asset-connector/)
