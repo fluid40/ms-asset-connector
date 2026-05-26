@@ -1,7 +1,6 @@
 """Asset connector module for interfacing with assets via AID and http."""
 
 import json
-from typing import List, Optional
 
 import requests
 from aas_standard_parser.aid_parser import HttpProtocolBinding
